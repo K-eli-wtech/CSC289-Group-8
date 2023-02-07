@@ -1,0 +1,13 @@
+
+.bgImageContainer {
+  background-image: url('home-page-image.jpg');
+}
+
+.enterButton {
+    background-color:#0fe9de;
+    border: none;
+    color: red;
+    padding: 15px 32px;
+    text-decoration: none;
+    font-family: monospace
+  }
