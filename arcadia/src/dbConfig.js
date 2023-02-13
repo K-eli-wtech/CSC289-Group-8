@@ -1,11 +1,19 @@
 const mysql = require('mysql2');
 
 const pool = mysql.createPool({
-  host: 'group8-projectdb.cb7cnaxezt2z.us-east-1.rds.amazonaws.com',
-  user: 'admin',
-  password: '12345678',
-  database: 'Group8_DB1',
+  host: 'your_host_name',
+  user: 'your_username',
+  password: 'your_password',
+  database: 'your_database_name',
   connectionLimit: 10,
+});
+
+pool.getConnection(function(err){
+  if (err) throw err;
+  pool.query("Select * from Users", function(err, results, fields){
+    if (err) throw err;
+    console.log(results);
+  });
 });
 
 // Testing connection to AWS RDS. Last Tested 2/13 from Tylers Computer
