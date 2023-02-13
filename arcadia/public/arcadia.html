@@ -9,18 +9,38 @@
 
         <div class="header">
             <h1> Arcadia 
-            <ul class="navigation_bar">
-                <li><a href="newest_games.html">Newest Games</a></li>
-                <li><a href="reviews.html">News</a></li>
-                <li><a href="recommender.html">Contact</a></li>
-                <li><a href="about.html">About</a></li>
-                <!--<li><button class ="login" type="button" onclick="window.location.href = 'location';">Login</button> </li> -->
-              </ul> 
+                <ul class="navigation_bar">
+                    <li><a href="newest_games.html">Newest Games</a></li>
+                    <li><a href="reviews.html">News</a></li>
+                    <li><a href="recommender.html">Contact</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <!--<li><button class ="login" type="button" onclick="window.location.href = 'location';">Login</button> </li> -->
+                </ul> 
               </h1>
         </div>
     <body>
         <div class="gameGenContainer">
-            <button class ="button testing" type="button">Test</button> 
+            <button class ="button testing" type="button"></button>>Test</button> 
         </div>
+        <script>
+            var mysql = require('mysql');
+
+            var con = mysql.createConnection({
+                host: "group8-projectdb.cb7cnaxezt2z.us-east-1.rds.amazonaws.com",
+                user: "admin",
+                password: "12345678",
+                database: "Group8_DB1"
+            });
+
+            con.connect(function(err) {
+                if (err) throw err;
+                    con.query("SELECT * FROM customers", function (err, result, fields) {
+                        if (err) throw err;
+                            console.log(result);
+                    });
+            });
+
+        </script>
+        <p id="whereToPrintData"></p>
     </body>
 </html> 
