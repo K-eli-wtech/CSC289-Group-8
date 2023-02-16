@@ -68,6 +68,20 @@ body {
   padding-top: 100px;  
   }  
 
+h2 {
+    color: whitesmoke;
+  }
+
+  p {
+    color: whitesmoke;
+    text-align: justify;
+  }
+
+  form {
+    color: whitesmoke;
+    text-align: center;
+  }
+
     .button {
         border: none;
         color: red;
