@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+const express = require('express');
+// const mysql = require('mysql2');     If we need to use mysql for this
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const app = express();
 
-export default App;
+// Define a route for button click
+app.get('/button-click', (req, res) => {
+  // Code to query the database using mysql2
+  // ...
+  res.send('Button was clicked!');
+});
+
+// Start the server
+app.listen(3000, () => {
+  console.log('Server started on port 3000');
+});
+
+export default app;
