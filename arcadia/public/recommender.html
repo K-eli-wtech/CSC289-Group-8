@@ -40,7 +40,19 @@
                 <br>
 
               </form> 
-            <button class ="button testing" type="button">Test</button> 
+            <button id="queryButton" class="button testing" type="button">Test</button> 
         </div>
+
+    <script>
+        // Adding an event listener to the button
+        const queryButton = document.getElementById('queryButton');
+        queryButton.addEventListener('click', () => {
+        // Sending a GET request to our server using fetch
+        fetch('/button-click')
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+        });
+    </script>
     </body>
 </html> 
