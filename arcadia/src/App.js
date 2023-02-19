@@ -10,7 +10,7 @@ app.get('/button-click', async (req, res) => {
     const { game1, game2, game3, game4, game5 } = req.query;
     
     // Query the database for recommended games based on the input
-    const [rows] = await dbC.pool.execute('SELECT * FROM games WHERE name IN (?, ?, ?, ?, ?)', [game1, game2, game3, game4, game5]);
+    const [rows] = await dbC.pool.execute("select * from Users where game1 ='Tarkov' and game2 ='Hogwarts Legacy' and game3 = 'Fallout 4' and game4 = 'Rust'and game5 = 'CSGO';", [game1, game2, game3, game4, game5]);
     const recommendedGames = rows.map(row => row.name);
     
     // Send the recommended games as the response
