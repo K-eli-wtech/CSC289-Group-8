@@ -1,12 +1,12 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
-    <meta name="viewport" content=""width=device-width, initial-scale="1.0">
-
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="arcadiastyle.css">
         <title> Arcadia</title>
     </head>
 
+    <body>
         <div class="header">
             <h1> Arcadia 
             <ul class="navigation_bar">
@@ -18,7 +18,7 @@
               </ul> 
               </h1>
         </div>
-    <body>
+
         <div class="gameGenContainer">
             <h2 id="gameGenHeader">Game Recommender</h2>
             <p>Enter five games you like<p>
@@ -43,16 +43,16 @@
             <button id="queryButton" class="button testing" type="button">Test</button> 
         </div>
 
-    <script>
-        // Adding an event listener to the button
-        const queryButton = document.getElementById('queryButton');
-        queryButton.addEventListener('click', () => {
-        // Sending a GET request to our server using fetch
-        fetch('/button-click')
-            .then(response => response.text())
-            .then(data => console.log(data))
-            .catch(error => console.error(error));
-        });
-    </script>
+        <script>
+            // Adding an event listener to the button
+            const queryButton = document.getElementById('queryButton');
+            queryButton.addEventListener('click', () => {
+            // Sending a GET request to our server using fetch
+            fetch('/button-click')
+                .then(response => response.text())
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+            });
+        </script>
     </body>
-</html> 
+</html>

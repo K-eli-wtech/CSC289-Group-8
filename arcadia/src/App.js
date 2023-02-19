@@ -10,12 +10,12 @@ app.get('/button-click', async (req, res) => {
     const { game1, game2, game3, game4, game5 } = req.query;
     
     // Check if the data exists in the database
-    const [result] = await dbC.pool.execute("select * from Users where name IN (?, ?, ?, ?, ?)", [game1, game2, game3, game4, game5]);
+    const [result] = await dbC.pool.execute("SELECT * FROM Users WHERE name IN ('Tarkov', 'Hogwarts Legacy', 'Fallout 4', 'Rust', 'CSGO') AND game1 = ? AND game2 = ? AND game3 = ? AND game4 = ? AND game5 = ?", [game1, game2, game3, game4, game5]);
     const dataExists = result.length > 0;
     console.log(`Data exists: ${dataExists}`);
     
     // Query the database for recommended games based on the input
-    const [rows] = await dbC.pool.execute("select * from Users where name IN (?, ?, ?, ?, ?)", [game1, game2, game3, game4, game5]);
+    const [rows] = await dbC.pool.execute("SELECT * FROM Users WHERE name IN ('Tarkov', 'Hogwarts Legacy', 'Fallout 4', 'Rust', 'CSGO') AND game1 = ? AND game2 = ? AND game3 = ? AND game4 = ? AND game5 = ?", [game1, game2, game3, game4, game5]);
     const recommendedGames = rows.map(row => row.name);
     
     // Send the recommended games as the response
