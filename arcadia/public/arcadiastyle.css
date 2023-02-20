@@ -1,32 +1,13 @@
-/*Creating columns for grid view*/
-* {
-  box-sizing: border-box;
-}
+/*Master Style Sheet for Arcadia Site*/
 
-.row::after {
-  content: "";
-  clear: both;
-  display: table;
-}
+/*Page Header and Nav Bar*/
 
-[class*="col-"] {
-  float: left;
-  padding: 15px;
-  border: 1px solid red;
+.grid-container {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: auto auto auto auto auto auto;
+  grid-template-rows: auto auto auto auto auto auto;
 }
-
-.col-1 {width: 8.33%;}
-.col-2 {width: 16.66%;}
-.col-3 {width: 25%;}
-.col-4 {width: 33.33%;}
-.col-5 {width: 41.66%;}
-.col-6 {width: 50%;}
-.col-7 {width: 58.33%;}
-.col-8 {width: 66.66%;}
-.col-9 {width: 75%;}
-.col-10 {width: 83.33%;}
-.col-11 {width: 91.66%;}
-.col-12 {width: 100%;}
 
 .header {
   background-color: whitesmoke;
@@ -34,14 +15,8 @@
   padding: 15px;
 }
 
-.loginContainer {
-float: left;
-width: 15%;
-color:black;
-text-align: right;
-}
-
 .navigation_bar {
+  height:auto;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -63,13 +38,23 @@ li a:hover {
   background-color: #0fe9de;
 }
 
+/*Home Page Login*/
+.loginContainer {
+  float: left;
+  width: 15%;
+  color:black;
+  text-align: right;
+  }
+
+/*Page Body*/  
 body {
     background-color: black;
 }
-  
+
+/*Game Recommender Home Page*/
 .gameGenContainer{  
+  font-family: monospace;
   text-align: center;  
-  border: 7px solid red;  
   width: 300px;  
   height: 200px;  
   padding-top: 100px;  
@@ -98,3 +83,32 @@ h2 {
       }
       
       .testing {background-color: #0fe9de;}
+
+/*Home Page Login*/
+.loginContainer {
+float: left;
+width: 15%;
+color:black;
+text-align: right;
+}
+
+/*Newest Games Gallery*/
+.gallery-scroll {
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overflow-x: scroll;
+}
+
+.gallery-item {
+  padding: .5rem;
+  font-size: 1.2rem;
+  text-align: center;
+  background-color: #333;
+  color: whitesmoke;
+  scroll-snap-align: center;
+}
