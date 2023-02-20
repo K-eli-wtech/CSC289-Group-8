@@ -44,12 +44,10 @@
         </div>
 
         <script>
-            // Adding an event listener to the button
             const queryButton = document.getElementById('queryButton');
             queryButton.addEventListener('click', () => {
-            // Sending a GET request to our server using fetch
-            fetch('/button-click')
-                .then(response => response.text())
+            fetch('http://localhost:3000/button-click') // send the request to port 5000
+                .then(response => response.json())
                 .then(data => console.log(data))
                 .catch(error => console.error(error));
             });

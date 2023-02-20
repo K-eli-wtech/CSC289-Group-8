@@ -8,15 +8,4 @@ const pool = mysql.createPool({
   connectionLimit: 10,
 });
 
-// Testing connection to AWS RDS. Last Tested 2/13 from Tylers Computer
-
-
- /* pool.getConnection(function(err){
-  if (err) throw err;
-  pool.query("Select * from Users", function(err, results, fields) {
-    if (err) throw err;
-    console.log (results);
-  });
-}); */
-
 module.exports = pool;
