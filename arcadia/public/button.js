@@ -6,9 +6,9 @@ const port = 3000;
 
 app.get('/button-click', async (req, res) => {
     try {
-      dbC.pool.getConnection(function(err){
+      dbC.dbInfo.getConnection(function(err){
         if (err) throw err;
-        dbC.pool.query("Select * from Users", function(err, results, fields) {
+        dbC.dbInfo.query("Select * from Users", function(err, results, fields) {
           if (err) throw err;
           res.json(results);
         });

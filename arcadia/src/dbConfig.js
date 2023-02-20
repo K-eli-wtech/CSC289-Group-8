@@ -1,6 +1,6 @@
 const mysql = require('mysql2');
 
-const pool = mysql.createPool({
+const dbInfo = mysql.createPool({
   host: 'group8-projectdb.cb7cnaxezt2z.us-east-1.rds.amazonaws.com',
   user: 'admin',
   password: '12345678',
@@ -8,4 +8,4 @@ const pool = mysql.createPool({
   connectionLimit: 10,
 });
 
-module.exports = pool;
+module.exports = dbInfo;
