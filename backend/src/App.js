@@ -4,7 +4,7 @@ const dbC = require('./dbConfig');
 const app = express();
 const port = 3000;
 
-app.get('/service/button-click', async (req, res) => {
+app.get('/button-click', async (req, res) => {
     try {
       dbC.dbInfo.getConnection(function(err){
         if (err) throw err;
