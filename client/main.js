@@ -11,7 +11,7 @@ function createWindow() {
   });
 
   // Load the React app.
-  win.loadURL("http://localhost:3000");
+  win.loadURL("http://localhost:3001");
 }
 
 app.whenReady().then(createWindow);

@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link rel="stylesheet" href="arcadiastyle.css">
         <title> Arcadia</title>
     </head>
@@ -44,30 +45,25 @@
         </div>
 
         <script>
-            const queryButton = document.getElementById('queryButton');
-            const game1 = document.getElementById('game1').value;
-            const game2 = document.getElementById('game2').value;
-            const game3 = document.getElementById('game3').value;
-            const game4 = document.getElementById('game4').value;
-            const game5 = document.getElementById('game5').value;
+            $(document).ready(function() {
+              $('#queryButton').click(function() {
+                var game1 = $('#game1').val();
+                var game2 = $('#game2').val();
+                var game3 = $('#game3').val();
+                var game4 = $('#game4').val();
+                var game5 = $('#game5').val();
         
-            queryButton.addEventListener('click', () => {
-                const data = {
+                $.post('http://localhost:3000/button-test', {
                 game1: game1,
                 game2: game2,
                 game3: game3,
                 game4: game4,
                 game5: game5
-                };
-        
-                fetch('http://localhost:3000/button-click', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
+                }, function(response) {
+                console.log(response);
                 });
+              });
             });
-        </script>
+          </script>
     </body>
 </html>
