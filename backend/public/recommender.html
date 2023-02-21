@@ -45,11 +45,28 @@
 
         <script>
             const queryButton = document.getElementById('queryButton');
+            const game1 = document.getElementById('game1').value;
+            const game2 = document.getElementById('game2').value;
+            const game3 = document.getElementById('game3').value;
+            const game4 = document.getElementById('game4').value;
+            const game5 = document.getElementById('game5').value;
+        
             queryButton.addEventListener('click', () => {
-            fetch('http://localhost:3000/button-click') // send the request to port 5000
-                .then(response => response.text())
-                .then(data => console.log(data))
-                .catch(error => console.error(error));
+                const data = {
+                game1: game1,
+                game2: game2,
+                game3: game3,
+                game4: game4,
+                game5: game5
+                };
+        
+                fetch('http://localhost:3000/button-click', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+                });
             });
         </script>
     </body>
