@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const dbConnect = require("./dbConfig");
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -15,17 +16,35 @@ app.use(cors({
   origin: 'http://localhost:3001'
 }));
 
-app.post('/button-test', (req, res) => {
-  const game1 = req.body.game1;
-  const game2 = req.body.game2;
-  const game3 = req.body.game3;
-  const game4 = req.body.game4;
-  const game5 = req.body.game5;
+app.post('/button-test', async (req, res) => {
+    const { game1, game2, game3, game4, game5 } = req.body;
+    console.log(game1, game2, game3, game4, game5);
+    /*
+    // Querying the database
+    dbConnect.query(`UPDATE Users SET game1='${game1}', game2='${game2}', game3='${game3}', game4='${game4}', game5='${game5}' WHERE id=1`, (error, results) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Error querying database');
+    } else {
+      console.log(results);
+      res.send('Received your request!');
+    }
+  });
+  */
 
-  console.log(game1, game2, game3, game4, game5);
-
-  res.send('Received your request!');
+  // Checking the data
+  dbConnect.query(`SELECT * FROM Users`, (error, results) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Error querying database');
+    } else {
+      console.log(results);
+      res.send('Received your request!');
+    }
+  });
 });
+
+
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
