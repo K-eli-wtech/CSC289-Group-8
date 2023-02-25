@@ -6,21 +6,32 @@
         <link rel="stylesheet" href="arcadiastyle.css">
         <title> Arcadia</title>
     </head>
-
+<!-- Creating Grid Layout -->
+<div class="grid-container">
+<div class="grid-item">1</div>
+<div class="grid-item">2</div>
+<div class="grid-item">3</div>
+<div class="grid-item">4</div>
+<div class="grid-item">5</div>
+<div class="grid-item">6</div>
+<div class="grid-item">7</div>
+<div class="grid-item">8</div>
+<div class="grid-item">9</div>
+</div>
+    
+<!--Page Header Information, Includes Nav Bar-->
         <div class="header">
             <h1> Arcadia 
-            <ul class="navigation_bar">
+            <h2><ul class="navigation_bar">
                 <li><a href="newest_games.html">Newest Games</a></li>
                 <li><a href="reviews.html">News</a></li>
                 <li><a href="recommender.html">Game Recommender</a></li>
                 <li><a href="about.html">About</a></li>
-              </ul> 
+                </ul></h2> 
               </h1>
               <body><form action="/action_page.php" method="post">
-                <!--<div class="imgcontainer">
-                  <img src="img_avatar2.png" alt="Avatar" class="avatar">
-                </div>-->
-              
+        
+              <!-- Login Button -->
                 <div class="loginContainer">
                   <label for="uname"><b>Username</b></label>
                   <input type="text" placeholder="Enter Username" name="uname" required>
@@ -38,6 +49,26 @@
               </form>
               </body>
         </div>
+
+    <!--Newest Games Gallery-->
+    <div class="row">
+<h2>Newest Games</h2> <!--Header-->
+</div>
+    <!--Carousel--> 
+<div class="row">
+<div class="gallery-scroll">
+    <figure class="gallery-item">
+      <img class="gallery-img" src="https://picsum.photos/230/300?random=1" alt="symbol image" title="symbol image">
+      <figcaption>Image Title</figcaption>
+    </figure>
+    <figure class="gallery-item">
+      <img class="gallery-img" src="https://picsum.photos/230/300?random=20" alt="symbol image" title="symbol image">
+      <figcaption>Image Title</figcaption>
+    </figure>
+  </div><!-- end gallery-scroll -->
+</div> <!--Wrap in a div with row class-->
+    
+    <!--Game Recommender Container -->
     <body>
         <div class="gameGenContainer">
             <h2 id="gameGenHeader">Need A New Adventure?</h2>
