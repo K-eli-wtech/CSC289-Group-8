@@ -1,54 +1,25 @@
 !DOCTYPE html>
 <html>
-    <head>
+<!--Tab Header Information-->    
+<head>
     <meta name="viewport" content=""width=device-width, initial-scale="1.0">
-
-        <link rel="stylesheet" href="arcadiastyle.css">
-        <title> Arcadia</title>
-    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="arcadiastyle.css">
+    <title> Arcadia</title>
     
-    <body>
-        <div id=page>
-    
-<!--Page Header Information, Includes Nav Bar-->
-        <section>
-            <header>
-                <a class="logo" title="Arcadia" href="arcadia.html">Arcadia</a>
-            <h1>
+    <!--Javascript to access API
+    <script>
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://api",
+            "method": "GET"
+        }
             <h2><ul class="navigation_bar">
                 <li><a href="newest_games.html">Newest Games</a></li>
                 <li><a href="reviews.html">News</a></li>
                 <li><a href="recommender.html">Game Recommender</a></li>
                 <li><a href="about.html">About</a></li>
-                </ul></h2> 
-              </h1>
-              <form action="/action_page.php" method="post">
-        
-              <!-- Login Button -->
-                <div class="loginContainer">
-                  <label for="uname"><b>Username</b></label>
-                  <input type="text" placeholder="Enter Username" name="uname" required>
-              
-                  <label for="psw"><b>Password</b></label>
-                  <input type="password" placeholder="Enter Password" name="psw" required>
-                      
-                  <button type="submit">Login</button>
-                  <label>
-                    <input type="checkbox" checked="checked" name="remember"> Remember me
-                  </label>
-                  <button type="button" class="cancelbtn">Cancel</button>
-                  <span class="psw">Forgot <a href="#">password?</a></span>
-                </header>
-              </form>
-             
-        </div>
-            </section>
-
-    <!--Newest Games Gallery-->
-     <section class="newestGames">
-    <aside>
-        <div>
-            <h2>Newest Games</h2> <!--Header-->
         </div>
          </aside>
          
