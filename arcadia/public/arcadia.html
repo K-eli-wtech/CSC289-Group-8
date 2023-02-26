@@ -1,44 +1,77 @@
 !DOCTYPE html>
 <html>
-    <head>
+<!--Tab Header Information-->    
+<head>
     <meta name="viewport" content=""width=device-width, initial-scale="1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="arcadiastyle.css">
+    <title> Arcadia</title>
+    
+    <!--Javascript to access API
+    <script>
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://api",
+            "method": "GET"
+        }
 
-        <link rel="stylesheet" href="arcadiastyle.css">
-        <title> Arcadia</title>
-    </head>
+        $.ajax(settings).done(function(response) {$('#myUrl').attr('src',response.results[0].url);});
+        </script>-->
+</head>
 
-        <div class="header">
-            <h1> Arcadia 
-            <ul class="navigation_bar">
+<!--Page Header Information, Includes Nav Bar-->
+    <div class="header">
+        <h1> Arcadia 
+            <h2><ul class="navigation_bar">
                 <li><a href="newest_games.html">Newest Games</a></li>
                 <li><a href="reviews.html">News</a></li>
                 <li><a href="recommender.html">Game Recommender</a></li>
                 <li><a href="about.html">About</a></li>
-              </ul> 
-              </h1>
-              <body><form action="/action_page.php" method="post">
-                <!--<div class="imgcontainer">
-                  <img src="img_avatar2.png" alt="Avatar" class="avatar">
-                </div>-->
+            </ul> </h2>
+        </h1>
+
+<!--Login Button-->
+    <body><form action="/action_page.php" method="post">
               
-                <div class="loginContainer">
-                  <label for="uname"><b>Username</b></label>
-                  <input type="text" placeholder="Enter Username" name="uname" required>
-              
-                  <label for="psw"><b>Password</b></label>
-                  <input type="password" placeholder="Enter Password" name="psw" required>
-                      
-                  <button type="submit">Login</button>
-                  <label>
-                    <input type="checkbox" checked="checked" name="remember"> Remember me
-                  </label>
-                  <button type="button" class="cancelbtn">Cancel</button>
-                  <span class="psw">Forgot <a href="#">password?</a></span>
-                </div>
-              </form>
-              </body>
-        </div>
-    <body>
+            <div class="loginContainer">
+                <label for="uname"><b>Login</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+            
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+                    
+                <button type="submit">Login</button>
+                <label>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+                <button type="button" class="cancelbtn">Cancel</button>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+        </form>
+    </body>
+    </div>
+
+<div class="row">
+<h2>Newest Games</h2>
+</div>
+<!--Newest Games Gallery-->
+<div class="row">
+<div class="gallery-scroll">
+    <figure class="gallery-item">
+      <img class="gallery-img" src="https://picsum.photos/230/300?random=1" alt="symbol image" title="symbol image">
+      <figcaption>Image Title</figcaption>
+    </figure>
+    <!-- ... 20 Images at all ... -->
+    <figure class="gallery-item">
+      <img class="gallery-img" src="https://picsum.photos/230/300?random=20" alt="symbol image" title="symbol image">
+      <figcaption>Image Title</figcaption>
+    </figure>
+  </div><!-- end gallery-scroll -->
+</div> <!--Wrap in a div with row class-->
+
+<!--Game Recommender Section-->   
+        <body>
         <div class="gameGenContainer">
             <h2 id="gameGenHeader">Need A New Adventure?</h2>
             <p>Find your newest favorite game in just a few minutes using our game recommender. Answer a few simple questions and we'll show you games we think you'll love. Sign in with your member profile for even more personalized recommendations.<p>
