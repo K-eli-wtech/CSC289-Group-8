@@ -15,67 +15,141 @@
             "url": "https://api",
             "method": "GET"
         }
-
-        $.ajax(settings).done(function(response) {$('#myUrl').attr('src',response.results[0].url);});
-        </script>-->
-</head>
-
-<!--Page Header Information, Includes Nav Bar-->
-    <div class="header">
-        <h1> Arcadia 
             <h2><ul class="navigation_bar">
                 <li><a href="newest_games.html">Newest Games</a></li>
                 <li><a href="reviews.html">News</a></li>
                 <li><a href="recommender.html">Game Recommender</a></li>
                 <li><a href="about.html">About</a></li>
-            </ul> </h2>
-        </h1>
-
-<!--Login Button-->
-    <body><form action="/action_page.php" method="post">
-              
-            <div class="loginContainer">
-                <label for="uname"><b>Login</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
-            
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-                    
-                <button type="submit">Login</button>
-                <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
-                <button type="button" class="cancelbtn">Cancel</button>
-                <span class="psw">Forgot <a href="#">password?</a></span>
-            </div>
-        </form>
-    </body>
-    </div>
-
-<div class="row">
-<h2>Newest Games</h2>
-</div>
-<!--Newest Games Gallery-->
+        </div>
+         </aside>
+         
+    <!--Carousel--> 
 <div class="row">
 <div class="gallery-scroll">
     <figure class="gallery-item">
       <img class="gallery-img" src="https://picsum.photos/230/300?random=1" alt="symbol image" title="symbol image">
       <figcaption>Image Title</figcaption>
     </figure>
-    <!-- ... 20 Images at all ... -->
     <figure class="gallery-item">
       <img class="gallery-img" src="https://picsum.photos/230/300?random=20" alt="symbol image" title="symbol image">
       <figcaption>Image Title</figcaption>
     </figure>
   </div><!-- end gallery-scroll -->
 </div> <!--Wrap in a div with row class-->
+  </section>
+    
+    <!--Game Recommender Container -->
+        <section class="gameGenContainer" style="background-image: url('carl-raw-8Gdayy2Lhi0-unsplash.jpg');"> <!--Image should span entire width-->
+             <div class="gameGenContainer"> <!--Needs to be anchored left, size limited-->
+                 <h2 id="gameGenHeader">Need A New Adventure?</h2>
+                    <p>Find your newest favorite game in just a few minutes using our game recommender. Answer a few simple questions and we'll show you games we think you'll love. Sign in with your member profile for even more personalized recommendations.<p>
+                    <button class ="button testing" type="button" onclick="window.location.href = 'recommender.html';">Find Games</button> 
+             </div>
+        </section>
+            
+    <!--Latest Reviews and Search Dropdown Container -->
+            <section class="latest">
+                <div class="filterDropdown">
+                    
+                    <!--Platform Dropdown-->
+                 <div class="dropdown">
+                    <button onclick="useDropdown()" class="dropbtn">Platform</button>
+                    <div id="myDropdown" class="dropdown-content">
+                    <a href="#">PC</a>
+                    <a href="#">XBox X</a>
+                    <a href="#">PS5</a>
+                    <a href="#">Nintendo Switch</a>
+                    <a href="#">Mobile</a>
+                    <a href="#">XBox One</a>
+                    <a href="#">PS4</a>
+                </div>
+               </div> 
+                    <!--Year Dropdown-->
+                 <div class="dropdown">
+                    <button onclick="useDropdown()" class="dropbtn">Year</button>
+                    <div id="myDropdown" class="dropdown-content">
+                    <a href="#">2023</a>
+                    <a href="#">2022</a>
+                    <a href="#">2021</a>
+                    <a href="#">2020</a>
+                    <a href="#">2019</a>
+                    <a href="#">2018</a>
+                    <a href="#">2017</a>
+                    <a href="#">2016</a>
+                    <a href="#">2015</a>
+                    <a href="#">2014</a>
+                    <a href="#">2013</a>
+                    <a href="#">2012</a>
+                </div>
+               </div>
+                    <!--Rating Dropdown-->
+                    <div class="dropdown">
+                    <button onclick="useDropdown()" class="dropbtn">Rating</button>
+                    <div id="myDropdown" class="dropdown-content">
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                </div>
+               </div>
+                    <!--Genre Dropdown-->
+                    <div class="dropdown">
+                    <button onclick="useDropdown()" class="dropbtn">Genre</button>
+                    <div id="myDropdown" class="dropdown-content">
+                    <a href="#">Action</a>
+                    <a href="#">Adventure</a>
+                    <a href="#">Puzzle</a>
+                    <a href="#">Role Playing</a>
+                    <a href="#">Simulation</a>
+                    <a href="#">Strategy</a>
+                    <a href="#">Sports</a>
+                    <a href="#">MMO</a>
+                </div>
+               </div>
+                    
+                </div>
+                
+                <div class="latestReviews">
+                    <div class="latestReviewSnippet">
+                    </div>
+                    <div class="latestReviewSnippet">
+                    </div>
+                    <div class="latestReviewSnippet">
+                    </div>
+                    <div class="latestReviewSnippet">
+                    </div>     
+                </div>
+            </section>
+            
+<!--Javascript for the dropdown menu-->
+<script>
+function useDropdown() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
 
-<!--Game Recommender Section-->   
-        <body>
-        <div class="gameGenContainer">
-            <h2 id="gameGenHeader">Need A New Adventure?</h2>
-            <p>Find your newest favorite game in just a few minutes using our game recommender. Answer a few simple questions and we'll show you games we think you'll love. Sign in with your member profile for even more personalized recommendations.<p>
-            <button class ="button testing" type="button" onclick="window.location.href = 'recommender.html';">Find Games</button> 
-        </div>
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+} 
+</script>                                   
+            
+    <!--Navigation Bar-->
+            <nav>
+            </nav>
+            
+    <!--Footer -->
+            <footer>
+            </footer>
+            
+        </div> <!--This div wraps the entire page-->
     </body>
 </html> 
