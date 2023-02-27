@@ -3,35 +3,47 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <link rel="stylesheet" href="arcadiastyle.css">
-        <title> Arcadia</title>
+        <link rel="stylesheet" href="./css/login.css">
+        <title> Login </title>
     </head>
 
     <body>
-        <div class="login">
-            <h1></h1>
-        </div>
+      <section>
+        <div class="form-box">
+            <div class="form_value">
+              <form action="">
+                <h2>Login</h2>
 
-        <script>
-            $(document).ready(function() {
-              $('#queryButton').click(function() {
-                var game1 = $('#game1').val();
-                var game2 = $('#game2').val();
-                var game3 = $('#game3').val();
-                var game4 = $('#game4').val();
-                var game5 = $('#game5').val();
-        
-                $.post('http://localhost:3000/button-test', {
-                game1: game1,
-                game2: game2,
-                game3: game3,
-                game4: game4,
-                game5: game5
-                }, function(response) {
-                console.log(response);
-                });
-              });
-            });
-          </script>
+                <!--Email input-->
+                <div class="inputbox">
+                  <ion-icon name="mail-outline"></ion-icon>
+                  <input type="email" required>
+                  <label for="">Email</label>
+                </div>
+
+                <!--Password input-->
+                <div class="inputbox">
+                  <ion-icon name="lock-closed-outline"></ion-icon>
+                  <input type="password" required>
+                  <label for="">Password</label>
+                </div>
+
+                <!--Password recovery-->
+                <div class="forget">
+                  <label for=""><input type="checkbox">Remember Me</label>
+                  <a href="#">Forgot Password</a>
+                </div>
+
+                <!--Register redirect-->
+                <button>Log in</button>
+                <div class="register">
+                  <p>Don't have an account? <a href="./register.html">Register</a></p>
+                </div>
+              </form>
+            </div>
+        </div>
+      </section>
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     </body>
 </html>
