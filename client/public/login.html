@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="arcadiastyle.css">
+        <title> Arcadia</title>
+    </head>
+
+    <body>
+        <div class="login">
+            <h1></h1>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+              $('#queryButton').click(function() {
+                var game1 = $('#game1').val();
+                var game2 = $('#game2').val();
+                var game3 = $('#game3').val();
+                var game4 = $('#game4').val();
+                var game5 = $('#game5').val();
+        
+                $.post('http://localhost:3000/button-test', {
+                game1: game1,
+                game2: game2,
+                game3: game3,
+                game4: game4,
+                game5: game5
+                }, function(response) {
+                console.log(response);
+                });
+              });
+            });
+          </script>
+    </body>
+</html>
