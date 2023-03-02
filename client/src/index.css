@@ -1,6 +1,6 @@
 
 .bgImageContainer {
-  background-image: url('home-page-image.jpg');
+  background-image: url('../public/images/home-page-image.jpg');
 }
 
 .enterButton {
