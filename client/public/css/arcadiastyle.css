@@ -136,7 +136,7 @@ body {
 }
 
 /*Newest Games Section*/
-.newestGames {
+.newest_games {
   width: 100%;
   height: 10%;
   margin-left: 4%;
@@ -152,6 +152,7 @@ body {
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   overflow-x: scroll;
+  vertical-align: middle;
 }
 
 .gallery-item {
@@ -165,18 +166,18 @@ body {
 
 /*Game Recommender Home Page*/
 
-.gameGenContainer{
+.game_gen_container{
   background-image: url('./images/splash1.jpg');
   /*width: 80%;
   height: 26%; */ 
+  margin-left: 4%;
 }
 
-.gameGenContainerText{  
+.game_gen_container_description{  
   font-family: monospace;
   text-align: center;  
   width: 300px;  
   height: 200px;  
-  padding-top: 100px;
   }  
 
 
@@ -196,5 +197,48 @@ form {
   
   .testing {background-color: #0fe9de;}
 
+/*Latest Reviews*/
 
+  .dropdown {
+    float:left;
+  }
 
+  .latest_reviews {
+    padding: 0, 2%;
+    width: 70%;
+    float: right;
+  }
+
+  .latest_reviews_header {
+    margin-bottom: 3%;
+    margin-top: 4%;
+  }
+
+  .latest_reviews_snippet {
+    padding: 2%;
+    float: left;
+  }
+
+  .placeholder {
+    height: 11%;
+    width: 11%;
+    background-color: whitesmoke;
+  }
+
+  .review_text_container {
+    width: 22%;
+    color: whitesmoke;
+  }
+
+  /*Footer*/
+
+  footer{
+    padding: 0, 4%;
+    color: whitesmoke;
+  }
+
+  footer aside {
+    width: 25%;
+    float: left;
+    text-align: center;
+  }
