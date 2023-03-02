@@ -1,5 +1,60 @@
-/*Master Style Sheet for Arcadia Site*/
+/*~~~~~~~~~~~~Master Style Sheet for Arcadia Site~~~~~~~~~~~~*/
 
+/*Font Styling*/
+@font-face {
+  font-family: "f25_bank_printer"; /*Headings, Large Buttons*/
+  src: url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/f25_bank_printer-webfont.woff") format("woff"),
+  url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/f25_bank_printer-webfont.otf") format("opentype"),
+  url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/f25_bank_printer-webfont.woff2") format("woff2");
+  }
+
+@font-face {
+  font-family: "f25_bank_printer_bold";
+  src: url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/f25_bank_printer_bold-webfont.woff") format("woff"),
+  url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/f25_bank_printer_bold-webfont.otf") format("opentype"),
+  url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/f25_bank_printer_bold-webfont.woff2") format("woff2");
+  }
+
+
+@font-face {
+  font-family: "garet-book"; /*Paragraph text*/
+  src: url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/garet-book-webfont.woff") format("woff"),
+  url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/garet-book-webfont.otf") format("opentype"),
+  url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/garet-book-webfont.woff2") format("woff2");
+  }
+
+@font-face {
+  font-family: "garet-heavy";
+  src: url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/garet-heavy-webfont.woff") format("woff"),
+  url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/garet-heavy-webfont.otf") format("opentype"),
+  url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/garet-heavy-webfont.woff2") format("woff2");
+  }
+
+@font-face {
+  font-family: "retro_gaming"; /*Paragraph text*/
+  src: url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/retro_gaming-webfont.woff") format("woff"),
+  url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/retro_gaming-webfont.otf") format("opentype"),
+  url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/retro_gaming-webfont.woff2") format("woff2");
+  } 
+  
+  body { font-family: 'garet-book', Arial, sans-serif}
+  
+  h1 {
+    font-family: 'f25_bank_printer', Courier, monospace;
+    font-weight:bold;
+    font-style:bold;
+  }
+
+  h2 {color:whitesmoke}
+  /*h3 {}
+  h4{}
+  */
+  p {font-family: 'garet-book', Arial, Helvetica, sans-serif; 
+    color: whitesmoke;
+    text-align: justify;
+  }
+  a {color: whitesmoke;}
+/*______________________________________________________________________________________*/
 
 /*Responsive Grid View Set Up*/
 * {
@@ -30,6 +85,7 @@
   clear: both;
   display: table;
 }
+/*______________________________________________________________________________________*/
 
 
 /*Page Header*/
@@ -38,6 +94,7 @@
   background-color: whitesmoke;
   color: #a81000;
   padding: 30px;
+  position: relative;
 }
 
 /*Navigation Bar*/
@@ -46,6 +103,10 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
+  position: relative;
+  font-family: 'garet-book', Arial, sans-serif;
+  font-weight:normal;
+  font-style:normal;
 }
 
 li {
@@ -65,11 +126,8 @@ li a:hover {
 }
 
 /*Home Page Login*/
-.loginContainer {
-  float: right;
-  width: 15%;
-  color:black;
-  text-align: right;
+.login {
+  font-family:'garet-book', Arial, Helvetica, sans-serif; 
   }
 
 /*Page Body*/  
@@ -77,48 +135,14 @@ body {
     background-color: black;
 }
 
-/*Game Recommender Home Page*/
-.gameGenContainer{  
-  font-family: monospace;
-  text-align: center;  
-  width: 300px;  
-  height: 200px;  
-  padding-top: 100px;  
-  }  
-
-h2 {
-    color: whitesmoke;
-  }
-
-  p {
-    color: whitesmoke;
-    text-align: justify;
-  }
-
-  form {
-    color: whitesmoke;
-    text-align: center;
-  }
-
-    .button {
-        border: none;
-        color: red;
-        padding: 15px 32px;
-        text-decoration: none;
-        font-family: monospace
-      }
-      
-      .testing {background-color: #0fe9de;}
-
-/*Home Page Login*/
-.loginContainer {
-float: left;
-width: 15%;
-color:black;
-text-align: right;
+/*Newest Games Section*/
+.newestGames {
+  width: 100%;
+  height: 10%;
+  margin-left: 4%;
 }
 
-/*Newest Games Gallery*/
+/*Newest Games Carousel*/
 .gallery-scroll {
   display: flex;
   flex-wrap: nowrap;
@@ -138,3 +162,39 @@ text-align: right;
   color: whitesmoke;
   scroll-snap-align: center;
 }
+
+/*Game Recommender Home Page*/
+
+.gameGenContainer{
+  background-image: url('./images/splash1.jpg');
+  /*width: 80%;
+  height: 26%; */ 
+}
+
+.gameGenContainerText{  
+  font-family: monospace;
+  text-align: center;  
+  width: 300px;  
+  height: 200px;  
+  padding-top: 100px;
+  }  
+
+
+
+form {
+  color: whitesmoke;
+  text-align: center;
+}
+
+.button {
+    border: none;
+    color: red;
+    padding: 15px 32px;
+    text-decoration: none;
+    font-family: monospace
+  }
+  
+  .testing {background-color: #0fe9de;}
+
+
+
