@@ -1,11 +1,13 @@
 !DOCTYPE html>
-<html>
+<html lang="en">
+
 <!--Tab Header Information-->    
 <head>
     <meta name="viewport" content=""width=device-width, initial-scale="1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link rel="stylesheet" href="./css/arcadiastyle.css">
     <title> Arcadia</title>
+  </head>
     
     <!--Javascript to access API-->
     <script>
@@ -19,7 +21,7 @@
 
   <!--Header and Navigation Bar-->
   <div class="header">
-    <h1> Arcadia </h1>
+    <a href="arcadia.html"><h1 style="color: #a81000">Arcadia</h1></a>
     <h3>
     <ul class="navigation_bar">
         <li><a href="newest_games.html">NEWEST GAMES</a></li>
@@ -32,6 +34,8 @@
     </h3>
   </div>
 
+  <!--<?php include 'header.html';?>-->
+
   <!--The Newest Games-->
   <div class="newest_games">
     <h2>NEWEST GAMES</h2>
@@ -42,7 +46,9 @@
     <div class="row">
   <div class="gallery-scroll">
     <figure class="gallery-item">
-      <img class="gallery-img" src="https://picsum.photos/230/300?random=1" alt="symbol image" title="symbol image">
+      <!--Need to replace all image sources with database images-->
+      <img class="gallery-img" src="https://picsum.photos/230/300?random=1"> alt="symbol image" title="symbol image">
+      <!--Need to change all figcaptions to pull the title off the database-->
       <figcaption>Image Title</figcaption>
     </figure>
     <figure class="gallery-item">
@@ -227,7 +233,7 @@ window.onclick = function(event) {
             <nav>
             </nav>
             
-    <!--Footer -->
+    <!--Footer-->
             <footer>
 
               <aside>
@@ -257,6 +263,7 @@ window.onclick = function(event) {
               </aside>
 
             </footer>
+            <?php include 'footer.html';?>
             
         </div> <!--This div wraps the entire page-->
     </body>
