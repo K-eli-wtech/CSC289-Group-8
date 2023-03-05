@@ -1,11 +1,13 @@
 !DOCTYPE html>
-<html>
+<html lang="en">
+
 <!--Tab Header Information-->    
 <head>
     <meta name="viewport" content=""width=device-width, initial-scale="1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link rel="stylesheet" href="./css/arcadiastyle.css">
     <title> Arcadia</title>
+  </head>
     
     <!--Javascript to access API-->
     <script>
@@ -17,20 +19,38 @@
         }
       </script>
 
+  <!--Responsive Grid Layout-->
+  <div id="grid">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+    <div>9</div>
+    <div>10</div>
+    <div>11</div>
+    <div>12</div>
+  </div>
+
   <!--Header and Navigation Bar-->
   <div class="header">
-    <h1> Arcadia </h1>
+    <a href="arcadia.html"><h1 style="color: #a81000">Arcadia</h1></a>
     <h3>
     <ul class="navigation_bar">
         <li><a href="newest_games.html">NEWEST GAMES</a></li>
         <li><a href="reviews.html">REVIEWS</a></li>
         <li><a href="recommender.html">RECOMMENDER</a></li>
         <li><a href="about.html">ABOUT</a></li>
-        <li style="float: right; padding-right: 10px;"><button class ="login" type="button" onclick="window.location.href = 'login.html'">LOGIN</button> </li>
+        <li style="float: right; padding-right: 10px;"><button class ="login" type="button" onclick="window.location.href = 'location';">LOGIN</button> </li>
         <li style="float: right; padding-right: 10px;"> <input type="text" placeholder="Search"></li>
     </ul> 
     </h3>
   </div>
+
+  <!--<?php include 'header.html';?>-->
 
   <!--The Newest Games-->
   <div class="newest_games">
@@ -42,7 +62,9 @@
     <div class="row">
   <div class="gallery-scroll">
     <figure class="gallery-item">
-      <img class="gallery-img" src="https://picsum.photos/230/300?random=1" alt="symbol image" title="symbol image">
+      <!--Need to replace all image sources with database images-->
+      <img class="gallery-img" src="https://picsum.photos/230/300?random=1"> alt="symbol image" title="symbol image">
+      <!--Need to change all figcaptions to pull the title off the database-->
       <figcaption>Image Title</figcaption>
     </figure>
     <figure class="gallery-item">
@@ -87,7 +109,6 @@
     
   <!--Game Recommender Container -->
   <div class="game_gen_container"> <!--Needs to be anchored left, size limited-->
-    <img src="/images/splash1.jpg"/>
     <div class="game_gen_container_text">
       <h2>NEED A NEW ADVENTURE?</h2>
       <div class="game_gen_container_description">
@@ -121,6 +142,9 @@
             <a href="#">2020</a>
             <a href="#">2019</a>
             <a href="#">2018</a>
+            <a href="#">2017</a>
+            <a href="#">2016</a>
+            <a href="#">2015</a>
           </div>
         </div>
       <!--Rating Dropdown-->
@@ -224,7 +248,7 @@ window.onclick = function(event) {
             <nav>
             </nav>
             
-    <!--Footer -->
+    <!--Footer-->
             <footer>
 
               <aside>
@@ -254,6 +278,7 @@ window.onclick = function(event) {
               </aside>
 
             </footer>
+            <?php include 'footer.html';?>
             
         </div> <!--This div wraps the entire page-->
     </body>

@@ -58,6 +58,7 @@
 
 /*Responsive Grid View Set Up*/
 * {
+  display: grid;
   box-sizing: border-box;
 }
 
@@ -167,9 +168,9 @@ body {
 /*Game Recommender Home Page*/
 
 .game_gen_container{
-  background-image: url('./images/splash1.jpg');
-  /*width: 80%;
-  height: 26%; */ 
+  background-image: url('/images/splash1.jpg');
+  width: 80%;
+  height: 26%;  
   margin-left: 4%;
 }
 
