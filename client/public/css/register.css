@@ -118,3 +118,12 @@ button{
 .login a:hover{
     text-decoration: underline;
 }
+
+.confirm-text{
+    margin: -15px 15px 15px;
+    font-size: 1em;
+    font-weight: 550;
+    color:#fff;
+    display: flex;
+    justify-content: center;
+}
