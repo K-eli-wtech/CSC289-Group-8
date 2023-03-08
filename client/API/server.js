@@ -17,7 +17,7 @@ const phpExpress = require('php-express')({
 // Cors middleware to allow cross port connections
 app.use(
   cors({
-    origin: 'http://localhost:3001',
+    origin: ['http://localhost:3000', 'http://localhost:3001']
   })
 );
 
@@ -75,7 +75,7 @@ app.get('/login', async (req, res) => {
 // Check user endpoint
 app.post('/check-user', async (req, res) => {
   let email = req.body.email;
-  let display_name = req.body.username;
+  let display_name = req.body.display_name;
 
   try {
     // Check if the email or username already exists in the database
@@ -85,16 +85,17 @@ app.post('/check-user', async (req, res) => {
     );
     if (results.length > 0) {
       // Return an error message if the email or username already exists
-      res.status(400).send('Email or username already exists');
+      res.status(400).json({ error: 'Email or username already exists', payload: { email, display_name } });
     } else {
       // Return a success message if the email and username are both unique
-      res.status(200).send('Email and username are unique');
+      res.status(200).json({ message: 'Email and username are unique', payload: { email, display_name } });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send('Internal Server Error');
+    res.status(500).json({ error: 'Internal Server Error', payload: { email, display_name } });
   }
 });
+
 
 
 // 5 random games button

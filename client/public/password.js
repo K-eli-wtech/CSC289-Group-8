@@ -1,47 +1,55 @@
 /* eslint-disable no-unused-vars */
-// Checking the password/username/email
-function checkPass() {
+
+// Checking the password
+async function checkPass() {
   let password = document.getElementById("pass").value;
   let confirm = document.getElementById("verify").value;
-  let username = document.getElementById("username").value;
+  let display_name = document.getElementById("display_name").value;
   let email = document.getElementById("email").value;
-  let button = document.getElementById("register-button");
   let message = document.getElementById("output");
 
   if (password.length !== 0) {
     if (password === confirm) {
-      // Make an AJAX request to the server
-      let xhr = new XMLHttpRequest();
-      xhr.open("POST", "http://localhost:3000/check-user", true);
-      xhr.setRequestHeader("Content-type", "application/json");
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          let response = JSON.parse(xhr.responseText);
-          if (response.status === "exists") {
-            message.textContent = "Username or email already exists";
-            message.style.color = "#ff4d4d";
-            button.disabled = true;
-          } else if (response.status === "empty") {
-            message.textContent = "Username or email cannot be empty";
-            message.style.color = "#ff4d4d";
-            button.disabled = true;
-          } else {
-            message.textContent = "";
-            button.disabled = false;
-          }
+      try {
+        const response = await checkUser(email, display_name);
+        if (response.status === "exists") {
+          message.textContent = "Email or username already exists";
+          message.style.color = "#ff4d4d";
+        } else if (response.status === "empty") {
+          message.textContent = "Username or email cannot be empty";
+          message.style.color = "#ff4d4d";
+        } else {
+          message.textContent = "";
         }
-      };
-      xhr.send(JSON.stringify({ username, email }));
+      } catch (error) {
+        message.textContent = "Error: " + error.message;
+        message.style.color = "#ff4d4d";
+      }
     } else {
       message.textContent = "Passwords don't match";
       message.style.color = "#ff4d4d";
-      button.disabled = true;
     }
   } else {
     message.textContent = "Password can't be empty";
     message.style.color = "#ff4d4d";
-    button.disabled = true;
   }
+}
+
+// Check username and email
+async function checkUser(email, displayName) {
+  const data = { email, display_name: displayName };
+
+  const response = await fetch('http://localhost:3000/check-user', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
+  });
+
+  const result = await response.json();
+
+  return result;
 }
 
 
