@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+// Checking the password/username/email
 function checkPass() {
   let password = document.getElementById("pass").value;
   let confirm = document.getElementById("verify").value;
@@ -11,18 +12,22 @@ function checkPass() {
     if (password === confirm) {
       // Make an AJAX request to the server
       let xhr = new XMLHttpRequest();
-      xhr.open("POST", "/check-user", true);
+      xhr.open("POST", "http://localhost:3000/check-user", true);
       xhr.setRequestHeader("Content-type", "application/json");
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
           let response = JSON.parse(xhr.responseText);
-          if (response.exists) {
+          if (response.status === "exists") {
             message.textContent = "Username or email already exists";
             message.style.color = "#ff4d4d";
-            button.type = "button";
+            button.disabled = true;
+          } else if (response.status === "empty") {
+            message.textContent = "Username or email cannot be empty";
+            message.style.color = "#ff4d4d";
+            button.disabled = true;
           } else {
             message.textContent = "";
-            button.type = "submit";
+            button.disabled = false;
           }
         }
       };
@@ -30,15 +35,17 @@ function checkPass() {
     } else {
       message.textContent = "Passwords don't match";
       message.style.color = "#ff4d4d";
-      button.type = "button";
+      button.disabled = true;
     }
   } else {
     message.textContent = "Password can't be empty";
     message.style.color = "#ff4d4d";
-    button.type = "button";
+    button.disabled = true;
   }
 }
 
+
+// Show/hide the password
 function showPass(pass, icon){
   let password = document.getElementById(pass);
   let eye = document.getElementById(icon);
