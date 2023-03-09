@@ -1,51 +1,34 @@
 // Main modules
 const express = require('express');
-const session = require('express-session');
 const phpExpress = require('php-express')({ binPath: 'php' });
+const path = require('path');
+const app = express();
+const port = 3000;
 
 // Routes to external files
 const pagesRouter = require('./routes/form');
 const gamesRouter = require('./routes/recommend');
 const emailRouter = require('./routes/email');
 
-// Middleware
-const path = require('path');
-const cors = require('cors');
+// Middlewares
+const corsMiddleware = require('./middlewares/cors');
+const sessionMiddleware = require('./middlewares/session');
+const loggedInMiddleware = require('./middlewares/loggedIn');
 
-const app = express();
-const port = 3000;
 
-// Cors middleware to allow cross port connections
-app.use(
-  cors({
-    origin: ['http://localhost:3000', 'http://localhost:3001']
-  })
-);
+// Use middleware functions
+app.use(corsMiddleware);
+app.use(sessionMiddleware);
+app.use(loggedInMiddleware);
 
 // Add the phpExpress middleware
 app.engine('php', phpExpress.engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'php');
 
-// Express session setup
-app.use(session({
-  secret: 'safg921ka@#!asdakga21312',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false } // Change this to true if you're using HTTPS
-}));
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/public')));
-
-// Initialize loggedIn flag in session
-app.use(function(req, _, next) {
-  if (!req.session.loggedIn) {
-    req.session.loggedIn = false;
-  }
-  next();
-});
 
 // route to form and recommend
 app.use('/pages', [pagesRouter, gamesRouter, emailRouter]);
