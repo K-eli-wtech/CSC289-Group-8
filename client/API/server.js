@@ -1,18 +1,19 @@
+// Main modules
 const express = require('express');
+const session = require('express-session');
+const phpExpress = require('php-express')({ binPath: 'php' });
+
+// Routes to external files
+const pagesRouter = require('./routes/form');
+const gamesRouter = require('./routes/recommend');
+const emailRouter = require('./routes/email');
+
+// Middleware
 const path = require('path');
-const dbConnect = require('./dbConfig');
-const bodyParser = require('body-parser');
 const cors = require('cors');
+
 const app = express();
 const port = 3000;
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '../client/public')));
-app.use(bodyParser.json());
-
-const phpExpress = require('php-express')({
-  binPath: 'php',
-});
 
 // Cors middleware to allow cross port connections
 app.use(
@@ -26,93 +27,37 @@ app.engine('php', phpExpress.engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'php');
 
-app.post('/register.php', phpExpress.router);
-app.post('/login.php', phpExpress.router);
-app.post('/check-user.php', phpExpress.router);
+// Express session setup
+app.use(session({
+  secret: 'safg921ka@#!asdakga21312',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } // Change this to true if you're using HTTPS
+}));
 
-// Registering account php form
-app.post('/register', async (req, res) => {
-  console.log(req.body);
-  const { display_name, email, password } = req.body;
-  console.log(display_name, email, password);
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, '../client/public')));
 
-  try {
-    // Checking the data
-    const results = await dbConnect.query(
-      `INSERT INTO Users (display_name, email, password) VALUES ("${display_name}", "${email}", "${password}")`
-    );
-    console.log(results);
-    res.send('User registered successfully!');
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Error querying database');
+// Initialize loggedIn flag in session
+app.use(function(req, _, next) {
+  if (!req.session.loggedIn) {
+    req.session.loggedIn = false;
   }
+  next();
 });
 
-// Login php form
-app.get('/login', async (req, res) => {
-  console.log(req.query);
-  const { email, password } = req.query;
-  console.log(email, password);
+// route to form and recommend
+app.use('/pages', [pagesRouter, gamesRouter, emailRouter]);
 
-  try {
-    // Checking the data
-    const results = await dbConnect.query(
-      `SELECT * FROM Users WHERE email="${email}" AND password="${password}"`
-    );
-    console.log(results);
-    if (results.length === 0) {
-      res.status(401).send('Invalid email or password');
-    } else {
-      res.send('User logged in successfully!');
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Error querying database');
-  }
-});
-
-// Check user endpoint
-app.post('/check-user', async (req, res) => {
-  let email = req.body.email;
-  let display_name = req.body.display_name;
-
-  try {
-    // Check if the email or username already exists in the database
-    const results = await dbConnect.query(
-      'SELECT * FROM Users WHERE email = ? OR display_name = ?',
-      [email, display_name]
-    );
-    if (results.length > 0) {
-      // Return an error message if the email or username already exists
-      res.status(400).json({ error: 'Email or username already exists', payload: { email, display_name } });
-    } else {
-      // Return a success message if the email and username are both unique
-      res.status(200).json({ message: 'Email and username are unique', payload: { email, display_name } });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error', payload: { email, display_name } });
-  }
-});
-
-
-
-// 5 random games button
-app.post('/button-test', async (req, res) => {
-    const { game1, game2, game3, game4, game5 } = req.body;
-    console.log(game1, game2, game3, game4, game5);
-
-  // Checking the data
-  dbConnect.query(`SELECT * FROM Users`, (error, results) => {
-    if (error) {
-      console.error(error);
-      res.status(500).send('Error querying database');
-    } else {
-      console.log(results);
-      res.send('Received your request!');
-    }
-  });
+// path define and redirect to the profile page
+app.get('/profile.html', (req, res) => {
+  // Check if user is logged in
+  if (req.session.loggedIn) {
+    res.sendFile(path.join(__dirname, '../public/profile.html'));
+  } else {
+    res.redirect('/login.html');
+  }  
 });
 
 app.listen(port, () => {

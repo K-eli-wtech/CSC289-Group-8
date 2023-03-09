@@ -7,6 +7,7 @@ async function checkPass() {
   let display_name = document.getElementById("display_name").value;
   let email = document.getElementById("email").value;
   let message = document.getElementById("output");
+  let button = document.getElementById("register-button")
 
   if (password.length !== 0) {
     if (password === confirm) {
@@ -15,23 +16,29 @@ async function checkPass() {
         if (response.status === "exists") {
           message.textContent = "Email or username already exists";
           message.style.color = "#ff4d4d";
+          button.setAttribute('type', 'button');
         } else if (response.status === "empty") {
           message.textContent = "Username or email cannot be empty";
           message.style.color = "#ff4d4d";
+          button.setAttribute('type', 'button');
         } else {
           message.textContent = "";
+          button.setAttribute('type', 'submit');
         }
       } catch (error) {
         message.textContent = "Error: " + error.message;
         message.style.color = "#ff4d4d";
+        button.setAttribute('type', 'button');
       }
     } else {
       message.textContent = "Passwords don't match";
       message.style.color = "#ff4d4d";
+      button.setAttribute('type', 'button');
     }
   } else {
     message.textContent = "Password can't be empty";
     message.style.color = "#ff4d4d";
+    button.setAttribute('type', 'button');
   }
 }
 
@@ -39,7 +46,7 @@ async function checkPass() {
 async function checkUser(email, displayName) {
   const data = { email, display_name: displayName };
 
-  const response = await fetch('http://localhost:3000/check-user', {
+  const response = await fetch('http://localhost:3000/pages/check-user', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
