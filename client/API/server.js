@@ -1,87 +1,63 @@
+// Main modules
 const express = require('express');
+const session = require('express-session');
+const phpExpress = require('php-express')({ binPath: 'php' });
+
+// Routes to external files
+const pagesRouter = require('./routes/form');
+const gamesRouter = require('./routes/recommend');
+const emailRouter = require('./routes/email');
+
+// Middleware
 const path = require('path');
-const dbConnect = require("./dbConfig");
-const bodyParser = require('body-parser');
 const cors = require('cors');
-const phpExpress = require('php-express')({
-  binPath: 'php'
-});
 
 const app = express();
 const port = 3000;
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '../client/public')));
-app.use(bodyParser.json());
-
 // Cors middleware to allow cross port connections
-app.use(cors({
-  origin: 'http://localhost:3001'
-}));
+app.use(
+  cors({
+    origin: ['http://localhost:3000', 'http://localhost:3001']
+  })
+);
 
 // Add the phpExpress middleware
 app.engine('php', phpExpress.engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'php');
 
-app.post('/register.php', phpExpress.router);
-app.post('/login.php', phpExpress.router);
+// Express session setup
+app.use(session({
+  secret: 'safg921ka@#!asdakga21312',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } // Change this to true if you're using HTTPS
+}));
 
-// Registering account php form
-app.post('/register', async (req, res) => {
-    console.log(req.body);
-    const { display_name, email, password } = req.body;
-    console.log(display_name, email, password);
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, '../client/public')));
 
-    // Checking the data
-    dbConnect.query(`INSERT INTO Users (display_name, email, password) VALUES ("${display_name}", "${email}", "${password}")`, (error, results) => {
-      if (error) {
-        console.error(error);
-        res.status(500).send('Error querying database');
-      } else {
-        console.log(results);
-        res.send('User registered successfully!');
-      }
-    });
+// Initialize loggedIn flag in session
+app.use(function(req, _, next) {
+  if (!req.session.loggedIn) {
+    req.session.loggedIn = false;
+  }
+  next();
 });
 
-// Login php form
-app.get('/login', async (req, res) => {
-  console.log(req.query);
-  const { email, password } = req.query;
-  console.log(email, password);
+// route to form and recommend
+app.use('/pages', [pagesRouter, gamesRouter, emailRouter]);
 
-  // Checking the data
-  dbConnect.query(`SELECT * FROM Users WHERE email="${email}" AND password="${password}"`, (error, results) => {
-    if (error) {
-      console.error(error);
-      res.status(500).send('Error querying database');
-    } else if (results.length === 0) {
-      res.status(401).send('Invalid email or password');
-    } else {
-      console.log(results);
-      res.send('User logged in successfully!');
-    }
-  });
-});
-
-
-
-// 5 random games button
-app.post('/button-test', async (req, res) => {
-    const { game1, game2, game3, game4, game5 } = req.body;
-    console.log(game1, game2, game3, game4, game5);
-
-  // Checking the data
-  dbConnect.query(`SELECT * FROM Users`, (error, results) => {
-    if (error) {
-      console.error(error);
-      res.status(500).send('Error querying database');
-    } else {
-      console.log(results);
-      res.send('Received your request!');
-    }
-  });
+// path define and redirect to the profile page
+app.get('/profile.html', (req, res) => {
+  // Check if user is logged in
+  if (req.session.loggedIn) {
+    res.sendFile(path.join(__dirname, '../public/profile.html'));
+  } else {
+    res.redirect('/login.html');
+  }  
 });
 
 app.listen(port, () => {
