@@ -15,13 +15,12 @@ const corsMiddleware = require('./middlewares/cors');
 const sessionMiddleware = require('./middlewares/session');
 const loggedInMiddleware = require('./middlewares/loggedIn');
 
-
 // Use middleware functions
 app.use(corsMiddleware);
 app.use(sessionMiddleware);
 app.use(loggedInMiddleware);
 
-// Add the phpExpress middleware
+// The phpExpress middleware
 app.engine('php', phpExpress.engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'php');
