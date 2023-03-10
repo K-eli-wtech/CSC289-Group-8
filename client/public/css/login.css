@@ -122,11 +122,20 @@ button{
 }
 
 .register a{
-    ttext-decoration: none!important;
+    text-decoration: none!important;
     color: #fff;
     font-weight: 600;
 }
 
 .register a:hover{
     text-decoration: underline;
+}
+
+.confirm-text{
+    margin: -5px 15px 15px;
+    font-size: 1em;
+    font-weight: 550;
+    color:#fff;
+    display: flex;
+    justify-content: center;
 }
