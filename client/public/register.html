@@ -11,22 +11,25 @@
       <section>
         <div class="form-box">
             <div class="form_value">
-              <form action="http://localhost:3000/register" method="post">
+              <form action="http://localhost:3000/pages/register" method="post">
                 <h2>Register</h2>
+
 
                 <!--Username input-->
                 <div class="inputbox">
                     <ion-icon name="person-outline"></ion-icon>
-                    <input type="text" name="display_name" required>
+                    <input id="display_name" type="text" name="display_name" required>
                     <label for="">Username</label>
                   </div>
+
 
                 <!--Email input-->
                 <div class="inputbox">
                   <ion-icon name="mail-outline"></ion-icon>
-                  <input type="email" name="email" required>
+                  <input id="email" type="email" name="email" required>
                   <label for="">Email</label>
                 </div>
+
 
                 <!--Password input-->
                 <div class="inputbox">
@@ -42,12 +45,15 @@
                     <label for="">Re-Enter Password</label>
                 </div>
 
+
                 <div class="confirm-text">
                     <p id="output"></p>
                 </div>
 
+
                 <!--Submit button-->
-                <button type="submit" class="register-button" id="register-button">Register</button>
+                <button type="button" class="register-button" id="register-button" onclick="checkPass()">Register</button>
+
 
                 <!--Login form redirect-->
                 <div class="login">

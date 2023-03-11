@@ -1,4 +1,4 @@
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
 const dbInfo = mysql.createPool({
   host: 'group8-projectdb.cb7cnaxezt2z.us-east-1.rds.amazonaws.com',
@@ -7,5 +7,6 @@ const dbInfo = mysql.createPool({
   database: 'Group8_DB1',
   connectionLimit: 10,
 });
+
 
 module.exports = dbInfo;
