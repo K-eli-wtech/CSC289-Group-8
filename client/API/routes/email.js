@@ -3,19 +3,21 @@ const emailRouter = express.Router();
 const nodemailer = require('nodemailer');
 const randtoken = require('rand-token');
 const connection = require('../dbConfig');
+const dotenv = require('dotenv');
 const emailVerification = require('../middlewares/emailVerification');
+dotenv.config();
 
 function sendEmail(email, token) {
   var mail = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'arcadia.verify@gmail.com',
-      pass: 'Arcadia102938'
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD
     }
   });
 
   var mailOptions = {
-    from: 'arcadia.verify@gmail.com',
+    from: process.env.EMAIL,
     to: email,
     subject: 'Email verification - Arcadia',
     html: `You requested for email verification, kindly use this link to verify your email address 
