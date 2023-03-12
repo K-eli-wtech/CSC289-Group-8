@@ -1,6 +1,8 @@
 
 .bgImageContainer {
   background-image: url('../public/images/home-page-image.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .enterButton {
