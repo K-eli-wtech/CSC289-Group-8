@@ -10,39 +10,44 @@ formRouter.post('/register', async (req, res) => {
   console.log(display_name, email, password);
 
   try {
-    // Hash the password with a salt
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    // Hash the password
+    const hash = await bcrypt.hash(password, 10);
 
     // Insert the user data into the database
-    const results = await dbConnect.query(
-      `INSERT INTO Users (display_name, email, password) VALUES ("${display_name}", "${email}", "${hashedPassword}")`
+    const results = await dbConnect.execute(
+      'INSERT INTO Users (display_name, email, password) VALUES (?, ?, ?)',
+      [display_name, email, hash]
     );
+    
     console.log(results);
-    res.send('User registered successfully!');
+    res.status(200).json({ message: 'User registered successfully' });
   } catch (error) {
     console.error(error);
     res.status(500).send('Error querying database');
   }
 });
 
+
 // Login php form
 formRouter.get('/login', async (req, res) => {
   console.log(req.query);
   const { email, password } = req.query;
-  console.log(email, password);
 
   try {
     // Get the user data from the database
-    const results = await dbConnect.query(
-      `SELECT * FROM Users WHERE email="${email}"`
+    const [results] = await dbConnect.execute(
+      `SELECT * FROM Users WHERE email = ?`,
+      [email]
     );
+    console.log(results)
     if (results.length === 0) {
       console.log("Login failed: invalid email or password");
       res.status(401).send('Invalid email or password');
     } else {
       // Compare the password with the hashed password from the database
       const isMatch = await bcrypt.compare(password, results[0].password);
+      console.log(password, results[0].password);
+      console.log(isMatch)
       if (isMatch) {
         console.log("Login successful");
         req.session.loggedIn = true; // Set the loggedIn flag in the session
@@ -58,6 +63,8 @@ formRouter.get('/login', async (req, res) => {
     res.status(500).send('Error querying database');
   }
 });
+
+
 
 // Check user endpoint
 formRouter.post('/check-user', async (req, res) => {
