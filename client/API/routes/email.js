@@ -1,24 +1,25 @@
-/* eslint-disable no-unused-vars */
 const express = require('express');
 const emailRouter = express.Router();
 const nodemailer = require('nodemailer');
 const randtoken = require('rand-token');
 const connection = require('../dbConfig');
+const dotenv = require('dotenv');
 const emailVerification = require('../middlewares/emailVerification');
+dotenv.config();
 
 function sendEmail(email, token) {
   var mail = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: '', // Your email id
-      pass: '' // Your password
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD
     }
   });
 
   var mailOptions = {
-    from: 'nicesnippets@gmail.com',
+    from: process.env.EMAIL,
     to: email,
-    subject: 'Email verification - Nicesnippets.com',
+    subject: 'Email verification - Arcadia',
     html: `You requested for email verification, kindly use this link to verify your email address 
            <a href="http://localhost:3000/email/verify-email?token=${token}">Verify Email</a>`
   };
@@ -32,8 +33,7 @@ function sendEmail(email, token) {
   });
 }
 
-/* send verification link */
-emailRouter.post('/send-email', function(req, res, next) {
+emailRouter.post('/send-email', emailVerification, function(req, res, next) {
   var email = req.body.email;
   connection.query('SELECT * FROM verifications WHERE email = ?', [email], function(err, result) {
     if (err) {
@@ -65,8 +65,7 @@ emailRouter.post('/send-email', function(req, res, next) {
   });
 });
 
-/* email verification route */
-emailRouter.get('/verify-email', function(req, res, next) {
+emailRouter.get('/verify-email', emailVerification, function(req, res, next) {
   var token = req.query.token;
   connection.query('SELECT * FROM verifications WHERE token = ?', [token], function(err, result) {
     if (err) {

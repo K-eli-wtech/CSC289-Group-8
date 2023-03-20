@@ -7,7 +7,7 @@
         <title> Login </title>
     </head>
 
-    <body>
+    <body onload="getCookieData()">
       <section>
         <div class="form-box">
             <div class="form_value">
@@ -17,21 +17,26 @@
                 <!--Email input-->
                 <div class="inputbox">
                   <ion-icon name="mail-outline"></ion-icon>
-                  <input type="email" name="email" required>
+                  <input id="email" type="email" name="email" required>
                   <label for="">Email</label>
                 </div>
 
                 <!--Password input-->
                 <div class="inputbox">
                   <ion-icon name="lock-closed-outline"></ion-icon>
-                  <input type="password" name="password" required>
+                  <input id="password" type="password" name="password" required>
                   <label for="">Password</label>
                 </div>
 
                 <!--Password recovery-->
                 <div class="forget">
-                  <label for=""><input type="checkbox">Remember Me</label>
-                  <a href="#">Forgot Password</a>
+                  <label for=""><input id="remember-me" type="checkbox" onclick="setcookie()">Remember Me</label>
+                  <a href="./forgot.html">Forgot Password</a>
+                </div>
+
+                <!--Info Output-->
+                <div class="confirm-text">
+                  <p id="output"></p>
                 </div>
 
                 <!--Register redirect-->
@@ -45,5 +50,6 @@
       </section>
       <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
       <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+      <script src="remember.js"></script>
     </body>
 </html>

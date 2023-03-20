@@ -1,12 +1,15 @@
 const mysql = require('mysql2/promise');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const dbInfo = mysql.createPool({
-  host: 'group8-projectdb.cb7cnaxezt2z.us-east-1.rds.amazonaws.com',
-  user: 'admin',
-  password: '12345678',
-  database: 'Group8_DB1',
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
   connectionLimit: 10,
 });
-
 
 module.exports = dbInfo;
