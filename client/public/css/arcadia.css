@@ -36,19 +36,16 @@ src: url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/
 url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/retro_gaming-webfont.otf") format("opentype"),
 url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/retro_gaming-webfont.woff2") format("woff2");
 } 
-    
-body {
-    font-family: 'garet-book', Arial, sans-serif;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    width: 100%;
-    background: url('../images/homebg.jpg')no-repeat;
-    background-position: center;
-    background-size: cover;
+
+
+
+* {
+    margin: 0;
+    padding: 0;
 }
 
 #wrap {
+    border-radius: 40px;
     position: relative;
     width: 80%;
     height: 100%;
@@ -58,30 +55,35 @@ body {
     align-items: center;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-}
 
 /* Page Header */
 
 .header {
-  background: rgba(19, 12, 49, 0.712);
-  color: #fff;
-  padding: 30px;
-  display: flex;
-  backdrop-filter: blur(12px);
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
+    background: rgba(19, 12, 49, 0.712);
+    color: #fff;
+    padding: 30px;
+    display: flex;
+    backdrop-filter: blur(12px);
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
 }
 
 .header h1 {
-  font-size: 3em;
-  font-weight: 700;
+    font-size: 3em;
+    font-weight: 700;
 }
 
+
+/* Newest */
+
+.newest_games {
+    padding: 20px;
+}
+
+
 /*Newest Games Carousel*/
+
 .gallery-scroll {
     display: flex;
     flex-wrap: nowrap;
@@ -103,6 +105,7 @@ body {
     scroll-snap-align: center;
 }
 
+
 /*Game Recommender Home Page*/
 
 .game_gen_container{
@@ -122,7 +125,7 @@ body {
 form {
     color: whitesmoke;
     text-align: center;
-  }
+}
   
 .button {
     border: none;
@@ -135,72 +138,210 @@ form {
 .testing {background-color: #0fe9de;}
 
 .navigation_bar {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  font-weight: 600;
-  font-size: 1.2em;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+    font-size: 1.2em;
 }
 
 li {
-  display: inline-block;
-  margin-right: 20px;
+    display: inline-block;
+    margin-right: 20px;
 }
 
 li:last-child {
-  margin-right: 0;
+    margin-right: 0;
 }
 
 li a {
-  display: inline-block;
-  color: #fff;
-  text-align: center;
-  padding: 10px 20px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
+    display: inline-block;
+    border-radius: 40px;
+    color: #fff;
+    text-align: center;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: background-color 0.1s ease;
 }
 
 li a:hover {
-  background-color: #fff;
-  color: #0fe9de;
+    border-radius: 40px;
+    background-color: #fff;
+    color: #141414;
 }
+
+li ion-icon {
+    font-size: 2.6em;
+}
+
+.login {
+    background: transparent;
+    border: none;
+    color: #fff;
+    outline: none;
+    height: 50px;
+    width: 50px;
+}
+
+.login:hover {
+    cursor: pointer;
+}
+
+.search {
+    background: transparent;
+    height: 50px;
+    color: #fff;
+    border: none;
+    outline: none;
+}
+
+.search:hover {
+    cursor: pointer;
+}
+
 
 /* Page Body */
 
 body {
-  background-color: #f1f1f1;
+    font-family: 'garet-book', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background: url('../images/homebg.jpg')no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: #fff;
 }
 
 .section-heading {
-  font-size: 2.5em;
-  font-weight: 600;
-  margin-top: 60px;
-  margin-bottom: 30px;
+    font-size: 2.5em;
+    font-weight: 600;
+    margin-top: 60px;
+    margin-bottom: 30px;
 }
 
 .paragraph {
-  font-size: 1.2em;
-  line-height: 1.8;
-  margin-bottom: 30px;
+    font-size: 1.2em;
+    line-height: 1.8;
+    margin-bottom: 30px;
 }
 
 .button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #0fe9de;
-  color: #fff;
-  font-size: 1.2em;
-  text-decoration: none;
-  border-radius: 40px;
-  transition: background-color 0.3s ease;
+    display: inline-block;
+    background-color: #0fe9de;
+    color: #fff;
+    font-size: 1.2em;
+    text-decoration: none;
+    border-radius: 40px;
+    transition: background-color 0.1s ease;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 .button:hover {
-  background-color: #fff;
-  color: #0fe9de;
+    background-color: #fff;
+    color: #0fe9de;
 }
 
+
+/* Latest Reviews */
+.latest-head {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    position: relative;
+  }
+
+.latest-body {
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+}
+
+.filter_dropdown {
+    display: inline-flex;
+    width: 100%;
+    align-items: right;
+    padding: 10px 20px;
+    justify-content: right;
+}
+
+.latest button {
+    width: 200px;
+    height: 50px;
+    font-weight: 600;
+    font-size: 1.2em;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border: none;
+    background-color: #ffffff;
+    padding: 10px 20px;
+}
+
+.latest_reviews_header {
+    padding: 20px;
+    width: 350px;
+    height: 50px;
+}
+
+.latest_reviews {
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Dropdown */
+.dropdown {
+    display: relative;
+    width: auto;
+    align-items: center;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #272727ad;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #66666686;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #ffffff;
+    color: #181818;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+
 /* Footer */
+
 footer {
     background: rgba(48, 48, 48, 0.6);
     color: #fff;
@@ -212,55 +353,27 @@ footer {
     position: relative;
 }
 
-.dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #252525;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
-    padding: 12px 16px;
-    z-index: 1;
-    top: 100%;
-    left: 0;
-  }
-  
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-  
-
-.dropdown a {
-    text-decoration: none!important;
-    color: #fff;
-    font-weight: 600;
-}
-
 footer p {
-  font-size: 1.2em;
-  margin-bottom: 20px;
+    font-size: 1.2em;
+    margin-bottom: 20px;
 }
 
 footer ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 footer li {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 footer a {
-  color: #fff;
-  text-decoration: none;
-  transition: opacity 0.3s ease;
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
 }
 
 footer a:hover {
-  opacity: 0.7;
+    opacity: 0.7;
 }
