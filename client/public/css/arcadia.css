@@ -38,7 +38,6 @@ url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts
 } 
 
 
-
 * {
     margin: 0;
     padding: 0;
@@ -126,6 +125,7 @@ form {
     color: whitesmoke;
     text-align: center;
 }
+
   
 .button {
     border: none;
