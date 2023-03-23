@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+/*Font Styling*/
+@font-face {
+font-family: "f25_bank_printer"; /*Headings, Large Buttons*/
+src: url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/f25_bank_printer-webfont.woff") format("woff"),
+url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/f25_bank_printer-webfont.otf") format("opentype"),
+url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/f25_bank_printer-webfont.woff2") format("woff2");
+}
+
+@font-face {
+font-family: "f25_bank_printer_bold";
+src: url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/f25_bank_printer_bold-webfont.woff") format("woff"),
+url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/f25_bank_printer_bold-webfont.otf") format("opentype"),
+url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/f25_bank_printer_bold-webfont.woff2") format("woff2");
+}
+
+
+@font-face {
+font-family: "garet-book"; /*Paragraph text*/
+src: url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/garet-book-webfont.woff") format("woff"),
+url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/garet-book-webfont.otf") format("opentype"),
+url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/garet-book-webfont.woff2") format("woff2");
+}
+
+@font-face {
+font-family: "garet-heavy";
+src: url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/garet-heavy-webfont.woff") format("woff"),
+url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/garet-heavy-webfont.otf") format("opentype"),
+url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/garet-heavy-webfont.woff2") format("woff2");
+}
+
+@font-face {
+font-family: "retro_gaming"; /*Paragraph text*/
+src: url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/retro_gaming-webfont.woff") format("woff"),
+url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/retro_gaming-webfont.otf") format("opentype"),
+url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/retro_gaming-webfont.woff2") format("woff2");
+} 
+    
+body {
+    font-family: 'garet-book', Arial, sans-serif;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background: url('../images/homebg.jpg')no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+#wrap {
+    position: relative;
+    width: 80%;
+    height: 100%;
+    background: rgba(44, 78, 117, 0.7);
+    background-position: center;
+    justify-content: center;
+    align-items: center;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Page Header */
+
+.header {
+  background: rgba(19, 12, 49, 0.712);
+  color: #fff;
+  padding: 30px;
+  display: flex;
+  backdrop-filter: blur(12px);
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.header h1 {
+  font-size: 3em;
+  font-weight: 700;
+}
+
+/*Newest Games Carousel*/
+.gallery-scroll {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    overflow-x: scroll;
+    vertical-align: middle;
+}
+
+.gallery-item {
+    padding: .5rem;
+    font-size: 1.2rem;
+    text-align: center;
+    background-color: #333;
+    color: whitesmoke;
+    scroll-snap-align: center;
+}
+
+/*Game Recommender Home Page*/
+
+.game_gen_container{
+    background-image: url('/images/splash1.jpg');
+    width: 80%;
+    height: 26%;  
+    margin-left: 4%;
+  }
+  
+.game_gen_container_description{  
+    font-family: monospace;
+    text-align: center;
+    width: 300px;  
+    height: 200px;  
+}
+
+form {
+    color: whitesmoke;
+    text-align: center;
+  }
+  
+.button {
+    border: none;
+    color: red;
+    padding: 15px 32px;
+    text-decoration: none;
+    font-family: monospace
+}
+    
+.testing {background-color: #0fe9de;}
+
+.navigation_bar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+  font-size: 1.2em;
+}
+
+li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+li:last-child {
+  margin-right: 0;
+}
+
+li a {
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+li a:hover {
+  background-color: #fff;
+  color: #0fe9de;
+}
+
+/* Page Body */
+
+body {
+  background-color: #f1f1f1;
+}
+
+.section-heading {
+  font-size: 2.5em;
+  font-weight: 600;
+  margin-top: 60px;
+  margin-bottom: 30px;
+}
+
+.paragraph {
+  font-size: 1.2em;
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #0fe9de;
+  color: #fff;
+  font-size: 1.2em;
+  text-decoration: none;
+  border-radius: 40px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #fff;
+  color: #0fe9de;
+}
+
+/* Footer */
+footer {
+    background: rgba(48, 48, 48, 0.6);
+    color: #fff;
+    padding: 30px;
+    display: flex;
+    backdrop-filter: blur(12px);
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #252525;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+    padding: 12px 16px;
+    z-index: 1;
+    top: 100%;
+    left: 0;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+
+.dropdown a {
+    text-decoration: none!important;
+    color: #fff;
+    font-weight: 600;
+}
+
+footer p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+footer ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+footer li {
+  margin-bottom: 10px;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+footer a:hover {
+  opacity: 0.7;
+}
