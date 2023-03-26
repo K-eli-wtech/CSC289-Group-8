@@ -1,71 +1,56 @@
-!DOCTYPE html>
-<html>
-<!--SEARCH RESULTS PAGE-->
+<!--SEARCH PAGE-->
+<!DOCTYPE html>
+<html lang="en">
+
+<!--Javascript for template header and footer-->
+<script type=module src=./js/head-foot.js></script>
+
 <!--Tab Header Information-->    
 <head>
     <meta name="viewport" content=""width=device-width, initial-scale="1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="arcadiastyle.css">
+    <link rel="stylesheet" href="./css/search.css">
     <title> Arcadia</title>
-    
-    <!--Javascript to access API-->
-    <script>
-        var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "https://api",
-            "method": "GET"
-        }
-      </script>
+</head>
 
-  <!--Header and Navigation Bar-->
-  <div class="header">
-    <h1> Arcadia 
-    <ul class="navigation_bar">
-        <li><a href="newest_games.html">Newest Games</a></li>
-        <li><a href="reviews.html">News</a></li>
-        <li><a href="recommender.html">Game Recommender</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><button class ="login" type="button" onclick="window.location.href = 'location';">Login</button> </li>
-        <li> <input type="text" placeholder="Search"></li>
-      </ul> 
-      </h1>
+<body>
+  <!--This div wraps the entire page-->
+  <div id="wrap">
+    <!--Header and Navigation Bar-->
+    <my-header></my-header>
+
+      <h2 class="search-head">Search</h2>
+      <!--Search Bar-->
+      <div class="search-bar">
+        <input type="text" placeholder="Search" id="search-input">
+      </div>
+      
+      <!--Search Results-->
+      <div class="search-results">
+        <h2 id="terms"></h2>
+      </div>
+
+      <div>
+        <h3> Game Titles </h3>
+        <!--Search Results with similar titles should go here-->
+      </div>
+      
+      <div>
+        <h3> Companies </h3>
+        <!--Search Results with similar companies should go here-->
+      </div>
+      
+      <div>
+        <h3> Characters </h3>
+        <!--Search Results with similar characters should go here-->
+      </div>
+              
+      <!--Footer -->
+      <my-footer></my-footer>
+
   </div>
-    
-  <!--Search Bar-->
-  <div class="search_bar">
-    <input type="text" placeholder="Search" id="search_input">
-  </div>
-  
-  <!--Search Results-->
-  <div class="search_results">
-    <h2>Search</h2> <h2 id="terms"></h2>
-  </div>
-  
-  <div>
-    <h3> Game Titles </h3>
-    <!--Search Results with similar titles should go here-->
-  </div>
-  
-  <div>
-    <h3> Companies </h3>
-    <!--Search Results with similar companies should go here-->
-  </div>
-  
-  <div>
-    <h3> Characters </h3>
-    <!--Search Results with similar characters should go here-->
-  </div>
-  
-  <script>
-      let html = document.getElementById("search_input").innerHTML;
-      document.getElementById("terms").innerHTML = html;
-  </script> <!--Does not work since search bar doesn't function but should display the user's search terms-->
-            
-    <!--Footer -->
-            <footer>
-            </footer>
-            
-        </div> <!--This div wraps the entire page-->
-    </body>
+  <!--Javascript for icons-->
+  <script type=module src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js></script>
+  <script nomodule src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js></script>
+</body>
 </html> 
