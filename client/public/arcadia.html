@@ -1,250 +1,211 @@
+<!--Main PAGE-->
 <!DOCTYPE html>
 <html lang="en">
 
-<!--Javascript to access API-->
-<script>
-  var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": "https://api",
-      "method": "GET"
-  }
-</script>
+<!--Javascript for template header and footer-->
+<script type=module src=./js/head-foot.js></script>
 
 <!--Tab Header Information-->    
 <head>
   <meta name="viewport" content=""width=device-width, initial-scale="1.0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="./css/arcadia.css">
+  <link rel="stylesheet" href=./css/arcadia.css>
   <title> Arcadia</title>
 </head>
 
-  <body>
-    <div id="wrap">
-      <!--Header and Navigation Bar-->
-      <div class="header">
-        <a href="arcadia.html"><h1 style="color: #a81000">Arcadia</h1></a>
-        <h3>
-        <ul class="navigation_bar">
-            <li><a href="newest_games.html">NEWEST GAMES</a></li>
-            <li><a href="reviews.html">REVIEWS</a></li>
-            <li><a href="recommender.html">RECOMMENDER</a></li>
-            <li><a href="about.html">ABOUT</a></li>
+<body>
+  <!--This div wraps the entire page-->
+  <div id="wrap">
+    <!--Header and Navigation Bar-->
+    <my-header></my-header>
 
-            <li style="float: right; padding-right: 10px;">
-              <button class ="login" type="button" onclick="window.location.href = 'login.html';">
-                <ion-icon name="person-circle"></ion-icon>
-              </button> 
-            </li>
-            <li style="float: right; padding-right: 10px;">
-              <button class ="search" type="button" onclick="window.location.href = 'search.html';">
-                <ion-icon name="search-circle-outline"></ion-icon>
-            </button> </li>
-        </ul> 
-        </h3>
+    <!--The Newest Games-->
+    <div class="newest_games">
+      <h2>THE NEWEST GAMES</h2>
+    </div>      
+      
+
+    <!--Newest Games Carousel--> 
+    <div class="carousel">
+      <div class="row">
+    <div class="gallery-scroll">
+      <figure class="gallery-item">
+        <!--Need to replace all image sources with database images-->
+        <img class="gallery-img" src="https://picsum.photos/230/300?random=1"> alt="symbol image" title="symbol image">
+        <!--Need to change all figcaptions to pull the title off the database-->
+        <figcaption>Image Title</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img class="gallery-img" src="https://picsum.photos/230/300?random=2" alt="symbol image" title="symbol image">
+        <figcaption>Image Title</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img class="gallery-img" src="https://picsum.photos/230/300?random=3" alt="symbol image" title="symbol image">
+        <figcaption>Image Title</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img class="gallery-img" src="https://picsum.photos/230/300?random=4" alt="symbol image" title="symbol image">
+        <figcaption>Image Title</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img class="gallery-img" src="https://picsum.photos/230/300?random=5" alt="symbol image" title="symbol image">
+        <figcaption>Image Title</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img class="gallery-img" src="https://picsum.photos/230/300?random=6" alt="symbol image" title="symbol image">
+        <figcaption>Image Title</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img class="gallery-img" src="https://picsum.photos/230/300?random=7" alt="symbol image" title="symbol image">
+        <figcaption>Image Title</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img class="gallery-img" src="https://picsum.photos/230/300?random=8" alt="symbol image" title="symbol image">
+        <figcaption>Image Title</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img class="gallery-img" src="https://picsum.photos/230/300?random=9" alt="symbol image" title="symbol image">
+        <figcaption>Image Title</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img class="gallery-img" src="https://picsum.photos/230/300?random=10" alt="symbol image" title="symbol image">
+        <figcaption>Image Title</figcaption>
+      </figure>
+    </div><!-- end gallery-scroll -->
+    </div> <!--Wrap in a div with row class-->
+    </div>
+
+    <!--Latest Reviews and Search Dropdown Container -->
+    <section class="latest">
+      <div class="latest-head">
+        <div class="latest_reviews_header">
+          <h2>LATEST REVIEWS</h2>
+        </div>
+
+        <!--Platform Dropdown-->
+        <div class="filter_dropdown">
+          <div class="dropdown">
+            <button onclick="" class="dropbtn">PLATFORM</button>
+            <div id="myDropdown" class="dropdown-content">
+              <a href="#">PC</a>
+              <a href="#">XBox X</a>
+              <a href="#">PS5</a>
+              <a href="#">Nintendo Switch</a>
+            </div>
+          </div> 
+
+        <!--Year Dropdown-->
+          <div class="dropdown">
+            <button onclick="" class="dropbtn">YEAR</button>
+            <div id="myDropdown" class="dropdown-content">
+              <a href="#">2023</a>
+              <a href="#">2022</a>
+              <a href="#">2021</a>
+              <a href="#">2020</a>
+              <a href="#">2019</a>
+              <a href="#">2018</a>
+              <a href="#">2017</a>
+              <a href="#">2016</a>
+              <a href="#">2015</a>
+            </div>
+          </div>
+
+        <!--Rating Dropdown-->
+          <div class="dropdown">
+            <button onclick="" class="dropbtn">RATING</button>
+            <div id="myDropdown" class="dropdown-content">
+              <a href="#">1</a>
+              <a href="#">2</a>
+              <a href="#">3</a>
+              <a href="#">4</a>
+              <a href="#">5</a>
+            </div>
+          </div>
+
+        <!--Genre Dropdown-->
+          <div class="dropdown">
+            <button onclick="" class="dropbtn">GENRE</button>
+            <div id="myDropdown" class="dropdown-content">
+              <a href="#">Action</a>
+              <a href="#">Adventure</a>
+              <a href="#">Horror</a>
+              <a href="#">Puzzle</a>
+              <a href="#">RPG</a>
+              <a href="#">Simulation</a>
+              <a href="#">Strategy</a>
+              <a href="#">Sports</a>
+              <a href="#">MMO</a>
+            </div>
+          </div>
+
+        </div>
       </div>
 
-      <!--The Newest Games-->
-      <div class="newest_games">
-        <h2>THE NEWEST GAMES</h2>
-      </div>      
-        
-
-      <!--Newest Games Carousel--> 
-      <div class="carousel">
-        <div class="row">
-      <div class="gallery-scroll">
-        <figure class="gallery-item">
-          <!--Need to replace all image sources with database images-->
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=1"> alt="symbol image" title="symbol image">
-          <!--Need to change all figcaptions to pull the title off the database-->
-          <figcaption>Image Title</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=2" alt="symbol image" title="symbol image">
-          <figcaption>Image Title</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=3" alt="symbol image" title="symbol image">
-          <figcaption>Image Title</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=4" alt="symbol image" title="symbol image">
-          <figcaption>Image Title</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=5" alt="symbol image" title="symbol image">
-          <figcaption>Image Title</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=6" alt="symbol image" title="symbol image">
-          <figcaption>Image Title</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=7" alt="symbol image" title="symbol image">
-          <figcaption>Image Title</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=8" alt="symbol image" title="symbol image">
-          <figcaption>Image Title</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=9" alt="symbol image" title="symbol image">
-          <figcaption>Image Title</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=10" alt="symbol image" title="symbol image">
-          <figcaption>Image Title</figcaption>
-        </figure>
-      </div><!-- end gallery-scroll -->
-      </div> <!--Wrap in a div with row class-->
+      <div class="latest-body">
+        <div class="latest_reviews">
+            <div class="latest_review_snippet">
+              <div class="placeholder"></div>
+              <div class="review_text_container">
+                <div class="review_platform"><!--need call to database here-->PLAYSTATION</div>
+                <div class="review_game_year"><!--need call to database here-->1998</div>
+                <div class="review_game_title"><!--need call to database here-->SPYRO THE DRAGON</div>
+                <div class="review_rating"><!--need call to database here-->****</div>
+                <div class="reviewer_username"><!--need call to database here-->OldSchoolCool</div>
+              </div>
+            </div>
+            <div class="latest_review_snippet">
+              <div class="placeholder"></div>
+              <div class="review_text_container">
+                <div class="review_platform"><!--need call to database here-->PLAYSTATION</div>
+                <div class="review_game_year"><!--need call to database here-->1998</div>
+                <div class="review_game_title"><!--need call to database here-->SPYRO THE DRAGON</div>
+                <div class="review_rating"><!--need call to database here-->****</div>
+                <div class="reviewer_username"><!--need call to database here-->OldSchoolCool</div>
+              </div>
+            </div>
+            <div class="latest_review_snippet">
+              <div class="placeholder"></div>
+              <div class="review_text_container">
+                <div class="review_platform"><!--need call to database here-->PLAYSTATION</div>
+                <div class="review_game_year"><!--need call to database here-->1998</div>
+                <div class="review_game_title"><!--need call to database here-->SPYRO THE DRAGON</div>
+                <div class="review_rating"><!--need call to database here-->****</div>
+                <div class="reviewer_username"><!--need call to database here-->OldSchoolCool</div>
+              </div>
+            </div>
+            <div class="latest_review_snippet">
+              <div class="placeholder"></div>
+              <div class="review_text_container">
+                <div class="review_platform"><!--need call to database here-->PLAYSTATION</div>
+                <div class="review_game_year"><!--need call to database here-->1998</div>
+                <div class="review_game_title"><!--need call to database here-->SPYRO THE DRAGON</div>
+                <div class="review_rating"><!--need call to database here-->****</div>
+                <div class="reviewer_username"><!--need call to database here-->OldSchoolCool</div>
+              </div>
+            </div>     
+        </div>
       </div>
+    </section>
+
+
+    <!--Game Recommender Container -->
+    <div class="game_gen_container"> <!--Needs to be anchored left, size limited-->
+      <div class="game_gen_container_text">
+        <h2>NEED A NEW ADVENTURE?</h2>
+        <div class="game_gen_container_description">
+        <p>Find your newest favorite game in just a few minutes using our game recommender. Answer a few simple questions and we'll show you games we think you'll love. Sign in with your member profile for even more personalized recommendations.</p>
+        </div>
+        <button class ="button testing" type="button" onclick="window.location.href = 'recommender.html';">FIND GAMES NOW</button> 
+      </div>
+    </div>
+                              
   
-      <!--Latest Reviews and Search Dropdown Container -->
-      <section class="latest">
-        <div class="latest-head">
-          <div class="latest_reviews_header">
-            <h2>LATEST REVIEWS</h2>
-          </div>
+    <!--Footer-->
+    <my-footer></my-footer>
 
-          <!--Platform Dropdown-->
-          <div class="filter_dropdown">
-            <div class="dropdown">
-              <button onclick="" class="dropbtn">PLATFORM</button>
-              <div id="myDropdown" class="dropdown-content">
-                <a href="#">PC</a>
-                <a href="#">XBox X</a>
-                <a href="#">PS5</a>
-                <a href="#">Nintendo Switch</a>
-              </div>
-            </div> 
-
-          <!--Year Dropdown-->
-            <div class="dropdown">
-              <button onclick="" class="dropbtn">YEAR</button>
-              <div id="myDropdown" class="dropdown-content">
-                <a href="#">2023</a>
-                <a href="#">2022</a>
-                <a href="#">2021</a>
-                <a href="#">2020</a>
-                <a href="#">2019</a>
-                <a href="#">2018</a>
-                <a href="#">2017</a>
-                <a href="#">2016</a>
-                <a href="#">2015</a>
-              </div>
-            </div>
-
-          <!--Rating Dropdown-->
-            <div class="dropdown">
-              <button onclick="" class="dropbtn">RATING</button>
-              <div id="myDropdown" class="dropdown-content">
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-              </div>
-            </div>
-
-          <!--Genre Dropdown-->
-            <div class="dropdown">
-              <button onclick="" class="dropbtn">GENRE</button>
-              <div id="myDropdown" class="dropdown-content">
-                <a href="#">Action</a>
-                <a href="#">Adventure</a>
-                <a href="#">Horror</a>
-                <a href="#">Puzzle</a>
-                <a href="#">RPG</a>
-                <a href="#">Simulation</a>
-                <a href="#">Strategy</a>
-                <a href="#">Sports</a>
-                <a href="#">MMO</a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="latest-body">
-          <div class="latest_reviews">
-              <div class="latest_review_snippet">
-                <div class="placeholder"></div>
-                <div class="review_text_container">
-                  <div class="review_platform"><!--need call to database here-->PLAYSTATION</div>
-                  <div class="review_game_year"><!--need call to database here-->1998</div>
-                  <div class="review_game_title"><!--need call to database here-->SPYRO THE DRAGON</div>
-                  <div class="review_rating"><!--need call to database here-->****</div>
-                  <div class="reviewer_username"><!--need call to database here-->OldSchoolCool</div>
-                </div>
-              </div>
-              <div class="latest_review_snippet">
-                <div class="placeholder"></div>
-                <div class="review_text_container">
-                  <div class="review_platform"><!--need call to database here-->PLAYSTATION</div>
-                  <div class="review_game_year"><!--need call to database here-->1998</div>
-                  <div class="review_game_title"><!--need call to database here-->SPYRO THE DRAGON</div>
-                  <div class="review_rating"><!--need call to database here-->****</div>
-                  <div class="reviewer_username"><!--need call to database here-->OldSchoolCool</div>
-                </div>
-              </div>
-              <div class="latest_review_snippet">
-                <div class="placeholder"></div>
-                <div class="review_text_container">
-                  <div class="review_platform"><!--need call to database here-->PLAYSTATION</div>
-                  <div class="review_game_year"><!--need call to database here-->1998</div>
-                  <div class="review_game_title"><!--need call to database here-->SPYRO THE DRAGON</div>
-                  <div class="review_rating"><!--need call to database here-->****</div>
-                  <div class="reviewer_username"><!--need call to database here-->OldSchoolCool</div>
-                </div>
-              </div>
-              <div class="latest_review_snippet">
-                <div class="placeholder"></div>
-                <div class="review_text_container">
-                  <div class="review_platform"><!--need call to database here-->PLAYSTATION</div>
-                  <div class="review_game_year"><!--need call to database here-->1998</div>
-                  <div class="review_game_title"><!--need call to database here-->SPYRO THE DRAGON</div>
-                  <div class="review_rating"><!--need call to database here-->****</div>
-                  <div class="reviewer_username"><!--need call to database here-->OldSchoolCool</div>
-                </div>
-              </div>     
-          </div>
-        </div>
-      </section>
-
-
-      <!--Game Recommender Container -->
-      <div class="game_gen_container"> <!--Needs to be anchored left, size limited-->
-        <div class="game_gen_container_text">
-          <h2>NEED A NEW ADVENTURE?</h2>
-          <div class="game_gen_container_description">
-          <p>Find your newest favorite game in just a few minutes using our game recommender. Answer a few simple questions and we'll show you games we think you'll love. Sign in with your member profile for even more personalized recommendations.</p>
-          </div>
-          <button class ="button testing" type="button" onclick="window.location.href = 'recommender.html';">FIND GAMES NOW</button> 
-        </div>
-      </div>
-                                
-    
-      <!--Footer-->
-      <footer>
-
-        <aside>
-          <div class="content"></div>
-          <h3>CREATED BY:</h3>
-          <ul>
-            <li>KATHERINE ALEXANDER</li>
-            <li>TYLER BROWNING</li>
-            <li>DAVIN MCFADDIN</li>
-            <li>KALEB WHITE</li>
-          </ul>
-        </aside>
-        <aside>
-          <div id="contact" class="content"></div>
-          <h3>Contact Us</h3>
-        </aside>
-      </footer>
-    </div> <!--This div wraps the entire page-->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-  </body>
+  </div>
+  <!--Javascript for icons-->
+  <script type=module src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js></script>
+  <script nomodule src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js></script>
+</body>
 </html> 
