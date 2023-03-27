@@ -1,7 +1,6 @@
-<!--Main PAGE-->
+<!--Main Page-->
 <!DOCTYPE html>
 <html lang="en">
-
 
 <!--Javascript for template header and footer-->
 <script type=module src=./js/head-foot.js></script>
@@ -28,7 +27,7 @@
 
     <!--Newest Games Carousel--> 
     <div class="carousel">
-      <div class="row">
+    <div class="row">
     <div class="gallery-scroll">
       <figure class="gallery-item">
         <!--Need to replace all image sources with database images-->
@@ -73,12 +72,24 @@
         <figcaption>Image Title</figcaption>
       </figure>
     </div><!-- end gallery-scroll -->
-    </div> <!--Wrap in a div with row class-->
+    </div><!--Wrap in a div with row class-->
+    </div>
+
+    <!--Game Recommender Container -->
+    <div class="game_gen_container"> <!--Needs to be anchored left, size limited-->
+      <div class="game_gen_container_text">
+        <h2>NEED A NEW ADVENTURE?</h2>
+        <div class="game_gen_container_description">
+        <p>Find your newest favorite game in just a few minutes using our game recommender. Answer a few simple questions and we'll show you games we think you'll love. Sign in with your member profile for even more personalized recommendations.</p>
+        </div>
+        <button class ="button testing" type="button" onclick="window.location.href = 'recommender.html';">FIND GAMES NOW</button> 
+      </div>
     </div>
 
     <!--Latest Reviews and Search Dropdown Container -->
     <section class="latest">
       <div class="latest-head">
+
         <div class="latest_reviews_header">
           <h2>LATEST REVIEWS</h2>
         </div>
@@ -94,6 +105,7 @@
               <a href="#">Nintendo Switch</a>
             </div>
           </div> 
+        </div> 
 
         <!--Year Dropdown-->
           <div class="dropdown">
@@ -138,8 +150,6 @@
               <a href="#">MMO</a>
             </div>
           </div>
-
-        </div>
       </div>
 
       <div class="latest-body">
@@ -234,18 +244,6 @@
     </section>
 
 
-    <!--Game Recommender Container -->
-    <div class="game_gen_container"> <!--Needs to be anchored left, size limited-->
-      <div class="game_gen_container_text">
-        <h2>NEED A NEW ADVENTURE?</h2>
-        <div class="game_gen_container_description">
-        <p>Find your newest favorite game in just a few minutes using our game recommender. Answer a few simple questions and we'll show you games we think you'll love. Sign in with your member profile for even more personalized recommendations.</p>
-        </div>
-        <button class ="button testing" type="button" onclick="window.location.href = 'recommender.html';">FIND GAMES NOW</button> 
-      </div>
-    </div>
-                              
-  
     <!--Footer-->
     <my-footer></my-footer>
 

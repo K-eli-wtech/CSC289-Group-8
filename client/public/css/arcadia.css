@@ -1,53 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
-/*Font Styling*/
-@font-face {
-font-family: "f25_bank_printer"; /*Headings, Large Buttons*/
-src: url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/f25_bank_printer-webfont.woff") format("woff"),
-url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/f25_bank_printer-webfont.otf") format("opentype"),
-url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/f25_bank_printer-webfont.woff2") format("woff2");
-}
-
-@font-face {
-font-family: "f25_bank_printer_bold";
-src: url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/f25_bank_printer_bold-webfont.woff") format("woff"),
-url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/f25_bank_printer_bold-webfont.otf") format("opentype"),
-url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/f25_bank_printer_bold-webfont.woff2") format("woff2");
-}
-
-
-@font-face {
-font-family: "garet-book"; /*Paragraph text*/
-src: url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/garet-book-webfont.woff") format("woff"),
-url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/garet-book-webfont.otf") format("opentype"),
-url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/garet-book-webfont.woff2") format("woff2");
-}
-
-@font-face {
-font-family: "garet-heavy";
-src: url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/garet-heavy-webfont.woff") format("woff"),
-url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/garet-heavy-webfont.otf") format("opentype"),
-url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/garet-heavy-webfont.woff2") format("woff2");
-}
-
-@font-face {
-font-family: "retro_gaming"; /*Paragraph text*/
-src: url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/retro_gaming-webfont.woff") format("woff"),
-url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/retro_gaming-webfont.otf") format("opentype"),
-url("https://github.com/K-eli-wtech/CSC289-Group-8/blob/main/client/public/fonts/retro_gaming-webfont.woff2") format("woff2");
-} 
-
-
-* {
+*{
     margin: 0;
     padding: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 #wrap {
     border-radius: 40px;
     position: relative;
     width: 80%;
-    height: 100%;
     min-height: 100vh;
     background: rgba(44, 78, 117, 0.7);
     background-position: center;
@@ -208,7 +170,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
     width: 100%;
     background: url('../images/homebg.jpg')no-repeat;
     background-position: center;
