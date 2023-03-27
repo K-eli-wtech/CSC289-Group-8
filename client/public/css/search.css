@@ -29,6 +29,8 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
+    border-top-right-radius: 40px;
+    border-top-left-radius: 40px;
 }
 
 .header h1 {
@@ -126,6 +128,8 @@ footer {
     justify-content: space-between;
     align-items: center;
     position: relative;
+    border-bottom-right-radius: 40px;
+    border-bottom-left-radius: 40px;
 }
 
 footer p {
