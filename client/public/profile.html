@@ -8,7 +8,7 @@
 <!-- I will need to play around with this. It's copied with a few changes from https://www.geeksforgeeks.org/how-to-display-logged-in-user-information-in-php/ -->
 <body>
     <div class="header">
-        <h2>Profile Page</h2>
+        <h2>Profile</h2>
     </div>
     <div class="content">
   
@@ -34,26 +34,28 @@
              
  
  
+<p> 
+    Welcome
+        <strong>
+            <?php echo $_SESSION['username']; ?>
+        </strong>
+</p>
+
+<p>Add Games
+
+<form action="/action_page.php">
+    <label for="new_game_1">Game:</label>
+    <input type="text" id="new_game_1" name="new_game_1"><br><br>
+    <input type="submit" value="Submit">
+  </form>
+</p>
+
+<p>My Games</p>
+ 
+ 
 <p>
-                Welcome
-                <strong>
-                    <?php echo $_SESSION['username']; ?>
-                </strong>
-            </p>
- 
- 
- 
-             
- 
- 
-<p>
-                <a href="index.php?logout='1'" style="color: red;">
-                    Click here to Logout
-                </a>
-            </p>
- 
- 
- 
+    <a href="index.php?logout='1'" style="color: red;"> Click here to Logout </a>
+</p>
         <?php endif ?>
     </div>
 </body>
