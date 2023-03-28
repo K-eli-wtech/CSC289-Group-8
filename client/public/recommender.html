@@ -1,69 +1,75 @@
+<!--RECOMMENDER PAGE-->
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <link rel="stylesheet" href="./css/arcadia.css">
-        <title> Arcadia</title>
-    </head>
+<html lang="en">
 
-    <body>
-        <div class="header">
-            <h1> Arcadia 
-            <ul class="navigation_bar">
-                <li><a href="arcadia.html">Home</a></li>
-                <li><a href="newest_games.html">Newest Games</a></li>
-                <li><a href="reviews.html">News</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><button class ="login" type="button" onclick="window.location.href = 'login.html';">Login</button> </li>
-              </ul> 
-              </h1>
-        </div>
+<!--Javascript for template header and footer-->
+<script type=module src=./js/head-foot.js></script>
 
-        <div class="gameGenContainer">
-            <h2 id="gameGenHeader">Game Recommender</h2>
-            <p>Enter five games you like<p>
-            <form>
-                <label for="game1">Game 1:</label><br>
-                <input type="text" id="game1" name="game1"><br>
+<!--Tab Header Information-->    
+<head>
+    <meta name="viewport" content=""width=device-width, initial-scale="1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/search.css">
+    <title> Arcadia</title>
+</head>
 
-                <label for="game2">Game 2:</label><br>
-                <input type="text" id="game2" name="game2"><br>
+<body>
+  <!--This div wraps the entire page-->
+  <div id="wrap">
+    <!--Header and Navigation Bar-->
+    <my-header></my-header>
 
-                <label for="game3">Game 3:</label><br>
-                <input type="text" id="game3" name="game3"><br>
+      <div class="gameGenContainer">
+          <h2 id="gameGenHeader">Game Recommender</h2>
+          <p>Enter five games you like<p>
+          <form>
+              <label for="game1">Game 1:</label><br>
+              <input type="text" id="game1" name="game1"><br>
 
-                <label for="game4">Game 4:</label><br>
-                <input type="text" id="game4" name="game4"><br>
+              <label for="game2">Game 2:</label><br>
+              <input type="text" id="game2" name="game2"><br>
 
-                <label for="game5">Game 5:</label><br>
-                <input type="text" id="game5" name="game5"><br>
-                <br>
+              <label for="game3">Game 3:</label><br>
+              <input type="text" id="game3" name="game3"><br>
 
-              </form> 
-            <button id="queryButton" class="button testing" type="button">Test</button> 
-        </div>
+              <label for="game4">Game 4:</label><br>
+              <input type="text" id="game4" name="game4"><br>
 
-        <script>
-            $(document).ready(function() {
-              $('#queryButton').click(function() {
-                var game1 = $('#game1').val();
-                var game2 = $('#game2').val();
-                var game3 = $('#game3').val();
-                var game4 = $('#game4').val();
-                var game5 = $('#game5').val();
-        
-                $.post('http://localhost:3000/button-test', {
-                game1: game1,
-                game2: game2,
-                game3: game3,
-                game4: game4,
-                game5: game5
-                }, function(response) {
-                console.log(response);
-                });
+              <label for="game5">Game 5:</label><br>
+              <input type="text" id="game5" name="game5"><br>
+              <br>
+
+            </form> 
+          <button id="queryButton" class="button testing" type="button">Test</button> 
+      </div>
+
+      <script>
+          $(document).ready(function() {
+            $('#queryButton').click(function() {
+              var game1 = $('#game1').val();
+              var game2 = $('#game2').val();
+              var game3 = $('#game3').val();
+              var game4 = $('#game4').val();
+              var game5 = $('#game5').val();
+      
+              $.post('http://localhost:3000/button-test', {
+              game1: game1,
+              game2: game2,
+              game3: game3,
+              game4: game4,
+              game5: game5
+              }, function(response) {
+              console.log(response);
               });
             });
-          </script>
-    </body>
+          });
+        </script>
+
+      <!--Footer -->
+      <my-footer></my-footer>
+  </div>
+</body>
+  <!--Javascript for icons-->
+  <script type=module src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js></script>
+  <script nomodule src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js></script>
 </html>

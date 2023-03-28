@@ -1,60 +1,73 @@
+<!--PROFILE Page-->
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<!--Javascript for template header and footer-->
+<script type=module src=./js/head-foot.js></script>
+
+<!--Tab Header Information-->    
 <head>
-    <title>Homepage</title>
-    <link rel="stylesheet" type="text/css"
-                    href="style.css">
+    <meta name="viewport" content=""width=device-width, initial-scale="1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href=./css/about.css>
+    <title> Arcadia</title>
 </head>
+
 <!-- I will need to play around with this. It's copied with a few changes from https://www.geeksforgeeks.org/how-to-display-logged-in-user-information-in-php/ -->
 <body>
-    <div class="header">
-        <h2>Profile Page</h2>
-    </div>
-    <div class="content">
-  
-        <!-- Creating notification when the
-                user logs in -->
-         
-        <!-- Accessible only to the users that
-                have logged in already -->
-        <?php if (isset($_SESSION['success'])) : ?>
-            <div class="error success" >
-                <h3>
-                    <?php
-                        echo $_SESSION['success'];
-                        unset($_SESSION['success']);
-                    ?>
-                </h3>
-            </div>
-        <?php endif ?>
-  
-        <!-- information of the user logged in -->
-        <!-- welcome message for the logged in user -->
-        <?php  if (isset($_SESSION['username'])) : ?>
+    <!--This div wraps the entire page-->
+    <div id="wrap">
+      <!--Header and Navigation Bar-->
+      <my-header></my-header>
+            <!-- Creating notification when the
+                    user logs in -->
+            
+            <!-- Accessible only to the users that
+                    have logged in already -->
+            <?php if (isset($_SESSION['success'])) : ?>
+                <div class="error success" >
+                    <h3>
+                        <?php
+                            echo $_SESSION['success'];
+                            unset($_SESSION['success']);
+                        ?>
+                    </h3>
+                </div>
+            <?php endif ?>
+    
+            <!-- information of the user logged in -->
+            <!-- welcome message for the logged in user -->
+            <?php  if (isset($_SESSION['username'])) : ?>
              
  
  
+<p> 
+    Welcome
+        <strong>
+            <?php echo $_SESSION['username']; ?>
+        </strong>
+</p>
+
+<p>Add Games
+<form action="/action_page.php">
+    <label for="new_game_1">Game:</label>
+    <input type="text" id="new_game_1" name="new_game_1"><br><br>
+    <input type="submit" value="Submit">
+  </form>
+</p>
+
+<p>My Games</p>
+ 
+ 
 <p>
-                Welcome
-                <strong>
-                    <?php echo $_SESSION['username']; ?>
-                </strong>
-            </p>
- 
- 
- 
-             
- 
- 
-<p>
-                <a href="index.php?logout='1'" style="color: red;">
-                    Click here to Logout
-                </a>
-            </p>
- 
- 
- 
-        <?php endif ?>
+    <a href="index.php?logout='1'" style="color: red;"> Click here to Logout </a>
+</p>
+
+        <!--Footer -->
+        <my-footer></my-footer>
     </div>
 </body>
+  <!--Javascript for icons-->
+  <script type=module src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js></script>
+  <script nomodule src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js></script>
 </html>
