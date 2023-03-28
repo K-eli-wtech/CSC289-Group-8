@@ -20,31 +20,53 @@
     <my-header></my-header>
 
       <h2 class="search-head">Search</h2>
-      <!--Search Bar-->
-      <div class="search-bar">
-        <input type="text" placeholder="Search" id="search-input">
-      </div>
-      
-      <!--Search Results-->
-      <div class="search-results">
-        <h2 id="terms"></h2>
+      <div class="search-body">
+        <!--Search Bar-->
+        <div class="search-bar">
+          <input type="text" placeholder="Search" id="search-input">
+        </div>
+        
+        <div class="search-results">
+          <h2 id="terms"></h2>
+          <ul>
+            <li>Search Result 1</li>
+            <li>Search Result 2</li>
+            <li>Search Result 3</li>
+          </ul>
+        </div>
+
+        <div class="results-container">
+          <div class="title-results">
+            <h3>Game Titles</h3>
+            <ul>
+              <li>Game Title 1</li>
+              <li>Game Title 2</li>
+              <li>Game Title 3</li>
+            </ul>
+          </div>
+          
+          <div class="publisher-results">
+            <h3>Publishers</h3>
+            <ul>
+              <li>Company 1</li>
+              <li>Company 2</li>
+              <li>Company 3</li>
+            </ul>
+          </div>
+          
+          <div class="genre-results">
+            <h3>Genres</h3>
+            <ul>
+              <li>Genre 1</li>
+              <li>Genre 2</li>
+              <li>Genre 3</li>
+            </ul>
+          </div>
+        </div>
       </div>
 
-      <div>
-        <h3> Game Titles </h3>
-        <!--Search Results with similar titles should go here-->
-      </div>
+      <div class="blank_space"></div>
       
-      <div>
-        <h3> Companies </h3>
-        <!--Search Results with similar companies should go here-->
-      </div>
-      
-      <div>
-        <h3> Characters </h3>
-        <!--Search Results with similar characters should go here-->
-      </div>
-              
       <!--Footer -->
       <my-footer></my-footer>
 
@@ -53,4 +75,4 @@
   <!--Javascript for icons-->
   <script type=module src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js></script>
   <script nomodule src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js></script>
-</html> 
+</html>
