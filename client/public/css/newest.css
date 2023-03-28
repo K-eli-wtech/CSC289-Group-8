@@ -116,33 +116,34 @@ body {
     color: #fff;
 }
 
-.created_by {
-    width: 100%;
-    height: 10%;
-    margin-left: 4%;
-    padding-top: 150px;
+/* Newest */
+
+.newest_games {
+    padding: 20px;
 }
 
-.creator_container {
+
+/*Newest Games Carousel*/
+
+.gallery-scroll {
     display: flex;
-    margin-left: 4%;
-    margin-right: 4%;
-    align-items: center;
-    justify-content: space-between;
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    overflow-x: scroll;
+    vertical-align: middle;
 }
 
-.creator {
-    align-items: center;
-    padding: 5%;
-}
-
-.creator p {
-    align-items: center;
-    padding-right: 5%;
-}
-
-.blank_space {
-    margin-bottom: 200px;
+.gallery-item {
+    padding: .5rem;
+    font-size: 1.2rem;
+    text-align: center;
+    background-color: #333;
+    color: whitesmoke;
+    scroll-snap-align: center;
 }
 
 
