@@ -1,5 +1,5 @@
 const express = require('express');
-const APIRouter = express.Router;
+const APIRouter = express.Router();
 // const http = require("http");
 const https = require("https"); 
 
