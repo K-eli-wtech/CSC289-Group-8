@@ -9,6 +9,7 @@ const port = 3000;
 const pagesRouter = require('./routes/form');
 const gamesRouter = require('./routes/recommend');
 const emailRouter = require('./routes/email');
+const apiRouter = require('./routes/api-call');
 
 // Middlewares
 const corsMiddleware = require('./middlewares/cors');
@@ -30,7 +31,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/public')));
 
 // route to form and recommend
-app.use('/pages', [pagesRouter, gamesRouter, emailRouter]);
+app.use('/pages', [pagesRouter, gamesRouter, emailRouter, apiRouter]);
 
 // path define and redirect to the profile page
 app.get('/profile.html', (req, res) => {
