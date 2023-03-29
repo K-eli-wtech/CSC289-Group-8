@@ -72,26 +72,18 @@
     align-items: center;
 }
 
-.title-results ul,
-.publisher-results ul,
-.genre-results ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
+#t-results,
+#p-results,
+#g-results {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-gap: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    justify-items: center;
     align-items: center;
-    flex-wrap: wrap;
-}
-  
-.title-results li,
-.publisher-results li,
-.genre-results li {
-    margin-top: 20px;
-    text-align: center;
-    width: 33.33%;
 }
 
 .blank_space {
-    margin-bottom: 435px;
+    margin-bottom: 140px;
 }

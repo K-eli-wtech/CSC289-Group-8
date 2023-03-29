@@ -44,14 +44,14 @@ function createCardTemplate(game) {
   const genre2 = (game.genres2 && game.genres2.name) || '';
 
   return `
-      <div class="card">
-      <div class="card-image">
+      <div class="mini-card">
+      <div class="mini-card-image">
           <img src="${photo}" alt="${name}" />
       </div>
-      <div class="card-content">
+      <div class="mini-card-content">
           <h3>${name}</h3>
-          <p class="base">Release Date: </p><p>${released}</p>
-          <p class="base">Genres: </p><p>${genre}${genre2 ? ', ' + genre2 : ''}</p>
+          <p class="mini-base">Release Date: </p><p>${released}</p>
+          <p class="mini-base">Genres: </p><p>${genre}${genre2 ? ', ' + genre2 : ''}</p>
       </div>
       </div>
   `;
@@ -90,3 +90,4 @@ async function searchGames(searchType, container, count) {
       await handleSearch(randomCompany, resultsContainer, count);
     }
 }
+
