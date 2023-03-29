@@ -1,7 +1,7 @@
 const session = require('express-session');
 
 const sessionMiddleware = session({
-  secret: 'safg921ka@#!asdakga21312',
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false } // Change this to true if you're using HTTPS

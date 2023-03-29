@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-
 // Checking the password
 async function checkPass() {
   let password = document.getElementById("pass").value;
