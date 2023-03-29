@@ -1,0 +1,35 @@
+/* Card design */
+
+.card {
+    width: 260px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: rgba(19, 12, 49, 0.712);
+}
+  
+.card-image {
+    flex: 0 0 40%;
+    overflow: hidden;
+}
+  
+.card-image img {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #272727;
+}
+  
+.card-content {
+    flex: 1;
+    padding: 2.5px;
+    font-size: 17px;
+}
+  
+.card-content h3 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: bold;
+}

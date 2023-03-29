@@ -20,6 +20,9 @@ const loggedInMiddleware = require('./middlewares/loggedIn');
 app.use(corsMiddleware);
 app.use(sessionMiddleware);
 app.use(loggedInMiddleware);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 // The phpExpress middleware
 app.engine('php', phpExpress.engine);
