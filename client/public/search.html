@@ -15,7 +15,7 @@
     <title> Arcadia</title>
 </head>
 
-<body>
+<body onload="searchGames('title', 't-results', 4); searchGames('company', 'p-results', 4); searchGames('genre', 'g-results', 4);">
   <!--This div wraps the entire page-->
   <div id="wrap">
     <!--Header and Navigation Bar-->
@@ -33,35 +33,29 @@
         <div id="search-results">
         </div>
 
-        <div class="results-container">
-          <div class="title-results">
-            <h3>Game Titles</h3>
-            <ul>
-              <li>Game Title 1</li>
-              <li>Game Title 2</li>
-              <li>Game Title 3</li>
-            </ul>
+        <div class="results-container" onload="searchGames(genre, t-results)">
+          <div class="results-container">
+            <div class="title-results">
+              <h3>Game Titles</h3>
+              <div id="t-results">
+              </div>
+            </div>
           </div>
           
           <div class="publisher-results">
             <h3>Publishers</h3>
-            <ul>
-              <li>Company 1</li>
-              <li>Company 2</li>
-              <li>Company 3</li>
-            </ul>
+            <div id="p-results">
+            </div>
           </div>
           
           <div class="genre-results">
             <h3>Genres</h3>
-            <ul>
-              <li>Genre 1</li>
-              <li>Genre 2</li>
-              <li>Genre 3</li>
-            </ul>
+            <div id="g-results">
+            </div>
           </div>
         </div>
       </div>
+          
 
       <div class="blank_space"></div>
       
@@ -74,4 +68,5 @@
   <script type=module src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js></script>
   <script nomodule src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js></script>
   <script src="./js/search.js"></script>
+  <script src="./js/query.js"></script>
 </html>

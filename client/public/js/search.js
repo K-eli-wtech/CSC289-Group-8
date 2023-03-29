@@ -23,30 +23,46 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
           console.error('Error fetching data:', error);
         }
-      }
+    }
+    
+    function formatDate(dateString) {
+      const months = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ];
+    
+      const date = new Date(dateString);
+      const day = date.getDate();
+      const month = months[date.getMonth()];
+      const year = date.getFullYear();
+    
+      return `${month} ${day}, ${year}`;
+    }
+    
       
-  
-      function createCardTemplate(game) {
-        const name = game.name || 'Unknown Game';
-        const released = game.released || 'Unknown Release Date';
-        const photo = game.photo || '../images/NoImageFound.png';
-        const genre = (game.genres && game.genres.name) || 'Unknown Genre';
-        const genre2 = (game.genres2 && game.genres2.name) || '';
       
-        return `
-            <div class="card">
-            <div class="card-image">
-                <img src="${photo}" alt="${name}" />
-            </div>
-            <div class="card-content">
-                <h3>${name}</h3>
-                <p>Released: ${released}</p>
-                <p>Genres: ${genre}${genre2 ? ', ' + genre2 : ''}</p>
-            </div>
-            </div>
-        `;
-      }
-  
+    function createCardTemplate(game) {
+      const name = game.name || 'Unknown Game';
+      const released = game.released ? formatDate(game.released) : 'Unknown Release Date';
+      const photo = game.photo || '../images/NoImageFound.png';
+      const genre = (game.genres && game.genres.name) || 'Unknown Genre';
+      const genre2 = (game.genres2 && game.genres2.name) || '';
+    
+      return `
+          <div class="card">
+          <div class="card-image">
+              <img src="${photo}" alt="${name}" />
+          </div>
+          <div class="card-content">
+              <h3>${name}</h3>
+              <p class="base">Release Date: </p><p>${released}</p>
+              <p class="base">Genres: </p><p>${genre}${genre2 ? ', ' + genre2 : ''}</p>
+          </div>
+          </div>
+      `;
+    }
+    
+    
     async function handleSearch() {
       const query = searchInput.value;
       if (!query) {

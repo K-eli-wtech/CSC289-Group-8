@@ -19,17 +19,27 @@
 .card-image img {
     width: 100%;
     height: auto;
+    size: cover;
     border-bottom: 1px solid #272727;
 }
   
 .card-content {
     flex: 1;
     padding: 2.5px;
-    font-size: 17px;
+    font-size: 15px;
 }
   
 .card-content h3 {
     margin: 0;
-    font-size: 19px;
+    font-size: 20px;
     font-weight: bold;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+}
+
+.base {
+    font-size: 16px;
+    font-weight: 600;
 }
