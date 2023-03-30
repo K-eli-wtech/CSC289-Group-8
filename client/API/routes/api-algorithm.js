@@ -1,38 +1,28 @@
-const axios = require('axios');
-const express = require('express');
-const apialgo = express.Router;
+// Tyler's test node.js file for any api algorithm based search. Please keep. 
 
-apialgo.get('/games', (req, res) => {
-    // User's selected genres
-    const selectedGenres = ['action','rpg','fps'];
-    const key = 'd6823dbd4637434998d92a3eb889e30c';
-  
-    // Make API queries for each selected genre
-    const apiQueries = selectedGenres.map((genre) => {
-      return axios.get(`https://api.rawg.io/api/games?key=${key}&genres=${genre}&ordering=-rating&page_size=5`);
-    });
-  
-    // Send requests in parallel
-    axios.all(apiQueries)
-      .then((responses) => {
-        const results = responses.map((response) => {
-          // Extract only the desired properties for each game
-          return response.data.results.map((game) => {
-            return {
-              name: game.name,
-              backgroundImage: game.background_image,
-              releaseDate: game.released,
-              rating: game.rating
-            };
-          });
-        });
-        // Send results to the front end
-        res.send(results);
-      })
-      .catch((error) => {
-        console.log(error);
-        res.status(500).send('Error fetching game data');
-      });
+/* const https = require('https');
+
+const apiKey = 'd6823dbd4637434998d92a3eb889e30c';
+const year = '2020';
+const url = `https://api.rawg.io/api/games?key=${apiKey}&page_size=40&dates=${year}-01-01,${year}-12-31`;
+
+https.get(url, (resp) => {
+  let data = '';
+
+  resp.on('data', (chunk) => {
+    data += chunk;
   });
-  
-module.exports = apialgo;
+
+  resp.on('end', () => {
+    const games = JSON.parse(data).results;
+    const gameData = games.map((game) => ({
+      name: game.name,
+      released: game.released,
+      photo: game.background_image,
+    }));
+
+    console.log(gameData);
+  });
+}).on('error', (err) => {
+  console.log('Error' + err.message);
+}); */
