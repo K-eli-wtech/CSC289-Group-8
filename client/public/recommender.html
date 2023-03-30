@@ -9,7 +9,9 @@
 <head>
     <meta name="viewport" content=""width=device-width, initial-scale="1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="./css/search.css">
+    <link rel="stylesheet" href="./css/default.css">
+    <link rel="stylesheet" href="./css/recommender.css">
+    <link rel="stylesheet" href="./css/card.css">
     <title> Arcadia</title>
 </head>
 
@@ -19,57 +21,30 @@
     <!--Header and Navigation Bar-->
     <my-header></my-header>
 
-      <div class="gameGenContainer">
-          <h2 id="gameGenHeader">Game Recommender</h2>
-          <p>Enter five games you like<p>
-          <form>
-              <label for="game1">Game 1:</label><br>
-              <input type="text" id="game1" name="game1"><br>
+    <div class="gameGenContainer">
+      <h2 id="gameGenHeader">Game Recommender</h2>
+      <form id="game-recommender-form">
+        <!-- Add your questions and inputs here. For example: -->
+        <label for="genre">What genre are you interested in?</label>
+        <select name="genre" id="genre">
+          <option value="">Select a genre</option>
+          <!-- Add more genres as options -->
+          <option value="Action-Adventure">Action-Adventure</option>
+          <option value="Role-Playing">Role-Playing</option>
+          <!-- etc. -->
+        </select>
+        <!-- Add more questions here -->
+        <button type="submit">Find Recommendations</button>
+      </form>
+      <div id="results-container"></div>
+    </div>
 
-              <label for="game2">Game 2:</label><br>
-              <input type="text" id="game2" name="game2"><br>
-
-              <label for="game3">Game 3:</label><br>
-              <input type="text" id="game3" name="game3"><br>
-
-              <label for="game4">Game 4:</label><br>
-              <input type="text" id="game4" name="game4"><br>
-
-              <label for="game5">Game 5:</label><br>
-              <input type="text" id="game5" name="game5"><br>
-              <br>
-
-            </form> 
-          <button id="queryButton" class="button testing" type="button">Test</button> 
-      </div>
-
-      <script>
-          $(document).ready(function() {
-            $('#queryButton').click(function() {
-              var game1 = $('#game1').val();
-              var game2 = $('#game2').val();
-              var game3 = $('#game3').val();
-              var game4 = $('#game4').val();
-              var game5 = $('#game5').val();
-      
-              $.post('http://localhost:3000/button-test', {
-              game1: game1,
-              game2: game2,
-              game3: game3,
-              game4: game4,
-              game5: game5
-              }, function(response) {
-              console.log(response);
-              });
-            });
-          });
-        </script>
-
-      <!--Footer -->
-      <my-footer></my-footer>
+    <!--Footer -->
+    <my-footer></my-footer>
   </div>
 </body>
   <!--Javascript for icons-->
   <script type=module src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js></script>
   <script nomodule src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js></script>
+  <script src="./js/query.js"></script>
 </html>
