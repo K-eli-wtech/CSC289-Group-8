@@ -4,20 +4,20 @@ const gameCompanies = ["Nintendo", "Sony Interactive Entertainment", "Microsoft"
 const gameTitles = ["Minecraft", "Grand Theft Auto V", "Deathloop", "Resident Evil Village", "Returnal", "It Takes Two", "Ratchet & Clank: Rift Apart", "Halo Infinite", "Forza Horizon 5", "Psychonauts 2"];
 
 
-async function fetchData(query) {
-    try {
-      const response = await fetch('http://localhost:3000/pages/rawgAPI', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ query }),
-      });
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
+async function fetchData(searchParams) {
+  try {
+    const response = await fetch('http://localhost:3000/pages/searchGames', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(searchParams),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
 }
 
 function formatDate(dateString) {
@@ -58,36 +58,30 @@ function createCardTemplate(game) {
 }
 
 
-async function handleSearch(searchTerm, resultsContainer, count) {
-    const query = searchTerm;
-  
-    const data = await fetchData(query);
-    if (!data || !data.length) {
-      console.log('No results found');
-      return;
-    }
-  
-    const cards = data.slice(0, count).map(createCardTemplate).join('');
-    resultsContainer.innerHTML = cards;
+async function handleSearch(searchParams, resultsContainer, count) {
+  const data = await fetchData(searchParams);
+  if (!data || !data.length) {
+    console.log('No results found');
+    return;
   }
-  
 
-
-// Main function that takes the parameters and searches
-async function searchGames(searchType, container, count) {
-    const resultsContainer = document.getElementById(container);
-    if (searchType === 'title') {
-      const randomIndex = Math.floor(Math.random() * gameTitles.length);
-      const randomTitle = gameTitles[randomIndex];
-      await handleSearch(randomTitle, resultsContainer, count);
-    } else if (searchType === 'genre') {
-      const randomIndex = Math.floor(Math.random() * gameGenres.length);
-      const randomGenre = gameGenres[randomIndex];
-      await handleSearch(randomGenre, resultsContainer, count);
-    } else if (searchType === 'company') {
-      const randomIndex = Math.floor(Math.random() * gameCompanies.length);
-      const randomCompany = gameCompanies[randomIndex];
-      await handleSearch(randomCompany, resultsContainer, count);
-    }
+  const cards = data.slice(0, count).map(createCardTemplate).join('');
+  resultsContainer.innerHTML = cards;
 }
 
+async function searchGames(searchType, container, count) {
+  const resultsContainer = document.getElementById(container);
+  if (searchType === 'title') {
+    const randomIndex = Math.floor(Math.random() * gameTitles.length);
+    const randomTitle = gameTitles[randomIndex];
+    await handleSearch({ searchType: 'title', query: randomTitle }, resultsContainer, count);
+  } else if (searchType === 'genre') {
+    const randomIndex = Math.floor(Math.random() * gameGenres.length);
+    const randomGenre = gameGenres[randomIndex];
+    await handleSearch({ searchType: 'genre', query: randomGenre }, resultsContainer, count);
+  } else if (searchType === 'company') {
+    const randomIndex = Math.floor(Math.random() * gameCompanies.length);
+    const randomCompany = gameCompanies[randomIndex];
+    await handleSearch({ searchType: 'company', query: randomCompany }, resultsContainer, count);
+  }
+}

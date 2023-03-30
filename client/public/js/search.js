@@ -1,29 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('search-input');
-    const resultsContainer = document.getElementById('search-results');
-    const resultsOutput = document.getElementById('result');
-  
-    searchInput.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-          handleSearch();
-        }
-      });
-  
-    async function fetchData(query) {
-        try {
-          const response = await fetch('http://localhost:3000/pages/rawgAPI', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ query }),
-          });
-          const data = await response.json();
-          return data;
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
+  const searchInput = document.getElementById('search-input');
+  const resultsContainer = document.getElementById('search-results');
+  const resultsOutput = document.getElementById('result');
+
+  searchInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
     }
+  });
+
+  async function fetchData(query, searchType) {
+    try {
+      const response = await fetch('http://localhost:3000/pages/searchGames', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query, searchType }),
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
     
     function formatDate(dateString) {
       const months = [
@@ -64,16 +64,19 @@ document.addEventListener('DOMContentLoaded', () => {
     
     
     async function handleSearch() {
-      const query = searchInput.value;
-      if (!query) {
+      const input = searchInput.value;
+      if (!input) {
         resultsOutput.textContent = 'Please enter a search query';
         while (resultsContainer.firstChild) {
           resultsContainer.removeChild(resultsContainer.firstChild);
         }
         return;
       }
-  
-      const data = await fetchData(query);
+    
+      const [searchType, ...rest] = input.split(':');
+      const query = rest.join(':').trim();
+    
+      const data = await fetchData(query, searchType);
       if (!data || !data.length) {
         resultsOutput.textContent = 'No results found';
         while (resultsContainer.firstChild) {
@@ -81,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return;
       }
-  
+    
       const cards = data.map(createCardTemplate).join('');
       resultsOutput.textContent = '';
       resultsContainer.innerHTML = cards;
