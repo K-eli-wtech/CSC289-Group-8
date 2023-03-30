@@ -22,6 +22,7 @@ APIRouter.post('/rawgAPI', async (req, res) => {
           photo: game.background_image,
           genres: game.genres[0],
           genres2: game.genres[1],
+          rating: game.rating,
         }));
 
         res.status(200).json(gameData);
