@@ -23,21 +23,18 @@
 
     <div class="gameGenContainer">
       <h2 id="gameGenHeader">Game Recommender</h2>
-      <form id="game-recommender-form">
-        <!-- Add your questions and inputs here. For example: -->
-        <label for="genre">What genre are you interested in?</label>
-        <select name="genre" id="genre">
-          <option value="">Select a genre</option>
-          <!-- Add more genres as options -->
-          <option value="Action-Adventure">Action-Adventure</option>
-          <option value="Role-Playing">Role-Playing</option>
-          <!-- etc. -->
-        </select>
-        <!-- Add more questions here -->
-        <button type="submit">Find Recommendations</button>
-      </form>
-      <div id="results-container"></div>
+      <div id="genre-selection-container">
+        <p>What genres are you interested in? Select your top 3 favorites:</p>
+        <div id="genres-grid">
+          <!-- Genre cards will be populated here by JavaScript -->
+        </div>
+        <button id="continue-button" disabled>Continue</button>
+      </div>
+      <div id="results-container" style="display: none;">
+        <!-- Game recommendations will be displayed here -->
+      </div>
     </div>
+    
 
     <!--Footer -->
     <my-footer></my-footer>
