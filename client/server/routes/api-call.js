@@ -8,7 +8,7 @@ APIRouter.post('/searchGames', async (req, res) => {
   const key = 'd6823dbd4637434998d92a3eb889e30c';
 
   https
-    .get(`https://api.rawg.io/api/games?key=${key}&search=${encodeURIComponent(query)}&ordering=-rating&page_size=20&dates=2015-01-01,${new Date().getFullYear()}-12-31&rating=9.0,10.0`, (resp) => {
+    .get(`https://api.rawg.io/api/games?key=${key}&search=${encodeURIComponent(query)}&ordering=-rating&page_size=20&dates=2015-01-01,${new Date().getFullYear()}-12-31`, (resp) => {
       let data = '';
 
       resp.on('data', (chunk) => {

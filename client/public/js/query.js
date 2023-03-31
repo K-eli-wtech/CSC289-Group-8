@@ -1,26 +1,37 @@
 /* eslint-disable no-unused-vars */
-let gameGenres = [];
+const gameGenres = [
+  { id: 4, name: "Action" },
+  { id: 51, name: "Indie" },
+  { id: 3, name: "Adventure" },
+  { id: 5, name: "RPG" },
+  { id: 10, name: "Strategy" },
+  { id: 2, name: "Shooter" },
+  { id: 40, name: "Casual" },
+  { id: 14, name: "Simulation" },
+  { id: 7, name: "Puzzle" },
+  { id: 11, name: "Arcade" },
+  { id: 83, name: "Platformer" },
+  { id: 1, name: "Racing" },
+  { id: 59, name: "Massively Multiplayer" },
+  { id: 15, name: "Sports" },
+  { id: 6, name: "Fighting" },
+  { id: 19, name: "Family" },
+  { id: 28, name: "Board Games" },
+  { id: 34, name: "Educational" },
+  { id: 17, name: "Card" },
+];
 let gameCompanies = [];
 const gameTitles = ["Minecraft", "Grand Theft Auto V", "Deathloop", "Resident Evil Village", "Returnal", "It Takes Two", "Ratchet & Clank: Rift Apart", "Halo Infinite", "Forza Horizon 5", "Psychonauts 2"];
 
-async function fetchGenres() {
-  const key = 'd6823dbd4637434998d92a3eb889e30c';
-  const response = await fetch(`https://api.rawg.io/api/genres?key=${key}`);
-  const data = await response.json();
-  return data.results;
-}
 
 async function fetchDevelopers() {
   const key = 'd6823dbd4637434998d92a3eb889e30c';
-  const response = await fetch(`https://api.rawg.io/api/developers?key=${key}`);
+  const response = await fetch(`https://api.rawg.io/api/developers?key=${key}&page_size=20`);
   const data = await response.json();
   return data.results;
 }
 
 async function initData() {
-  const genres = await fetchGenres();
-  gameGenres = genres.map(genre => ({ id: genre.id, name: genre.name }));
-
   const developers = await fetchDevelopers();
   gameCompanies = developers.map(developer => ({ id: developer.id, name: developer.name }));
 
@@ -116,5 +127,3 @@ async function searchGames(searchType, container, count) {
     await handleSearch('year', { dates: '2021-01-01,2021-12-31' }, resultsContainer, count);
   }
 }
-
-
