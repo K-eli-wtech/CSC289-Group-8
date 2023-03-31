@@ -1,12 +1,37 @@
 /* eslint-disable no-unused-vars */
-const gameGenres = ["Action-Adventure", "Role-Playing", "Shooter", "Sports", "Simulation", "Platformer", "Strategy", "Fighting", "Racing", "Puzzle", "Massive Multiplayer"];
-const gameCompanies = ["Nintendo", "Sony Interactive Entertainment", "Microsoft", "Activision Blizzard", "Electronic Arts", "Tencent Games", "Ubisoft", "Take-Two Interactive", "Epic Games", "Valve Corporation"];
+let gameGenres = [];
+let gameCompanies = [];
 const gameTitles = ["Minecraft", "Grand Theft Auto V", "Deathloop", "Resident Evil Village", "Returnal", "It Takes Two", "Ratchet & Clank: Rift Apart", "Halo Infinite", "Forza Horizon 5", "Psychonauts 2"];
 
+async function fetchGenres() {
+  const key = 'd6823dbd4637434998d92a3eb889e30c';
+  const response = await fetch(`https://api.rawg.io/api/genres?key=${key}`);
+  const data = await response.json();
+  return data.results;
+}
 
-async function fetchData(searchParams) {
+async function fetchDevelopers() {
+  const key = 'd6823dbd4637434998d92a3eb889e30c';
+  const response = await fetch(`https://api.rawg.io/api/developers?key=${key}`);
+  const data = await response.json();
+  return data.results;
+}
+
+async function initData() {
+  const genres = await fetchGenres();
+  gameGenres = genres.map(genre => ({ id: genre.id, name: genre.name }));
+
+  const developers = await fetchDevelopers();
+  gameCompanies = developers.map(developer => ({ id: developer.id, name: developer.name }));
+
+  return Promise.resolve();
+}
+
+initData();
+
+async function fetchData(endpoint, searchParams) {
   try {
-    const response = await fetch('http://localhost:3000/api/searchGames', {
+    const response = await fetch(`http://localhost:3000/api/${endpoint}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -58,8 +83,8 @@ function createCardTemplate(game) {
 }
 
 
-async function handleSearch(searchParams, resultsContainer, count) {
-  const data = await fetchData(searchParams);
+async function handleSearch(endpoint, searchParams, resultsContainer, count) {
+  const data = await fetchData(endpoint, searchParams);
   if (!data || !data.length) {
     console.log('No results found');
     return;
@@ -69,20 +94,27 @@ async function handleSearch(searchParams, resultsContainer, count) {
   resultsContainer.innerHTML = cards;
 }
 
+
 async function searchGames(searchType, container, count) {
+  await initData(); // Add this line to wait for data initialization
   const resultsContainer = document.getElementById(container);
   if (searchType === 'title') {
     const randomIndex = Math.floor(Math.random() * gameTitles.length);
     const randomTitle = gameTitles[randomIndex];
-    await handleSearch({ searchType: 'title', query: randomTitle }, resultsContainer, count);
+    await handleSearch('searchGames', { query: randomTitle }, resultsContainer, count);
   } else if (searchType === 'genre') {
     const randomIndex = Math.floor(Math.random() * gameGenres.length);
     const randomGenre = gameGenres[randomIndex];
-    await handleSearch({ searchType: 'genres', query: randomGenre.id }, resultsContainer, count);
+    await handleSearch('genre', { genre: randomGenre.id }, resultsContainer, count);
   } else if (searchType === 'company') {
     const randomIndex = Math.floor(Math.random() * gameCompanies.length);
     const randomCompany = gameCompanies[randomIndex];
-    await handleSearch({ searchType: 'developers', query: randomCompany }, resultsContainer, count);
+    await handleSearch('developer', { developer: randomCompany.id }, resultsContainer, count);
+  } else if (searchType === 'rating') {
+    await handleSearch('rating', { rating: '90,100' }, resultsContainer, count);
+  } else if (searchType === 'year') {
+    await handleSearch('year', { dates: '2021-01-01,2021-12-31' }, resultsContainer, count);
   }
 }
+
 

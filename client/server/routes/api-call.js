@@ -8,7 +8,7 @@ APIRouter.post('/searchGames', async (req, res) => {
   const key = 'd6823dbd4637434998d92a3eb889e30c';
 
   https
-    .get(`https://api.rawg.io/api/games?key=${key}&search=${encodeURIComponent(query)}`, (resp) => {
+    .get(`https://api.rawg.io/api/games?key=${key}&search=${encodeURIComponent(query)}&ordering=-rating&page_size=20&dates=2015-01-01,${new Date().getFullYear()}-12-31&rating=9.0,10.0`, (resp) => {
       let data = '';
 
       resp.on('data', (chunk) => {
@@ -36,44 +36,112 @@ APIRouter.post('/searchGames', async (req, res) => {
     });
 });
 
-APIRouter.get('/genre', (req, res) => {
-  // User's selected genres
-  const selectedGenres = ['action','rpg','fps'];
+APIRouter.post('/title', async (req, res) => {
+  const query = req.body.query;
   const key = 'd6823dbd4637434998d92a3eb889e30c';
 
-  // Make API queries for each selected genre
-  const apiQueries = selectedGenres.map((genre) => {
-    return axios.get(`https://api.rawg.io/api/games?key=${key}&genres=${genre}&page_size=5`);
-  });
+  https
+    .get(`https://api.rawg.io/api/games?key=${key}&search=${query}&ordering=-rating&page_size=20&dates=2015-01-01,${new Date().getFullYear()}-12-31&rating=9.0,10.0`, (resp) => {
+      let data = '';
 
-  // Send requests in parallel
-  axios.all(apiQueries)
-    .then((responses) => {
-      const results = responses.map((response) => {
-        // Extract only the desired properties for each game
-        return response.data.results.map((game) => {
-          return {
+      resp.on('data', (chunk) => {
+        data += chunk;
+      });
+
+      resp.on('end', () => {
+        const games = JSON.parse(data).results;
+
+        const gameData = games.map((game) => ({
+          name: game.name,
+          released: game.released,
+          photo: game.background_image,
+          genres: game.genres[0],
+          genres2: game.genres[1],
+          rating: game.rating,
+        }));
+
+        res.status(200).json(gameData);
+      });
+    })
+    .on('error', (err) => {
+      console.log('Error' + err.message);
+      res.status(500).json({ message: 'Error fetching data from the API.' });
+    });
+});
+
+APIRouter.post('/genre', async (req, res) => {
+  const genre = req.body.genre;
+  const key = 'd6823dbd4637434998d92a3eb889e30c';
+
+  https
+    .get(`https://api.rawg.io/api/games?key=${key}&genres=${genre}&ordering=-rating&page_size=20&dates=2015-01-01,${new Date().getFullYear()}-12-31`, (resp) => {
+    let data = '';
+
+    resp.on('data', (chunk) => {
+      data += chunk;
+    });
+
+    resp.on('end', () => {
+      const games = JSON.parse(data).results;
+
+      const gameData = games.map((game) => ({
+          name: game.name,
+          released: game.released,
+          photo: game.background_image,
+          genres: game.genres[0],
+          genres2: game.genres[1],
+          rating: game.rating,
+        }));
+
+        res.status(200).json(gameData);
+      });
+    })
+    .on('error', (err) => {
+      console.log('Error' + err.message);
+      res.status(500).json({ message: 'Error fetching data from the API.' });
+    });
+});
+
+APIRouter.post('/developer', async (req, res) => {
+  const developer = req.body.developer;
+  const key = 'd6823dbd4637434998d92a3eb889e30c';
+
+  https
+    .get(`https://api.rawg.io/api/games?key=${key}&developers=${developer}&ordering=-rating&page_size=20&dates=2015-01-01,${new Date().getFullYear()}-12-31`, (resp) => {
+      let data = '';
+
+      resp.on('data', (chunk) => {
+        data += chunk;
+      });
+
+      resp.on('end', () => {
+        const games = JSON.parse(data).results;
+
+        const gameData = games.map((game) => ({
             name: game.name,
-            backgroundImage: game.background_image,
-            releaseDate: game.released,
-            rating: game.rating
-          };
-        });
+            released: game.released,
+            photo: game.background_image,
+            genres: game.genres[0],
+            genres2: game.genres[1],
+            rating: game.rating,
+          }));
+
+        res.status(200).json(gameData);
       });
-      // Send results to the front end
-      res.send(results);
     })
-    .catch((error) => {
-      console.log(error);
-      res.status(500).send('Error fetching game data');
+    .on('error', (err) => {
+      console.log('Error' + err.message);
+      res.status(500).json({ message: 'Error fetching data from the API.' });
     });
 });
 
-APIRouter.get('/platform', async (req, res) => {
+
+APIRouter.post('/platform', async (req, res) => {
+  const platform = req.body.platform;
   const key = 'd6823dbd4637434998d92a3eb889e30c';
 
   https
-    .get(`https://api.rawg.io/api/games?key=${key}&platform=xbox`, (resp) => {
+    .get(`https://api.rawg.io/api/games?key=${key}&platforms=${platform}&ordering=-rating&page_size=20&dates=2015-01-01,${new Date().getFullYear()}-12-31`, (resp) => {
       let data = '';
 
       resp.on('data', (chunk) => {
@@ -101,11 +169,12 @@ APIRouter.get('/platform', async (req, res) => {
     });
 });
 
-APIRouter.get('/rating', (req, res) => {
+APIRouter.post('/rating', (req, res) => {
+  const ratings = req.body.ratings;
   const key = 'd6823dbd4637434998d92a3eb889e30c';
 
   https
-    .get(`https://api.rawg.io/api/games?key=${key}&page_size=40`, (resp) => {
+    .get(`https://api.rawg.io/api/games?key=${key}&ordering=-rating&page_size=20&dates=2015-01-01,${new Date().getFullYear()}-12-31`, (resp) => {
       let data = '';
 
       resp.on('data', (chunk) => {
@@ -136,31 +205,35 @@ APIRouter.get('/rating', (req, res) => {
     });
 });
 
-APIRouter.get('/year', async (req, res) => {
-  const year = req.params.year;
+APIRouter.post('/year', async (req, res) => {
+  const year = req.body.year
   const key = 'd6823dbd4637434998d92a3eb889e30c';
 
-  https.get(`https://api.rawg.io/api/games?key=${key}&page_size=40&dates=${year}-01-01,${year}-12-31`, (resp) => {
-    let data = '';
+  https
+    .get(`https://api.rawg.io/api/games?key=${key}&ordering=-released&page_size=20&dates=${year}-01-01,${year}-12-31`, (resp) => {
+      let data = '';
 
-    resp.on('data', (chunk) => {
-      data += chunk;
+      resp.on('data', (chunk) => {
+        data += chunk;
+      });
+
+      resp.on('end', () => {
+        const games = JSON.parse(data).results;
+        const gameData = games.map((game) => ({
+          name: game.name,
+            released: game.released,
+            photo: game.background_image,
+            genres: game.genres[0],
+            genres2: game.genres[1],
+            rating: game.rating,
+        }));
+
+        res.status(200).json(gameData);
+      });
+    }).on('error', (err) => {
+      console.log('Error' + err.message);
+      res.status(500).json({ message: 'Error fetching data from the API.' });
     });
-
-    resp.on('end', () => {
-      const games = JSON.parse(data).results;
-      const gameData = games.map((game) => ({
-        name: game.name,
-        released: game.released,
-        photo: game.background_image,
-      }));
-
-      res.status(200).json(gameData);
-    });
-  }).on('error', (err) => {
-    console.log('Error' + err.message);
-    res.status(500).json({ message: 'Error fetching data from the API.' });
-  });
 });
 
 
