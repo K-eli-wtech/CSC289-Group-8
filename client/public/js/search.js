@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function fetchData(query, searchType) {
     try {
-      const response = await fetch('http://localhost:3000/pages/searchGames', {
+      const response = await fetch('http://localhost:3000/api/searchGames', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

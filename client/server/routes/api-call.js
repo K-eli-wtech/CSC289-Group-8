@@ -3,7 +3,7 @@ const APIRouter = express.Router();
 const https = require('https');
 const axios = require('axios');
 
-APIRouter.post('/rawgAPI', async (req, res) => {
+APIRouter.post('/searchGames', async (req, res) => {
   const query = req.body.query;
   const key = 'd6823dbd4637434998d92a3eb889e30c';
 
@@ -36,7 +36,7 @@ APIRouter.post('/rawgAPI', async (req, res) => {
     });
 });
 
-APIRouter.get('/games', (req, res) => {
+APIRouter.get('/genre', (req, res) => {
   // User's selected genres
   const selectedGenres = ['action','rpg','fps'];
   const key = 'd6823dbd4637434998d92a3eb889e30c';
