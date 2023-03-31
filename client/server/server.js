@@ -34,7 +34,8 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/public')));
 
 // route to form and recommend
-app.use('/pages', [pagesRouter, gamesRouter, emailRouter, apiRouter]);
+app.use('/pages', [pagesRouter, gamesRouter, emailRouter]);
+app.use('/api', apiRouter);
 
 // path define and redirect to the profile page
 app.get('/profile.html', (req, res) => {

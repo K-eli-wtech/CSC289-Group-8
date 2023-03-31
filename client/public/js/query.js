@@ -78,11 +78,11 @@ async function searchGames(searchType, container, count) {
   } else if (searchType === 'genre') {
     const randomIndex = Math.floor(Math.random() * gameGenres.length);
     const randomGenre = gameGenres[randomIndex];
-    await handleSearch({ searchType: 'genre', query: randomGenre }, resultsContainer, count); // Changed 'genre' to 'genres'
+    await handleSearch({ searchType: 'genres', query: randomGenre.id }, resultsContainer, count);
   } else if (searchType === 'company') {
     const randomIndex = Math.floor(Math.random() * gameCompanies.length);
     const randomCompany = gameCompanies[randomIndex];
-    await handleSearch({ searchType: 'company', query: randomCompany }, resultsContainer, count); // Changed 'company' to 'developers'
+    await handleSearch({ searchType: 'developers', query: randomCompany }, resultsContainer, count);
   }
 }
 

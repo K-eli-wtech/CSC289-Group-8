@@ -25,69 +25,75 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
     
-    function formatDate(dateString) {
-      const months = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
-      ];
-    
-      const date = new Date(dateString);
-      const day = date.getDate();
-      const month = months[date.getMonth()];
-      const year = date.getFullYear();
-    
-      return `${month} ${day}, ${year}`;
-    }
-    
+  function formatDate(dateString) {
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+
+    return `${month} ${day}, ${year}`;
+  }
       
-      
-    function createCardTemplate(game) {
-      const name = game.name || 'Unknown Game';
-      const released = game.released ? formatDate(game.released) : 'Unknown Release Date';
-      const photo = game.photo || '../images/NoImageFound.png';
-      const genre = (game.genres && game.genres.name) || 'Unknown Genre';
-      const genre2 = (game.genres2 && game.genres2.name) || '';
-    
-      return `
-          <div class="card">
-          <div class="card-image">
-              <img src="${photo}" alt="${name}" />
-          </div>
-          <div class="card-content">
-              <h3>${name}</h3>
-              <p class="base">Release Date: </p><p>${released}</p>
-              <p class="base">Genres: </p><p>${genre}${genre2 ? ', ' + genre2 : ''}</p>
-          </div>
-          </div>
-      `;
-    }
-    
-    
-    async function handleSearch() {
-      const input = searchInput.value;
-      if (!input) {
-        resultsOutput.textContent = 'Please enter a search query';
-        while (resultsContainer.firstChild) {
-          resultsContainer.removeChild(resultsContainer.firstChild);
-        }
-        return;
+  function createCardTemplate(game) {
+    const name = game.name || 'Unknown Game';
+    const released = game.released ? formatDate(game.released) : 'Unknown Release Date';
+    const photo = game.photo || '../images/NoImageFound.png';
+    const genre = (game.genres && game.genres.name) || 'Unknown Genre';
+    const genre2 = (game.genres2 && game.genres2.name) || '';
+
+    return `
+        <div class="card">
+        <div class="card-image">
+            <img src="${photo}" alt="${name}" />
+        </div>
+        <div class="card-content">
+            <h3>${name}</h3>
+            <p class="base">Release Date: </p><p>${released}</p>
+            <p class="base">Genres: </p><p>${genre}${genre2 ? ', ' + genre2 : ''}</p>
+        </div>
+        </div>
+    `;
+  }
+
+  async function handleSearch() {
+    const input = searchInput.value;
+    if (!input) {
+      resultsOutput.textContent = 'Please enter a search query';
+      while (resultsContainer.firstChild) {
+        resultsContainer.removeChild(resultsContainer.firstChild);
       }
-    
-      const [searchType, ...rest] = input.split(':');
-      const query = rest.join(':').trim();
-    
-      const data = await fetchData(query, searchType);
-      if (!data || !data.length) {
-        resultsOutput.textContent = 'No results found';
-        while (resultsContainer.firstChild) {
-          resultsContainer.removeChild(resultsContainer.firstChild);
-        }
-        return;
-      }
-    
-      const cards = data.map(createCardTemplate).join('');
-      resultsOutput.textContent = '';
-      resultsContainer.innerHTML = cards;
+      return;
     }
-  });
+  
+    let searchType;
+    let query;
+    let rest;
+    
+    if (input.includes(':')) {
+      [searchType, ...rest] = input.split(':');
+      query = rest.join(':').trim();
+    } else {
+      searchType = 'title';
+      query = input;
+    }
+  
+    const data = await fetchData(query, searchType);
+    if (!data || !data.length) {
+      resultsOutput.textContent = 'No results found';
+      while (resultsContainer.firstChild) {
+        resultsContainer.removeChild(resultsContainer.firstChild);
+      }
+      return;
+    }
+  
+    const cards = data.map(createCardTemplate).join('');
+    resultsOutput.textContent = '';
+    resultsContainer.innerHTML = cards;
+  }
+});
   
