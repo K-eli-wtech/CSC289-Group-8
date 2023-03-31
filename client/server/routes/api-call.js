@@ -3,24 +3,24 @@ const APIRouter = express.Router();
 const https = require('https');
 
 APIRouter.post('/searchGames', async (req, res) => {
-  const { platform, rating, genre, year, title, company } = req.body;
+  const { query, searchType } = req.body;
   const key = 'd6823dbd4637434998d92a3eb889e30c';
 
   // Construct the query string based on the search parameters
   let queryString = `https://api.rawg.io/api/games?key=${key}&page_size=15`;
 
-  if (platform) queryString += `&platforms=${platform}`;
-  if (rating) queryString += `&rating=${rating}`;
-  if (genre) queryString += `&genres=${genre}`;
-  if (year) queryString += `&dates=${year}-01-01,${year}-12-31`;
-  if (title) queryString += `&search=${encodeURIComponent(title)}`;
-  if (company) queryString += `&developers=${encodeURIComponent(company)}`;
+  if (searchType === 'platform') queryString += `&platforms=${query}`;
+  if (searchType === 'rating') queryString += `&rating=${query}`;
+  if (searchType === 'genre') queryString += `&genres=${query}`;
+  if (searchType === 'year') queryString += `&dates=${query}-01-01,${query}-12-31`;
+  if (searchType === 'title') queryString += `&search=${encodeURIComponent(query)}`;
+  if (searchType === 'company') queryString += `&developers=${encodeURIComponent(query)}`;
 
   // Make the API request with the constructed query string
   https
     .get(queryString, (resp) => {
       let data = '';
-      
+
       resp.on('data', (chunk) => {
         data += chunk;
       });
@@ -32,6 +32,8 @@ APIRouter.post('/searchGames', async (req, res) => {
           name: game.name,
           released: game.released,
           photo: game.background_image,
+          rating: game.rating,
+          console: game.console,
           genres: game.genres[0],
           genres2: game.genres[1],
         }));
