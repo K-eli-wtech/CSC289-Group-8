@@ -101,6 +101,26 @@ function createCardTemplate(game, type) {
 }
 
 
+// Genre cards for recommender
+function createGenreCard(genre) {
+  return `
+    <div class="genre-card" data-id="${genre.id}" data-name="${genre.name}">
+      <div class="genre-card-content">
+        <h3>${genre.name}</h3>
+      </div>
+    </div>
+  `;
+}
+
+
+// Filling up the grid with the genre cards when called
+async function populateGenresGrid() {
+  const genresGrid = document.getElementById("genres-grid");
+  const genresCards = gameGenres.map(createGenreCard).join("");
+  genresGrid.innerHTML = genresCards;
+}
+
+
 // Searching for the data and making cards
 async function handleSearch(endpoint, searchParams, resultsContainer, count, type) {
   const data = await fetchData(endpoint, searchParams);
@@ -139,13 +159,14 @@ async function randomGames(searchType, container, count, type) {
 
 
 // Handing the function call getting random games in a specified genre
-async function genreGames(genreName, container, count, type) {
-  const genreId = findGenreIdByName(genreName);
+async function genreGames(genre, container, count, type) {
+  const genreId = genre.id;
   if (!genreId) {
-    console.log(`genre "${genreName}" not found.`);
+    console.log(`genre "${genre.name}" not found.`);
     return;
   }
 
-  const resultsContainer = document.getElementById(container);
+  const resultsContainer = container;
   await handleSearch('genre', { genre: genreId }, resultsContainer, count, type);
 }
+

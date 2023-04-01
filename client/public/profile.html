@@ -14,58 +14,43 @@
     <title> Arcadia</title>
 </head>
 
-<!-- I will need to play around with this. It's copied with a few changes from https://www.geeksforgeeks.org/how-to-display-logged-in-user-information-in-php/ -->
+
 <body>
     <!--This div wraps the entire page-->
     <div id="wrap">
-      <!--Header and Navigation Bar-->
-      <my-header></my-header>
+        <!--Header and Navigation Bar-->
+        <my-header></my-header>
+
+        <div class="content">
             <!-- Creating notification when the
                     user logs in -->
             
             <!-- Accessible only to the users that
                     have logged in already -->
-            <?php if (isset($_SESSION['success'])) : ?>
                 <div class="error success" >
                     <h3>
-                        <?php
-                            echo $_SESSION['success'];
-                            unset($_SESSION['success']);
-                        ?>
                     </h3>
                 </div>
-            <?php endif ?>
-    
-            <!-- information of the user logged in -->
-            <!-- welcome message for the logged in user -->
-            <?php  if (isset($_SESSION['username'])) : ?>
-             
- 
- 
-<p> 
-    Welcome
-        <strong>
-            <?php echo $_SESSION['username']; ?>
-        </strong>
-</p>
 
-<p>Add Games
-<form action="/action_page.php">
-    <label for="new_game_1">Game:</label>
-    <input type="text" id="new_game_1" name="new_game_1"><br><br>
-    <input type="submit" value="Submit">
-  </form>
-</p>
+        <p>Welcome <strong>USER</strong></p>
 
-<p>My Games</p>
- 
- 
-<p>
-    <a href="index.php?logout='1'" style="color: red;"> Click here to Logout </a>
-</p>
+        <p>Add Games
+        <form action="/action_page.php">
+            <label for="new_game_1">Game:</label>
+            <input type="text" id="new_game_1" name="new_game_1"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+        </p>
+
+        <p>My Games</p>
+        
+        <p><a href="index.php?logout='1'" style="color: red;"> Click here to Logout </a></p>
+
+        </div>
 
         <!--Footer -->
         <my-footer></my-footer>
+
     </div>
 </body>
   <!--Javascript for icons-->
