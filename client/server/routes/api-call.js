@@ -37,7 +37,6 @@ APIRouter.post('/searchGames', async (req, res) => {
       search: query,
       ordering: '-rating',
       page_size: 20,
-      dates: `2015-01-01,${new Date().getFullYear()}-12-31`,
     });
 
     res.status(200).json(gameData);
