@@ -8,6 +8,7 @@
     border: 1px solid #ccc;
     border-radius: 10px;
     background: rgba(19, 12, 49, 0.712);
+    cursor: pointer;
 }
   
 .card-image {
@@ -58,6 +59,7 @@
     border: 1px solid #ccc;
     border-radius: 10px;
     background: rgba(19, 12, 49, 0.712);
+    cursor: pointer;
 }
   
 .mini-card-image {

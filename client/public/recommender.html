@@ -27,11 +27,12 @@
     
     <div class="container">
       <div id="genre-selection-container">
-        <p>What genres are you interested in? Select your top 3 favorites:</p>
+        <h2>What genres are you interested in? Select your top 3 favorites:</h2>
         <div id="genres-grid">
           <!-- Genre cards will be populated here by JavaScript -->
         </div>
-        <button id="continue-button" disabled>Continue</button>
+        <button id="continue-button">Continue</button>
+        <p id="result"></p>
       </div>
       <div id="results-container" style="display: none;">
         <!-- Game recommendations will be displayed here -->
@@ -50,32 +51,4 @@
   <script nomodule src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js></script>
   <script src="./js/query.js"></script>
   <script src="./js/recommend.js"></script>
-  <script>
-    continueButton.addEventListener("click", async () => {
-    // Hide genre selection container
-    document.getElementById("genre-selection-container").style.display = "none";
-  
-    // Show results container
-    const resultsContainer = document.getElementById("results-container");
-    resultsContainer.style.display = "flex";
-  
-    // Create containers for each genre and fetch recommended games
-    for (const genreId of selectedGenres) {
-      const genre = gameGenres.find((g) => g.id === parseInt(genreId));
-      const genreContainer = document.createElement("div");
-      genreContainer.className = "genre-results-container";
-  
-      const genreTitle = document.createElement("h2");
-      genreTitle.textContent = genre.name;
-      genreContainer.appendChild(genreTitle);
-  
-      const genreGamesContainer = document.createElement("div");
-      genreGamesContainer.className = "genre-games-container";
-      genreContainer.appendChild(genreGamesContainer);
-  
-      resultsContainer.appendChild(genreContainer);
-      await genreGames(genre, genreGamesContainer, 6, "mini");
-    }
-  });
-  </script>
 </html>
