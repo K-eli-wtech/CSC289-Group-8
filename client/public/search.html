@@ -21,46 +21,45 @@
     <!--Header and Navigation Bar-->
     <my-header></my-header>
 
-      <h2 class="search-head">Search</h2>
-      <div class="search-body">
-        <!--Search Bar-->
-        <div class="search-bar">
-          <input type="text" placeholder="Search" id="search-input">
+    <div class="content">
+
+    <h2 class="search-head">Search</h2>
+    <div class="search-body">
+
+      <!--Search Bar-->
+      <div class="search-bar">
+        <input type="text" placeholder="Search" id="search-input">
+      </div>
+
+      <p id="result"></p>
+
+      <div id="search-results"></div>
+
+      <div class="results-container">
+        <div class="title-results">
+          <h3>Game Titles</h3>
+          <div id="t-results">
+          </div>
         </div>
 
-        <p id="result"></p>
-        
-        <div id="search-results">
+        <div class="publisher-results">
+          <h3>Publishers</h3>
+          <div id="p-results">
+          </div>
         </div>
 
-        <div class="results-container">
-          <div class="results-container">
-            <div class="title-results">
-              <h3>Game Titles</h3>
-              <div id="t-results">
-              </div>
-            </div>
-          </div>
-          
-          <div class="publisher-results">
-            <h3>Publishers</h3>
-            <div id="p-results">
-            </div>
-          </div>
-          
-          <div class="genre-results">
-            <h3>Genres</h3>
-            <div id="g-results">
-            </div>
+        <div class="genre-results">
+          <h3>Genres</h3>
+          <div id="g-results">
           </div>
         </div>
       </div>
-          
+    </div>
 
-      <div class="blank_space"></div>
-      
-      <!--Footer -->
-      <my-footer></my-footer>
+    </div>
+
+    <!--Footer -->
+    <my-footer></my-footer>
 
   </div>
 </body>
