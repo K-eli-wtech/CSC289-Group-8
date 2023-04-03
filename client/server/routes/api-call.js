@@ -123,7 +123,9 @@ APIRouter.post('/platform', async (req, res) => {
     });
 
     res.status(200).json(gameData);
+    console.log(gameData)
   } catch (err) {
+    console.error('Error in platform route:', err);
     res.status(500).json({ message: err.message });
   }
 });

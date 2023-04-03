@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('search-input');
   const resultsContainer = document.getElementById('search-results');
@@ -24,7 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Error fetching data:', error);
     }
   }
-    
+  
+  
   function formatDate(dateString) {
     const months = [
       'January', 'February', 'March', 'April', 'May', 'June',
@@ -59,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
   }
+
 
   async function handleSearch() {
     const input = searchInput.value;
@@ -95,5 +98,47 @@ document.addEventListener('DOMContentLoaded', () => {
     resultsOutput.textContent = '';
     resultsContainer.innerHTML = cards;
   }
+
+  
+  function getParameterByName(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+  }
+
+  async function performSearch() {
+    const platform = getParameterByName("platform");
+    const year = getParameterByName("year");
+    const rating = getParameterByName("rating");
+    const genre = getParameterByName("genre");
+
+    // Perform the search based on the query parameter values.
+    if (platform) {
+      platformGames(platform, resultsContainer, 20, 'normal');
+    } else if (year) {
+      fetchData(year, "year").then(data => updateSearchResults(data));
+    } else if (rating) {
+      fetchData(rating, "rating").then(data => updateSearchResults(data));
+    } else if (genre) {
+      fetchData(genre, "genre").then(data => updateSearchResults(data));
+    }
+  }
+
+  function updateSearchResults(data) {
+    if (!data || !data.length) {
+      resultsOutput.textContent = 'No results found';
+      while (resultsContainer.firstChild) {
+        resultsContainer.removeChild(resultsContainer.firstChild);
+      }
+      return;
+    }
+
+    const cards = data.map(createCardTemplate).join('');
+    resultsOutput.textContent = '';
+    resultsContainer.innerHTML = cards;
+  }
+
+  // Call performSearch when the page loads.
+  performSearch();
+
 });
   

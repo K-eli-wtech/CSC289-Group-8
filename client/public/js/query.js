@@ -9,7 +9,6 @@ async function fetchDevelopers() {
   const key = 'd6823dbd4637434998d92a3eb889e30c';
   const response = await fetch(`https://api.rawg.io/api/developers?key=${key}&page_size=20`);
   const data = await response.json();
-  console.log(data);
   return data.results;
 }
 
@@ -31,7 +30,25 @@ function findGenreIdByName(genreName) {
 // Fetching data from api-call.js
 async function fetchData(endpoint, searchParams) {
   try {
-    const response = await fetch(`http://localhost:3000/api/${endpoint}`, {
+    let apiEndpoint;
+    switch (endpoint) {
+      case 'searchGames':
+        apiEndpoint = 'searchGames';
+        break;
+      case 'genre':
+        apiEndpoint = 'genre';
+        break;
+      case 'developer':
+        apiEndpoint = 'developer';
+        break;
+      case 'platform': // Add this case
+        apiEndpoint = 'platform';
+        break;
+      default:
+        console.error('Invalid endpoint:', endpoint);
+        return;
+    }
+    const response = await fetch(`http://localhost:3000/api/${apiEndpoint}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -43,6 +60,14 @@ async function fetchData(endpoint, searchParams) {
   } catch (error) {
     console.error('Error fetching data:', error);
   }
+}
+
+
+
+// Platform games
+async function platformGames(platform, container, count, type) {
+  const resultsContainer = container;
+  await handleSearch('platform', { platform }, resultsContainer, count, type);
 }
 
 

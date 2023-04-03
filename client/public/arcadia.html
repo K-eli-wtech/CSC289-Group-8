@@ -11,11 +11,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <link rel="stylesheet" href="./css/default.css">
   <link rel="stylesheet" href="./css/home.css">
+  <link rel="stylesheet" href="./css/recommender.css">
   <link rel="stylesheet" href="./css/card.css">
   <title> Arcadia</title>
 </head>
 
-<body>
+<body onload="populateGenresGrid()">
   <!--This div wraps the entire page-->
   <div id="wrap">
     <!--Header and Navigation Bar-->
@@ -80,13 +81,17 @@
     </div>
 
     <!--Game Recommender Container -->
-    <div class="game_gen_container"> <!--Needs to be anchored left, size limited-->
-      <div class="game_gen_container_text">
-        <h2>NEED A NEW ADVENTURE?</h2>
-        <div class="game_gen_container_description">
-        <p>Find your newest favorite game in just a few minutes using our game recommender. Answer a few simple questions and we'll show you games we think you'll love. Sign in with your member profile for even more personalized recommendations.</p>
+    <div class="container">
+      <div id="genre-selection-container">
+        <h2>What genres are you interested in? Select your top 3 favorites:</h2>
+        <div id="genres-grid">
+          <!-- Genre cards will be populated here by JavaScript -->
         </div>
-        <button class ="button testing" type="button" onclick="window.location.href = 'recommender.html';">FIND GAMES NOW</button> 
+        <button id="continue-button">Continue</button>
+        <p id="result"></p>
+      </div>
+      <div id="results-container" style="display: none;">
+        <!-- Game recommendations will be displayed here -->
       </div>
     </div>
 
@@ -102,12 +107,13 @@
         <div class="filter_dropdown">
           <div class="dropdown">
             <button onclick="" class="dropbtn">PLATFORM</button>
-            <div id="myDropdown" class="dropdown-content">
-              <a href="#">PC</a>
-              <a href="#">XBox X</a>
-              <a href="#">PS5</a>
-              <a href="#">Nintendo Switch</a>
+            <div class="dropdown-content">
+              <a href="./search.html?platform=PC">PC</a>
+              <a href="./search.html?platform=XBox%20X">XBox X</a>
+              <a href="./search.html?platform=PS5">PS5</a>
+              <a href="./search.html?platform=Nintendo%20Switch">Nintendo Switch</a>
             </div>
+            
           </div> 
 
           <!--Year Dropdown-->
@@ -234,5 +240,7 @@
   <!--Javascript for icons-->
   <script type=module src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js></script>
   <script nomodule src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js></script>
+  <script src="./js/query.js"></script>
+  <script src="./js/recommend.js"></script>
 </body>
 </html> 
