@@ -1,13 +1,10 @@
 /* eslint-disable no-unused-vars */
-const dotenv = require('dotenv');
 const gameGenres = [{ id: 4, name: "Action" },{ id: 51, name: "Indie" },{ id: 3, name: "Adventure" },{ id: 5, name: "RPG" },{ id: 10, name: "Strategy" },{ id: 2, name: "Shooter" },{ id: 40, name: "Casual" },{ id: 14, name: "Simulation" },{ id: 7, name: "Puzzle" },{ id: 11, name: "Arcade" },{ id: 83, name: "Platformer" },{ id: 1, name: "Racing" },{ id: 59, name: "Massively Multiplayer" },{ id: 15, name: "Sports" },{ id: 6, name: "Fighting" },{ id: 19, name: "Family" },{ id: 28, name: "Board Games" },{ id: 34, name: "Educational" },{ id: 17, name: "Card" }];
 const gameTitles = ["Minecraft", "Grand Theft Auto V", "Deathloop", "Resident Evil Village", "Returnal", "It Takes Two", "Ratchet & Clank: Rift Apart", "Halo Infinite", "Forza Horizon 5", "Psychonauts 2"];
 let gameCompanies = [];
 
-dotenv.config();
-
 // API key
-const key = process.env.API_KEY;
+const key = 'd6823dbd4637434998d92a3eb889e30c';
 
 
 // Get updated company ids
@@ -38,21 +35,21 @@ async function fetchData(endpoint, searchParams) {
     let apiEndpoint;
     switch (endpoint) {
       case 'searchGames':
-        apiEndpoint = 'searchGames';
+        apiEndpoint = `searchGames?key=${key}`;
         break;
       case 'genre':
-        apiEndpoint = 'genre';
+        apiEndpoint = `genre?key=${key}`;
         break;
       case 'developer':
-        apiEndpoint = 'developer';
+        apiEndpoint = `developer?key=${key}`;
         break;
       case 'platform':
-        apiEndpoint = 'platform';
+        apiEndpoint = `platform?key=${key}`;
         break;
       default:
         console.error('Invalid endpoint:', endpoint);
         return;
-    }    
+    }
     const response = await fetch(`http://localhost:3000/api/${apiEndpoint}`, {
       method: 'POST',
       headers: {
@@ -66,6 +63,7 @@ async function fetchData(endpoint, searchParams) {
     console.error('Error fetching data:', error);
   }
 }
+
 
 
 // Formatting date
@@ -88,22 +86,24 @@ function formatDate(dateString) {
 function createCardTemplate(game, type) {
   const name = game.name || 'Unknown Game';
   const released = game.released ? formatDate(game.released) : 'Unknown Release Date';
-  const photo = game.photo || '../images/NoImageFound.png';
+  const photo = game.background_image || '../images/NoImageFound.png';  
   const rating = game.rating || 'Not rated yet';
-  const genre = (game.genres && game.genres.name) || 'Unknown Genre';
-  const genre2 = (game.genres2 && game.genres2.name) || '';
-  const platforms = game.platforms || 'Unknown Platform';
+  const genres = game.genres || [];
+  const genreNames = Array.isArray(genres) ? genres.map((genre) => genre ? genre.name : '').join(', ') : 'Unknown Genre';
+  const platformsList = game.platforms || [];
+  const platforms = Array.isArray(platformsList) ? platformsList.map((platform) => platform.platform ? platform.platform.name : 'Unknown Platform').join(', ') : 'Unknown Platform';
+
 
   if (type === 'mini') {
     return `
-      <div class="mini-card">
+        <div class="mini-card">
         <div class="mini-card-image">
           <img src="${photo}" alt="${name}" />
         </div>
         <div class="mini-card-content">
           <h3>${name}</h3>
           <p class="mini-base">Release Date: </p><p>${released}</p>
-          <p class="mini-base">Genres: </p><p>${genre}${genre2 ? ', ' + genre2 : ''}</p>
+          <p class="mini-base">Genres: </p><p>${genreNames}</p>
           <p class="mini-base">Rating: </p>${rating}</p>
           <p class="mini-base">Platforms: </p><p>${platforms}</p>
         </div>
@@ -112,16 +112,16 @@ function createCardTemplate(game, type) {
   } else {
     return `
       <div class="card">
-        <div class="card-image">
-          <img src="${photo}" alt="${name}" />
-        </div>
-        <div class="card-content">
-          <h3>${name}</h3>
-          <p class="base">Release Date: </p><p>${released}</p>
-          <p class="base">Genres: </p><p>${genre}${genre2 ? ', ' + genre2 : ''}</p>
-          <p class="base">Rating: </p>${rating}</p>
-          <p class="base">Platforms: </p><p>${platforms}</p>
-        </div>
+      <div class="card-image">
+        <img src="${photo}" alt="${name}" />
+      </div>
+      <div class="card-content">
+        <h3>${name}</h3>
+        <p class="base">Release Date: </p><p>${released}</p>
+        <p class="base">Genres: </p><p>${genreNames}</p>
+        <p class="base">Rating: </p>${rating}</p>
+        <p class="base">Platforms: </p><p>${platforms}</p>
+      </div>
       </div>
     `;
   }
@@ -149,9 +149,13 @@ async function populateGenresGrid() {
 
 // Filling up popular reviews
 async function populateReviewBox() {
-  const reviewBox = document.getElementById("review_box");
-  const games = await getGamesByRating();
-  for (let i = 0; i < 30; i++) {
+  const response = await fetch(`https://api.rawg.io/api/games?key=${key}&sort_by=rating&limit=30`);
+  const data = await response.json();
+  const games = data.results;
+
+  const reviewBox = document.getElementById('review_box');
+
+  for (let i = 0; i < games.length; i++) {
     const game = games[i];
     const card = createCardTemplate(game, 'mini');
     reviewBox.insertAdjacentHTML('beforeend', card);

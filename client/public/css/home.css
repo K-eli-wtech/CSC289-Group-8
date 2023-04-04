@@ -1,7 +1,10 @@
 /* Newest */
 
-.newest_games {
-    padding: 20px;
+.newest_games-header {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: left;
+    margin: 20px;
 }
 
 
@@ -50,7 +53,6 @@ form {
     text-align: center;
 }
 
-  
 .button {
     border: none;
     color: red;
@@ -96,6 +98,10 @@ form {
 
 /* Latest Reviews */
 
+.latest {
+    padding-top: 50px;
+}
+
 .latest-head {
     width: 100%;
     display: flex;
@@ -114,9 +120,9 @@ form {
 .filter_dropdown {
     display: inline-flex;
     width: 100%;
-    align-items: right;
+    align-items: center;
     padding: 10px 20px;
-    justify-content: right;
+    justify-content: center;
 }
 
 .latest button {
@@ -132,13 +138,23 @@ form {
 }
 
 .latest_reviews_header {
-    padding: 20px;
-    width: 350px;
-    height: 50px;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px;
 }
 
 .latest_reviews {
+    width: 90%;
     align-items: center;
+    justify-content: center;
+    padding: 50px;
+}
+
+#review_box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 20px;
     justify-content: center;
 }
 
@@ -161,6 +177,16 @@ form {
     z-index: 1;
 }
 
+.dropdown-content-genre {
+    display: none;
+    position: absolute;
+    background-color: #272727ad;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+    z-index: 1;
+}
+
+
 /* Links inside the dropdown */
 .dropdown-content a {
     padding: 12px 16px;
@@ -170,15 +196,37 @@ form {
     font-weight: 600;
 }
 
+.dropdown-content-genre a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    color: #fff;
+    font-weight: 600;
+    width: 200px;
+    box-sizing: border-box;
+}
+
+
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
     background-color: #66666686;
 }
 
+.dropdown-content-genre a:hover {
+    background-color: #66666686;
+}
+
+
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+.dropdown:hover .dropdown-content-genre {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {

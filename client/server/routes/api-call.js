@@ -15,10 +15,6 @@ const fetchData = async (url, params) => {
     const response = await axios.get(url, config);
     const games = response.data.results;
 
-    const fullURL = response.request.res.responseUrl;
-    console.log('Page loaded')
-    console.log('RAWG API call:', fullURL);
-
     const gameData = games.map((game) => {
       const filteredPlatforms = game.platforms
         ? game.platforms.map((platform) => platform.platform.name)
