@@ -68,13 +68,13 @@ const fetchData = async (url, params) => {
       return {
         name: game.name,
         released: game.released,
-        photo: game.background_image,
+        background_image: game.background_image,
         genres: game.genres,
         rating: game.rating,
         platforms: aggregatedPlatforms.map((platform) => ({
           platform: { name: platform },
         })),
-      };
+      };      
     });
 
     return gameData;
