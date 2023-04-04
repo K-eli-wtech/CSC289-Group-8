@@ -148,17 +148,17 @@ async function populateGenresGrid() {
 }
 
 // Filling up popular reviews
-async function populateReviewBox() {
-  const response = await fetch(`https://api.rawg.io/api/games?key=${key}&sort_by=rating&limit=30`);
+async function populateElement(count, sortType, location) {
+  const response = await fetch(`https://api.rawg.io/api/games?key=${key}&ordering=-${sortType}&page_size=${count}&metacritic=1,100`);
   const data = await response.json();
   const games = data.results;
 
-  const reviewBox = document.getElementById('review_box');
+  const container = document.getElementById(location);
 
   for (let i = 0; i < games.length; i++) {
     const game = games[i];
-    const card = createCardTemplate(game, 'mini');
-    reviewBox.insertAdjacentHTML('beforeend', card);
+    const card = createCardTemplate(game, 'normal');
+    container.insertAdjacentHTML('beforeend', card);
   }
 }
 
@@ -223,13 +223,4 @@ async function platformGames(platform, container, count, type) {
 
   const resultsContainer = container;
   await handleSearch('platform', { platform: platformId }, resultsContainer, count, type);
-}
-
-
-// General games search
-async function getGamesByRating(page = 1) {
-  const url = `https://api.rawg.io/api/games?key=${key}&page=${page}&ordering=-rating`;
-  const response = await fetch(url);
-  const data = await response.json();
-  return data.results;
 }

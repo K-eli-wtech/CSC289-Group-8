@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function createCardTemplate(game) {
     const name = game.name || 'Unknown Game';
     const released = game.released ? formatDate(game.released) : 'Unknown Release Date';
-    const photo = game.photo || '../images/NoImageFound.png'; 
+    const photo = game.background_image || '../images/NoImageFound.png'; 
     const rating = game.rating || 'Not rated yet';
     const genres = game.genres || [];
     const genreNames = Array.isArray(genres) ? genres.map((genre) => genre.name).join(', ') : 'Unknown Genre';

@@ -16,7 +16,7 @@
   <title> Arcadia</title>
 </head>
 
-<body onload="populateGenresGrid(); populateReviewBox();">
+<body onload="populateGenresGrid(); populateElement(20, 'rating', 'review_box'); populateElement(20, 'released', 'release-container');">
   <!--This div wraps the entire page-->
   <div id="wrap">
     <!--Header and Navigation Bar-->
@@ -31,53 +31,12 @@
       
 
     <!--Newest Games Carousel--> 
-    <div class="carousel">
-    <div class="row">
-    <div class="gallery-scroll">
-      <figure class="gallery-item">
-        <!--Need to replace all image sources with database images-->
-        <img class="gallery-img" src="https://picsum.photos/230/300?random=1"> alt="symbol image" title="symbol image">
-        <!--Need to change all figcaptions to pull the title off the database-->
-        <figcaption>Image Title</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img class="gallery-img" src="https://picsum.photos/230/300?random=2" alt="symbol image" title="symbol image">
-        <figcaption>Image Title</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img class="gallery-img" src="https://picsum.photos/230/300?random=3" alt="symbol image" title="symbol image">
-        <figcaption>Image Title</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img class="gallery-img" src="https://picsum.photos/230/300?random=4" alt="symbol image" title="symbol image">
-        <figcaption>Image Title</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img class="gallery-img" src="https://picsum.photos/230/300?random=5" alt="symbol image" title="symbol image">
-        <figcaption>Image Title</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img class="gallery-img" src="https://picsum.photos/230/300?random=6" alt="symbol image" title="symbol image">
-        <figcaption>Image Title</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img class="gallery-img" src="https://picsum.photos/230/300?random=7" alt="symbol image" title="symbol image">
-        <figcaption>Image Title</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img class="gallery-img" src="https://picsum.photos/230/300?random=8" alt="symbol image" title="symbol image">
-        <figcaption>Image Title</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img class="gallery-img" src="https://picsum.photos/230/300?random=9" alt="symbol image" title="symbol image">
-        <figcaption>Image Title</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img class="gallery-img" src="https://picsum.photos/230/300?random=10" alt="symbol image" title="symbol image">
-        <figcaption>Image Title</figcaption>
-      </figure>
-    </div><!-- end gallery-scroll -->
-    </div><!--Wrap in a div with row class-->
+    <div class="carousel-back">
+      <div class="carousel">
+        <div class="gallery-scroll">
+          <div id="release-container"></div>
+        </div>
+      </div>
     </div>
 
     <!--Game Recommender Container -->
@@ -100,7 +59,7 @@
       <div class="latest-head">
 
         <div class="latest_reviews_header">
-          <h2>HIGHEST RATED GAMES</h2>
+          <h2>HIGHEST RATED</h2>
         </div>
 
         <!--Platform Dropdown-->
@@ -174,7 +133,6 @@
         <div class="latest-body">
           <div class="latest_reviews">
             <div id="review_box">
-              <!-- Generate 30 cards here with a general search of games sorted by highest rated -->
             </div>
           </div>
         </div>
