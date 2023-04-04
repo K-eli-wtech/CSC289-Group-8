@@ -16,7 +16,7 @@
   <title> Arcadia</title>
 </head>
 
-<body onload="populateGenresGrid()">
+<body onload="populateGenresGrid(); populateReviewBox();">
   <!--This div wraps the entire page-->
   <div id="wrap">
     <!--Header and Navigation Bar-->
@@ -25,8 +25,8 @@
     <div class="content">
 
     <!--The Newest Games-->
-    <div class="newest_games">
-      <h2>THE NEWEST GAMES</h2>
+    <div class="newest_games-header">
+      <h2>NEWEST GAMES</h2>
     </div>      
       
 
@@ -100,63 +100,72 @@
       <div class="latest-head">
 
         <div class="latest_reviews_header">
-          <h2>LATEST REVIEWS</h2>
+          <h2>HIGHEST RATED GAMES</h2>
         </div>
 
         <!--Platform Dropdown-->
         <div class="filter_dropdown">
           <div class="dropdown">
-            <button onclick="" class="dropbtn">PLATFORM</button>
+            <button class="dropbtn">PLATFORM</button>
             <div class="dropdown-content">
               <a href="./search.html?platform=PC">PC</a>
-              <a href="./search.html?platform=XBox%20X">XBox X</a>
-              <a href="./search.html?platform=PS5">PS5</a>
-              <a href="./search.html?platform=Nintendo%20Switch">Nintendo Switch</a>
-            </div>
-            
-          </div> 
-
-          <!--Year Dropdown-->
-          <div class="dropdown">
-            <button onclick="" class="dropbtn">YEAR</button>
-            <div class="dropdown-content">
-              <a href="#">2023</a>
-              <a href="#">2022</a>
-              <a href="#">2021</a>
-              <a href="#">2020</a>
-              <a href="#">2019</a>
-              <a href="#">2018</a>
-              <a href="#">2017</a>
-              <a href="#">2016</a>
-              <a href="#">2015</a>
+              <a href="./search.html?platform=Xbox">XBox</a>
+              <a href="./search.html?platform=PlayStation">Playstation</a>
+              <a href="./search.html?platform=Nintendo+Switch">Nintendo Switch</a>
             </div>
           </div>
 
-          <!--Rating Dropdown-->
+          <!-- Year Dropdown -->
           <div class="dropdown">
-            <button onclick="" class="dropbtn">RATING</button>
+            <button class="dropbtn">YEAR</button>
             <div class="dropdown-content">
-              <a href="#">1</a>
-              <a href="#">2</a>
-              <a href="#">3</a>
-              <a href="#">4</a>
-              <a href="#">5</a>
+              <a href="./search.html?year=2023">2023</a>
+              <a href="./search.html?year=2022">2022</a>
+              <a href="./search.html?year=2021">2021</a>
+              <a href="./search.html?year=2020">2020</a>
+              <a href="./search.html?year=2019">2019</a>
+              <a href="./search.html?year=2018">2018</a>
+              <a href="./search.html?year=2017">2017</a>
+              <a href="./search.html?year=2016">2016</a>
+              <a href="./search.html?year=2015">2015</a>
             </div>
           </div>
 
-          <!--Genre Dropdown-->
+          <!-- Rating Dropdown -->
           <div class="dropdown">
-            <button onclick="" class="dropbtn">GENRE</button>
+            <button class="dropbtn">RATING</button>
             <div class="dropdown-content">
-              <a href="#">Action</a>
-              <a href="#">Adventure</a>
-              <a href="#">Horror</a>
-              <a href="#">Puzzle</a>
-              <a href="#">RPG</a>
-              <a href="#">Simulation</a>
-              <a href="#">Strategy</a>
-              <a href="#">Sports</a>
-              <a href="#">MMO</a>
+              <a href="./search.html?rating=1">1</a>
+              <a href="./search.html?rating=2">2</a>
+              <a href="./search.html?rating=3">3</a>
+              <a href="./search.html?rating=4">4</a>
+              <a href="./search.html?rating=5">5</a>
+            </div>
+          </div>
+
+          <!-- Genre Dropdown -->
+          <div class="dropdown">
+            <button class="dropbtn">GENRE</button>
+            <div class="dropdown-content-genre">
+              <a href="./search.html?genre=4">Action</a>
+              <a href="./search.html?genre=51">Indie</a>
+              <a href="./search.html?genre=3">Adventure</a>
+              <a href="./search.html?genre=5">RPG</a>
+              <a href="./search.html?genre=10">Strategy</a>
+              <a href="./search.html?genre=2">Shooter</a>
+              <a href="./search.html?genre=40">Casual</a>
+              <a href="./search.html?genre=14">Simulation</a>
+              <a href="./search.html?genre=7">Puzzle</a>
+              <a href="./search.html?genre=11">Arcade</a>
+              <a href="./search.html?genre=83">Platformer</a>
+              <a href="./search.html?genre=1">Racing</a>
+              <a href="./search.html?genre=59">Massively Multiplayer</a>
+              <a href="./search.html?genre=15">Sports</a>
+              <a href="./search.html?genre=6">Fighting</a>
+              <a href="./search.html?genre=19">Family</a>
+              <a href="./search.html?genre=28">Board Games</a>
+              <a href="./search.html?genre=34">Educational</a>
+              <a href="./search.html?genre=17">Card</a>
             </div>
           </div>
         </div>
@@ -164,68 +173,8 @@
 
         <div class="latest-body">
           <div class="latest_reviews">
-            
-            <div class="review_box">
-              <div class="latest_review_snippet">
-                <div class="placeholder"></div>
-                <div class="review_text_container">
-                  <div class="review_platform"><!--need call to database here-->PLAYSTATION</div>
-                  <div class="review_game_year"><!--need call to database here-->1998</div>
-                  <div class="review_game_title"><!--need call to database here-->SPYRO THE DRAGON</div>
-                  <div class="review_rating"><!--need call to database here-->****</div>
-                  <div class="reviewer_username"><!--need call to database here-->OldSchoolCool</div>
-                </div>
-              </div>
-              <div class="latest_review_snippet">
-                <div class="placeholder"></div>
-                <div class="review_text_container">
-                  <div class="review_platform"><!--need call to database here-->PLAYSTATION</div>
-                  <div class="review_game_year"><!--need call to database here-->1998</div>
-                  <div class="review_game_title"><!--need call to database here-->SPYRO THE DRAGON</div>
-                  <div class="review_rating"><!--need call to database here-->****</div>
-                  <div class="reviewer_username"><!--need call to database here-->OldSchoolCool</div>
-                </div>
-              </div>
-              <div class="latest_review_snippet">
-                <div class="placeholder"></div>
-                <div class="review_text_container">
-                  <div class="review_platform"><!--need call to database here-->PLAYSTATION</div>
-                  <div class="review_game_year"><!--need call to database here-->1998</div>
-                  <div class="review_game_title"><!--need call to database here-->SPYRO THE DRAGON</div>
-                  <div class="review_rating"><!--need call to database here-->****</div>
-                  <div class="reviewer_username"><!--need call to database here-->OldSchoolCool</div>
-                </div>
-              </div>
-              <div class="latest_review_snippet">
-                <div class="placeholder"></div>
-                <div class="review_text_container">
-                  <div class="review_platform"><!--need call to database here-->PLAYSTATION</div>
-                  <div class="review_game_year"><!--need call to database here-->1998</div>
-                  <div class="review_game_title"><!--need call to database here-->SPYRO THE DRAGON</div>
-                  <div class="review_rating"><!--need call to database here-->****</div>
-                  <div class="reviewer_username"><!--need call to database here-->OldSchoolCool</div>
-                </div>
-              </div> 
-              <div class="latest_review_snippet">
-                <div class="placeholder"></div>
-                <div class="review_text_container">
-                  <div class="review_platform"><!--need call to database here-->PLAYSTATION</div>
-                  <div class="review_game_year"><!--need call to database here-->1998</div>
-                  <div class="review_game_title"><!--need call to database here-->SPYRO THE DRAGON</div>
-                  <div class="review_rating"><!--need call to database here-->****</div>
-                  <div class="reviewer_username"><!--need call to database here-->OldSchoolCool</div>
-                </div>
-              </div> 
-              <div class="latest_review_snippet">
-                <div class="placeholder"></div>
-                <div class="review_text_container">
-                  <div class="review_platform"><!--need call to database here-->PLAYSTATION</div>
-                  <div class="review_game_year"><!--need call to database here-->1998</div>
-                  <div class="review_game_title"><!--need call to database here-->SPYRO THE DRAGON</div>
-                  <div class="review_rating"><!--need call to database here-->****</div>
-                  <div class="reviewer_username"><!--need call to database here-->OldSchoolCool</div>
-                </div>
-              </div> 
+            <div id="review_box">
+              <!-- Generate 30 cards here with a general search of games sorted by highest rated -->
             </div>
           </div>
         </div>

@@ -1,28 +1,108 @@
 const express = require('express');
+const dotenv = require('dotenv');
 const APIRouter = express.Router();
 const axios = require('axios');
+dotenv.config();
 
 const baseURL = 'https://api.rawg.io/api/games';
-const key = 'd6823dbd4637434998d92a3eb889e30c';
+const key = process.env.API_KEY;
 
+
+// Fetching the data to return
 const fetchData = async (url, params) => {
   try {
-    const response = await axios.get(url, { params });
+    const config = { params };
+    const response = await axios.get(url, config);
     const games = response.data.results;
+
+    const gameData = games.map((game) => {
+      const filteredPlatforms = game.platforms
+        ? game.platforms.map((platform) => platform.platform.name)
+        : [];
     
-    const gameData = games.map((game) => ({
-      name: game.name,
-      released: game.released,
-      photo: game.background_image,
-      genres: game.genres[0],
-      genres2: game.genres[1],
-      rating: game.rating,
-    }));
+      // Aggregating platform names to general ones
+      const aggregatedPlatforms = [];
+      const mainPlatforms = ['PC', 'PlayStation', 'Xbox', 'Switch'];
+      const otherPlatforms = filteredPlatforms.filter(
+        (platform) =>
+          !mainPlatforms.includes(platform) &&
+          !platform.toLowerCase().includes('playstation') &&
+          !platform.toLowerCase().includes('xbox') &&
+          !platform.toLowerCase().includes('macos') &&
+          !platform.toLowerCase().includes('linux') &&
+          !platform.toLowerCase().includes('nintendo switch')
+      );
+    
+      if (
+        filteredPlatforms.some(
+          (platform) =>
+            platform.includes('PC') ||
+            platform.toLowerCase().includes('macos') ||
+            platform.toLowerCase().includes('linux')
+        )
+      ) {
+        aggregatedPlatforms.push('PC');
+      }
+      if (
+        filteredPlatforms.some((platform) =>
+          platform.toLowerCase().includes('playstation')
+        )
+      ) {
+        aggregatedPlatforms.push('PlayStation');
+      }
+      if (
+        filteredPlatforms.some((platform) => platform.toLowerCase().includes('xbox'))
+      ) {
+        aggregatedPlatforms.push('Xbox');
+      }
+      if (
+        filteredPlatforms.some((platform) =>
+          platform.toLowerCase().includes('nintendo switch')
+        )
+      ) {
+        aggregatedPlatforms.push('Switch');
+      }
+    
+      aggregatedPlatforms.push(...otherPlatforms);
+    
+      return {
+        name: game.name,
+        released: game.released,
+        photo: game.background_image,
+        genres: game.genres,
+        rating: game.rating,
+        platforms: aggregatedPlatforms.map((platform) => ({
+          platform: { name: platform },
+        })),
+      };
+    });
 
     return gameData;
   } catch (err) {
     console.log('Error' + err.message);
     throw new Error('Error fetching data from the API.');
+  }
+};
+
+
+// Function to fetch platform based on its name
+const fetchPlatform = async (platformName) => {
+  try {
+    const response = await axios.get('https://api.rawg.io/api/platforms', {
+      params: {
+        key,
+        search: platformName,
+      },
+    });
+
+    if (response.data.results.length > 0) {
+      return response.data.results[0];
+    } else {
+      throw new Error('No matching platform found');
+    }
+  } catch (err) {
+    console.error('Error fetching platform:', err);
+    throw err;
   }
 };
 
@@ -41,6 +121,35 @@ APIRouter.post('/searchGames', async (req, res) => {
 
     res.status(200).json(gameData);
   } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+
+// Advanced search
+APIRouter.post('/advancedSearch', async (req, res) => {
+  const { platformName, year, minRating, genreId } = req.body;
+
+  try {
+    let platform = null;
+    if (platformName) {
+      platform = await fetchPlatform(platformName);
+    }
+
+    const gameData = await fetchData(baseURL, {
+      key,
+      platforms: platform ? platform.id : undefined,
+      dates: year ? `${year}-01-01,${year}-12-31` : undefined,
+      rating: minRating ? `${minRating},10.0` : undefined,
+      genres: genreId,
+      ordering: '-rating',
+      page_size: 20,
+      metacritic: '1,100',
+    });
+
+    res.status(200).json(gameData);
+  } catch (err) {
+    console.error('Error in advanced search route:', err);
     res.status(500).json({ message: err.message });
   }
 });
@@ -77,7 +186,6 @@ APIRouter.post('/genre', async (req, res) => {
       genres: genre,
       ordering: '-rating',
       page_size: 20,
-      dates: `2015-01-01,${new Date().getFullYear()}-12-31`,
       metacritic: '1,100',
       tag: -1, // Exclude DLCs
     });
@@ -99,7 +207,6 @@ APIRouter.post('/developer', async (req, res) => {
       developers: developer,
       ordering: '-rating',
       page_size: 20,
-      dates: `2015-01-01,${new Date().getFullYear()}-12-31`,
     });
 
     res.status(200).json(gameData);
@@ -111,24 +218,38 @@ APIRouter.post('/developer', async (req, res) => {
 
 // Platform lookup
 APIRouter.post('/platform', async (req, res) => {
-  const platform = req.body.platform;
+  const query = req.body.platform;
+
+  const searchQuery = {
+    "PC": ["PC", "macOS", "Linux"],
+    "PlayStation": ["PlayStation", "PlayStation 2", "PlayStation 3", "PlayStation 4", "PlayStation 5", "PS Vita", "PSP"],
+    "Xbox": ["Xbox", "Xbox 360", "Xbox One", "Xbox Series S", "Xbox Series X"],
+    "Switch": ["Nintendo Switch"],
+  }[query];
+
+  if (!searchQuery) {
+    res.status(400).json({ error: 'Invalid platform query' });
+    return;
+  }
 
   try {
+    const platformsData = await Promise.all(searchQuery.map((name) => fetchPlatform(name)));
+
     const gameData = await fetchData(baseURL, {
       key,
-      platforms: platform,
+      platforms: platformsData.map((platform) => platform.id).join(','),
       ordering: '-rating',
       page_size: 20,
-      dates: `2015-01-01,${new Date().getFullYear()}-12-31`,
+      metacritic: '1,100',
     });
 
     res.status(200).json(gameData);
-    console.log(gameData)
   } catch (err) {
     console.error('Error in platform route:', err);
     res.status(500).json({ message: err.message });
   }
 });
+
 
 
 // Ratings lookup
@@ -140,7 +261,6 @@ APIRouter.post('/rating', async (req, res) => {
       key,
       ordering: '-rating',
       page_size: 20,
-      dates: `2015-01-01,${new Date().getFullYear()}-12-31`,
     });
 
     const filteredGames = gameData.filter((game) => game.rating >= ratings);

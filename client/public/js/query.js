@@ -3,10 +3,12 @@ const gameGenres = [{ id: 4, name: "Action" },{ id: 51, name: "Indie" },{ id: 3,
 const gameTitles = ["Minecraft", "Grand Theft Auto V", "Deathloop", "Resident Evil Village", "Returnal", "It Takes Two", "Ratchet & Clank: Rift Apart", "Halo Infinite", "Forza Horizon 5", "Psychonauts 2"];
 let gameCompanies = [];
 
+// API key
+const key = 'd6823dbd4637434998d92a3eb889e30c';
+
 
 // Get updated company ids
 async function fetchDevelopers() {
-  const key = 'd6823dbd4637434998d92a3eb889e30c';
   const response = await fetch(`https://api.rawg.io/api/developers?key=${key}&page_size=20`);
   const data = await response.json();
   return data.results;
@@ -33,16 +35,16 @@ async function fetchData(endpoint, searchParams) {
     let apiEndpoint;
     switch (endpoint) {
       case 'searchGames':
-        apiEndpoint = 'searchGames';
+        apiEndpoint = `searchGames?key=${key}`;
         break;
       case 'genre':
-        apiEndpoint = 'genre';
+        apiEndpoint = `genre?key=${key}`;
         break;
       case 'developer':
-        apiEndpoint = 'developer';
+        apiEndpoint = `developer?key=${key}`;
         break;
-      case 'platform': // Add this case
-        apiEndpoint = 'platform';
+      case 'platform':
+        apiEndpoint = `platform?key=${key}`;
         break;
       default:
         console.error('Invalid endpoint:', endpoint);
@@ -62,13 +64,6 @@ async function fetchData(endpoint, searchParams) {
   }
 }
 
-
-
-// Platform games
-async function platformGames(platform, container, count, type) {
-  const resultsContainer = container;
-  await handleSearch('platform', { platform }, resultsContainer, count, type);
-}
 
 
 // Formatting date
@@ -91,35 +86,42 @@ function formatDate(dateString) {
 function createCardTemplate(game, type) {
   const name = game.name || 'Unknown Game';
   const released = game.released ? formatDate(game.released) : 'Unknown Release Date';
-  const photo = game.photo || '../images/NoImageFound.png';
+  const photo = game.background_image || '../images/NoImageFound.png';  
   const rating = game.rating || 'Not rated yet';
-  const genre = (game.genres && game.genres.name) || 'Unknown Genre';
-  const genre2 = (game.genres2 && game.genres2.name) || '';
+  const genres = game.genres || [];
+  const genreNames = Array.isArray(genres) ? genres.map((genre) => genre ? genre.name : '').join(', ') : 'Unknown Genre';
+  const platformsList = game.platforms || [];
+  const platforms = Array.isArray(platformsList) ? platformsList.map((platform) => platform.platform ? platform.platform.name : 'Unknown Platform').join(', ') : 'Unknown Platform';
+
+
   if (type === 'mini') {
     return `
-      <div class="mini-card">
+        <div class="mini-card">
         <div class="mini-card-image">
           <img src="${photo}" alt="${name}" />
         </div>
         <div class="mini-card-content">
           <h3>${name}</h3>
           <p class="mini-base">Release Date: </p><p>${released}</p>
-          <p class="mini-base">Genres: </p><p>${genre}${genre2 ? ', ' + genre2 : ''}</p>
+          <p class="mini-base">Genres: </p><p>${genreNames}</p>
           <p class="mini-base">Rating: </p>${rating}</p>
+          <p class="mini-base">Platforms: </p><p>${platforms}</p>
         </div>
       </div>
     `;
   } else {
     return `
       <div class="card">
-        <div class="card-image">
-          <img src="${photo}" alt="${name}" />
-        </div>
-        <div class="card-content">
-          <h3>${name}</h3>
-          <p class="base">Release Date: </p><p>${released}</p>
-          <p class="base">Genres: </p><p>${genre}${genre2 ? ', ' + genre2 : ''}</p>
-        </div>
+      <div class="card-image">
+        <img src="${photo}" alt="${name}" />
+      </div>
+      <div class="card-content">
+        <h3>${name}</h3>
+        <p class="base">Release Date: </p><p>${released}</p>
+        <p class="base">Genres: </p><p>${genreNames}</p>
+        <p class="base">Rating: </p>${rating}</p>
+        <p class="base">Platforms: </p><p>${platforms}</p>
+      </div>
       </div>
     `;
   }
@@ -143,6 +145,21 @@ async function populateGenresGrid() {
   const genresGrid = document.getElementById("genres-grid");
   const genresCards = gameGenres.map(createGenreCard).join("");
   genresGrid.innerHTML = genresCards;
+}
+
+// Filling up popular reviews
+async function populateReviewBox() {
+  const response = await fetch(`https://api.rawg.io/api/games?key=${key}&sort_by=rating&limit=30`);
+  const data = await response.json();
+  const games = data.results;
+
+  const reviewBox = document.getElementById('review_box');
+
+  for (let i = 0; i < games.length; i++) {
+    const game = games[i];
+    const card = createCardTemplate(game, 'mini');
+    reviewBox.insertAdjacentHTML('beforeend', card);
+  }
 }
 
 
@@ -195,3 +212,24 @@ async function genreGames(genre, container, count, type) {
   await handleSearch('genre', { genre: genreId }, resultsContainer, count, type);
 }
 
+
+// Platform games
+async function platformGames(platform, container, count, type) {
+  const platformId = platform.id;
+  if (!platformId) {
+    console.log(`genre "${platformId.name}" not found.`);
+    return;
+  }
+
+  const resultsContainer = container;
+  await handleSearch('platform', { platform: platformId }, resultsContainer, count, type);
+}
+
+
+// General games search
+async function getGamesByRating(page = 1) {
+  const url = `https://api.rawg.io/api/games?key=${key}&page=${page}&ordering=-rating`;
+  const response = await fetch(url);
+  const data = await response.json();
+  return data.results;
+}

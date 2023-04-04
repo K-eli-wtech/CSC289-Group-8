@@ -61,7 +61,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 20px;
-  justify-content: center; /* Add this line to center the grid items */
+  justify-content: center;
 }
 
 #results-container {
