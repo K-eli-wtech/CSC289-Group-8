@@ -13,10 +13,12 @@ const apiRouter = require('./routes/api-call');
 // Middlewares
 const corsMiddleware = require('./middlewares/cors');
 const sessionMiddleware = require('./middlewares/session');
+const loggedInMiddleware = require('./middlewares/loggedIn.js');
 
 // Use middleware functions
 app.use(corsMiddleware);
 app.use(sessionMiddleware);
+app.use(loggedInMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
