@@ -7,19 +7,16 @@ const port = 3000;
 
 // Routes to external files
 const pagesRouter = require('./routes/form');
-const gamesRouter = require('./routes/recommend');
 const emailRouter = require('./routes/email');
 const apiRouter = require('./routes/api-call');
 
 // Middlewares
 const corsMiddleware = require('./middlewares/cors');
 const sessionMiddleware = require('./middlewares/session');
-const loggedInMiddleware = require('./middlewares/loggedIn');
 
 // Use middleware functions
 app.use(corsMiddleware);
 app.use(sessionMiddleware);
-app.use(loggedInMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -31,10 +28,10 @@ app.set('view engine', 'php');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../client/public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // route to form and recommend
-app.use('/pages', [pagesRouter, gamesRouter, emailRouter]);
+app.use('/pages', [pagesRouter, emailRouter]);
 app.use('/api', apiRouter);
 
 // path define and redirect to the profile page

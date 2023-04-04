@@ -20,9 +20,9 @@ class myHeader extends HTMLElement {
                     <li><a href="about.html">ABOUT</a></li>
 
                     <li style="float: right; padding-right: 10px;">
-                    <button class ="login" type="button" onclick="window.location.href = 'login.html';">
-                        <ion-icon class="head-icon" name="person-circle"></ion-icon>
-                    </button> 
+                        <button class="login" type="button" onclick="redirectToProfileOrLogin();">
+                            <ion-icon class="head-icon" name="person-circle"></ion-icon>
+                        </button>
                     </li>
                     <li style="float: right; padding-right: 10px;">
                     <button class ="search" type="button" onclick="window.location.href = 'search.html';">

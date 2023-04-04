@@ -50,8 +50,8 @@ formRouter.get('/login', async (req, res) => {
       console.log(isMatch)
       if (isMatch) {
         console.log("Login successful");
-        req.session.loggedIn = true; // Set the loggedIn flag in the session
-        console.log(req.session); // log the session object again to see if the flag was set
+        req.session.loggedIn = true;
+        console.log(req.session);
         res.redirect('/profile.html'); // Redirect to the profile page
       } else {
         console.log("Login failed: invalid email or password");
@@ -64,6 +64,15 @@ formRouter.get('/login', async (req, res) => {
   }
 });
 
+
+// In form.js or another suitable file
+formRouter.get('/is-logged-in', (req, res) => {
+  if (req.session.loggedIn) {
+    res.status(200).json({ loggedIn: true });
+  } else {
+    res.status(200).json({ loggedIn: false });
+  }
+});
 
 
 // Check user endpoint
