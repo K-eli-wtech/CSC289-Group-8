@@ -36,7 +36,7 @@
 
         <p>My Games</p>
         
-        <p><a href="./arcadia.html?logout=1" style="color: red;"> Click here to Logout </a></p>
+        <p><a href="#" onclick="logout();" style="color: red;"> Click here to Logout </a></p>
 
         </div>
 
@@ -48,4 +48,20 @@
   <!--Javascript for icons-->
   <script type=module src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js></script>
   <script nomodule src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js></script>
+  <script>
+    function logout() {
+    fetch('http://localhost:3000/pages/logout')
+        .then((response) => {
+        if (response.status === 200) {
+            console.log('Logged out');
+            window.location.href = 'arcadia.html';
+        } else {
+            console.error('Error logging out');
+        }
+        })
+        .catch((error) => {
+        console.error('Error:', error);
+        });
+    }
+  </script>
 </html>
