@@ -147,21 +147,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Platform search handling on page
   async function performSearch() {
-    const platform = getParameterByName("platform");
+    const platformId = getParameterByName("platform");
     const year = getParameterByName("year");
     const rating = getParameterByName("rating");
     const genre = getParameterByName("genre");
   
     const searchParams = {
-      platformName: platform,
+      platformId,
       year,
-      minRating: rating,
+      minRating: rating ? parseFloat(rating) - 0.99 : undefined,
+      maxRating: rating,
       genreId: genre
     };
   
     // Perform the search based on the query parameter values.
     const data = await fetchData(null, 'advanced', searchParams);
-
+  
     if (!data || !data.length) {
       resultsOutput.textContent = 'No results found';
       while (resultsContainer.firstChild) {
@@ -169,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       return;
     }
-
+  
     const cards = data.map(createCardTemplate).join('');
     resultsOutput.textContent = '';
     resultsContainer.innerHTML = cards;

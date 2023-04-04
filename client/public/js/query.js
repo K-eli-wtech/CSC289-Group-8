@@ -214,13 +214,7 @@ async function genreGames(genre, container, count, type) {
 
 
 // Platform games
-async function platformGames(platform, container, count, type) {
-  const platformId = platform.id;
-  if (!platformId) {
-    console.log(`genre "${platformId.name}" not found.`);
-    return;
-  }
-
-  const resultsContainer = container;
+async function platformGames(platformId, container, count, type) {
+  const resultsContainer = document.getElementById(container);
   await handleSearch('platform', { platform: platformId }, resultsContainer, count, type);
 }

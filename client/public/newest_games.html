@@ -15,7 +15,7 @@
     <title> Arcadia</title>
 </head>
 
-<body>
+<body onload="populateElement(50, 'released', 'release-container');">
   <!--This div wraps the entire page-->
   <div id="wrap">
     <!--Header and Navigation Bar-->
@@ -23,63 +23,15 @@
 
     <div class="content">
 
-      <!--The Newest Games-->
-      <div class="newest_games">
-          <h2>THE NEWEST GAMES</h2>
+      <div class="newest-title">
+        <h2>THE NEWEST GAMES</h2>
       </div>      
           
-    
-      <!--Newest Games Carousel--> 
-      <div class="carousel">
-      <div class="row">
-      <div class="gallery-scroll">
-        <figure class="gallery-item">
-          <!--Need to replace all image sources with database images-->
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=1"> alt="symbol image" title="symbol image">
-          <!--Need to change all figcaptions to pull the title off the database-->
-          <figcaption>Image Title</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=2" alt="symbol image" title="symbol image">
-          <figcaption>Image Title</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=3" alt="symbol image" title="symbol image">
-          <figcaption>Image Title</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=4" alt="symbol image" title="symbol image">
-          <figcaption>Image Title</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=5" alt="symbol image" title="symbol image">
-          <figcaption>Image Title</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=6" alt="symbol image" title="symbol image">
-          <figcaption>Image Title</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=7" alt="symbol image" title="symbol image">
-          <figcaption>Image Title</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=8" alt="symbol image" title="symbol image">
-          <figcaption>Image Title</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=9" alt="symbol image" title="symbol image">
-          <figcaption>Image Title</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img class="gallery-img" src="https://picsum.photos/230/300?random=10" alt="symbol image" title="symbol image">
-          <figcaption>Image Title</figcaption>
-        </figure>
-      </div><!-- end gallery-scroll -->
-      </div><!--Wrap in a div with row class-->
+      <div class="newest-body">
+        <div id="release-container"></div>
       </div>
 
-    </div>      
+    </div>     
 
     <!--Footer -->
     <my-footer></my-footer>
@@ -88,5 +40,6 @@
   <!--Javascript for icons-->
   <script type=module src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js></script>
   <script nomodule src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js></script>
+  <script src="./js/query.js"></script>
 </body>
 </html> 

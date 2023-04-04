@@ -1,29 +1,33 @@
 /* Newest */
 
-.newest_games {
-    padding: 20px;
-}
-
-
-/*Newest Games Carousel*/
-
-.gallery-scroll {
-    display: flex;
-    flex-wrap: nowrap;
-    margin: 0;
-    padding: 0;
-    background-color: black;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    overflow-x: scroll;
-    vertical-align: middle;
-}
-
-.gallery-item {
-    padding: .5rem;
-    font-size: 1.2rem;
+.newest-title {
+    font-size: 2.4em;
+    font-weight: bold;
     text-align: center;
-    background-color: #333;
-    color: whitesmoke;
-    scroll-snap-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.newest-body {
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 20px;
+    width: 90%;
+}
+
+#release-container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    justify-items: center;
+    align-items: center;
+    min-height: 90%;
 }

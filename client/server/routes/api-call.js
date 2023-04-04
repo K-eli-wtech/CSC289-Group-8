@@ -76,7 +76,7 @@ const fetchData = async (url, params) => {
         })),
       };      
     });
-
+    
     return gameData;
   } catch (err) {
     console.log('Error' + err.message);
@@ -85,18 +85,17 @@ const fetchData = async (url, params) => {
 };
 
 
-// Function to fetch platform based on its name
-const fetchPlatform = async (platformName) => {
+// Function to fetch platform based on its ID
+const fetchPlatform = async (platformId) => {
   try {
-    const response = await axios.get('https://api.rawg.io/api/platforms', {
+    const response = await axios.get(`https://api.rawg.io/api/platforms/${platformId}`, {
       params: {
         key,
-        search: platformName,
       },
     });
 
-    if (response.data.results.length > 0) {
-      return response.data.results[0];
+    if (response.data) {
+      return response.data;
     } else {
       throw new Error('No matching platform found');
     }
@@ -128,19 +127,19 @@ APIRouter.post('/searchGames', async (req, res) => {
 
 // Advanced search
 APIRouter.post('/advancedSearch', async (req, res) => {
-  const { platformName, year, minRating, genreId } = req.body;
+  const { platformId, year, minRating, maxRating, genreId } = req.body;
 
   try {
     let platform = null;
-    if (platformName) {
-      platform = await fetchPlatform(platformName);
+    if (platformId) {
+      platform = await fetchPlatform(platformId);
     }
-
+    
     const gameData = await fetchData(baseURL, {
       key,
       platforms: platform ? platform.id : undefined,
       dates: year ? `${year}-01-01,${year}-12-31` : undefined,
-      rating: minRating ? `${minRating},10.0` : undefined,
+      rating: maxRating ? `${minRating},${maxRating}` : undefined,
       genres: genreId,
       ordering: '-rating',
       page_size: 20,
