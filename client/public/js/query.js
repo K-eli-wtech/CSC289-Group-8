@@ -1,12 +1,17 @@
 /* eslint-disable no-unused-vars */
+const dotenv = require('dotenv');
 const gameGenres = [{ id: 4, name: "Action" },{ id: 51, name: "Indie" },{ id: 3, name: "Adventure" },{ id: 5, name: "RPG" },{ id: 10, name: "Strategy" },{ id: 2, name: "Shooter" },{ id: 40, name: "Casual" },{ id: 14, name: "Simulation" },{ id: 7, name: "Puzzle" },{ id: 11, name: "Arcade" },{ id: 83, name: "Platformer" },{ id: 1, name: "Racing" },{ id: 59, name: "Massively Multiplayer" },{ id: 15, name: "Sports" },{ id: 6, name: "Fighting" },{ id: 19, name: "Family" },{ id: 28, name: "Board Games" },{ id: 34, name: "Educational" },{ id: 17, name: "Card" }];
 const gameTitles = ["Minecraft", "Grand Theft Auto V", "Deathloop", "Resident Evil Village", "Returnal", "It Takes Two", "Ratchet & Clank: Rift Apart", "Halo Infinite", "Forza Horizon 5", "Psychonauts 2"];
 let gameCompanies = [];
 
+dotenv.config();
+
+// API key
+const key = process.env.API_KEY;
+
 
 // Get updated company ids
 async function fetchDevelopers() {
-  const key = 'd6823dbd4637434998d92a3eb889e30c';
   const response = await fetch(`https://api.rawg.io/api/developers?key=${key}&page_size=20`);
   const data = await response.json();
   return data.results;
@@ -41,13 +46,13 @@ async function fetchData(endpoint, searchParams) {
       case 'developer':
         apiEndpoint = 'developer';
         break;
-      case 'platform': // Add this case
+      case 'platform':
         apiEndpoint = 'platform';
         break;
       default:
         console.error('Invalid endpoint:', endpoint);
         return;
-    }
+    }    
     const response = await fetch(`http://localhost:3000/api/${apiEndpoint}`, {
       method: 'POST',
       headers: {
@@ -60,14 +65,6 @@ async function fetchData(endpoint, searchParams) {
   } catch (error) {
     console.error('Error fetching data:', error);
   }
-}
-
-
-
-// Platform games
-async function platformGames(platform, container, count, type) {
-  const resultsContainer = container;
-  await handleSearch('platform', { platform }, resultsContainer, count, type);
 }
 
 
@@ -95,6 +92,8 @@ function createCardTemplate(game, type) {
   const rating = game.rating || 'Not rated yet';
   const genre = (game.genres && game.genres.name) || 'Unknown Genre';
   const genre2 = (game.genres2 && game.genres2.name) || '';
+  const platforms = game.platforms || 'Unknown Platform';
+
   if (type === 'mini') {
     return `
       <div class="mini-card">
@@ -106,6 +105,7 @@ function createCardTemplate(game, type) {
           <p class="mini-base">Release Date: </p><p>${released}</p>
           <p class="mini-base">Genres: </p><p>${genre}${genre2 ? ', ' + genre2 : ''}</p>
           <p class="mini-base">Rating: </p>${rating}</p>
+          <p class="mini-base">Platforms: </p><p>${platforms}</p>
         </div>
       </div>
     `;
@@ -119,6 +119,8 @@ function createCardTemplate(game, type) {
           <h3>${name}</h3>
           <p class="base">Release Date: </p><p>${released}</p>
           <p class="base">Genres: </p><p>${genre}${genre2 ? ', ' + genre2 : ''}</p>
+          <p class="base">Rating: </p>${rating}</p>
+          <p class="base">Platforms: </p><p>${platforms}</p>
         </div>
       </div>
     `;
@@ -143,6 +145,17 @@ async function populateGenresGrid() {
   const genresGrid = document.getElementById("genres-grid");
   const genresCards = gameGenres.map(createGenreCard).join("");
   genresGrid.innerHTML = genresCards;
+}
+
+// Filling up popular reviews
+async function populateReviewBox() {
+  const reviewBox = document.getElementById("review_box");
+  const games = await getGamesByRating();
+  for (let i = 0; i < 30; i++) {
+    const game = games[i];
+    const card = createCardTemplate(game, 'mini');
+    reviewBox.insertAdjacentHTML('beforeend', card);
+  }
 }
 
 
@@ -195,3 +208,24 @@ async function genreGames(genre, container, count, type) {
   await handleSearch('genre', { genre: genreId }, resultsContainer, count, type);
 }
 
+
+// Platform games
+async function platformGames(platform, container, count, type) {
+  const platformId = platform.id;
+  if (!platformId) {
+    console.log(`genre "${platformId.name}" not found.`);
+    return;
+  }
+
+  const resultsContainer = container;
+  await handleSearch('platform', { platform: platformId }, resultsContainer, count, type);
+}
+
+
+// General games search
+async function getGamesByRating(page = 1) {
+  const url = `https://api.rawg.io/api/games?key=${key}&page=${page}&ordering=-rating`;
+  const response = await fetch(url);
+  const data = await response.json();
+  return data.results;
+}

@@ -1,7 +1,7 @@
 /* Card design */
 .card {
     width: 260px;
-    height: 300px;
+    height: 340px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -27,6 +27,12 @@
     flex: 1;
     padding: 2.5px;
     font-size: 15px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.card-content::-webkit-scrollbar {
+    display: none;
 }
   
 .card-content h3 {
@@ -78,8 +84,14 @@
     flex: 1;
     padding: 2.5px;
     font-size: 10px;
+    overflow-y: auto;
+    scrollbar-width: none;
 }
-  
+
+.mini-card-content::-webkit-scrollbar {
+    display: none;
+}
+
 .mini-card-content h3 {
     margin: 0;
     font-size: 13px;
