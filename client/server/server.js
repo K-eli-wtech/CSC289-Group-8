@@ -34,15 +34,6 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use('/pages', [pagesRouter, emailRouter]);
 app.use('/api', apiRouter);
 
-// path define and redirect to the profile page
-app.get('/profile.html', (req, res) => {
-  // Check if user is logged in
-  if (req.session.loggedIn) {
-    res.sendFile(path.join(__dirname, '../public/profile.html'));
-  } else {
-    res.redirect('/login.html');
-  }  
-});
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
