@@ -21,12 +21,12 @@ class myHeader extends HTMLElement {
 
                     <li style="float: right; padding-right: 10px;">
                     <button class ="login" type="button" onclick="window.location.href = 'login.html';">
-                        <ion-icon name="person-circle"></ion-icon>
+                        <ion-icon class="head-icon" name="person-circle"></ion-icon>
                     </button> 
                     </li>
                     <li style="float: right; padding-right: 10px;">
                     <button class ="search" type="button" onclick="window.location.href = 'search.html';">
-                        <ion-icon name="search-circle-outline"></ion-icon>
+                        <ion-icon class="head-icon" name="search-circle-outline"></ion-icon>
                     </button> </li>
                 </ul> 
                 </h3>
