@@ -24,50 +24,73 @@
         <my-header></my-header>
 
         <div class="content">
-            <div class="user-display">
+            <div class="titles">
                 <h2>Welcome <strong>USER</strong></h2>
+                <button class="logout-button" href="#" onclick="logout();">Logout</button>
             </div>
 
-            <div id="user-info">
-                <p id="display_name">Display Name: </p>
-                <p id="email">Email: </p>
-                <p id="name">First Name: </p>
-                <p id="age">Age: </p>
-                <p id="phone_number">Phone Number: </p>
-            </div>
-        
-            <div id="edit-form" style="display:none;">
-                <form id="update-user-form">
-                    <label for="display_name">Display Name:</label>
-                    <input type="text" id="display_name" name="display_name">
-                    <br>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email">
-                    <br>
-                    <label for="first_name">First Name:</label>
-                    <input type="text" id="first_name" name="first_name">
-                    <br>
-                    <label for="last_name">Last Name:</label>
-                    <input type="text" id="last_name" name="last_name">
-                    <br>
-                    <label for="age">Age:</label>
-                    <input type="number" id="age" name="age">
-                    <br>
-                    <label for="phone_number">Phone Number:</label>
-                    <input type="tel" id="phone_number" name="phone_number">
-                    <br>
-                    <input type="submit" value="Update">
-                </form>
+            
+
+            <div class="titles">
+                <h3>About You</h3>
             </div>
 
-            <button id="edit-btn" onclick="toggleEditForm()">Edit Profile</button>
+            <div class="user-info-container">
+                <div id="user-info">
+                    <p id="display_name">Display Name: </p>
+                    <p id="email">Email: </p>
+                    <p id="name">Name: </p>
+                    <p id="age">Age: </p>
+                    <p id="phone_number">Phone Number: </p>
+                </div>
+            
+                <div id="edit-form" style="display:none;">
+                    <form id="update-user-form">
+                        <div class="input-group">
+                            <label for="display_name">Display Name:</label>
+                            <input type="text" id="display_name" name="display_name">
+                        </div>
+                        <div class="input-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                        <div class="input-group">
+                            <label for="first_name">First Name:</label>
+                            <input type="text" id="first_name" name="first_name">
+                        </div>
+                        <div class="input-group">
+                            <label for="last_name">Last Name:</label>
+                            <input type="text" id="last_name" name="last_name">
+                        </div>
+                        <div class="input-group">
+                            <label for="age">Age:</label>
+                            <input type="number" id="age" name="age">
+                        </div>
+                        <div class="input-group">
+                            <label for="phone_number">Phone Number:</label>
+                            <input type="tel" id="phone_number" name="phone_number">
+                        </div>
+                    </form>                    
+                </div>
+                <div class="buttons-wrapper">
+                    <input class="button" id="update-btn" type="submit" form="update-user-form" value="Update" style="display:none;">
+                    <button class="button" id="edit-btn" onclick="toggleEditForm()">Edit Profile</button>
+                </div>
+            </div>
+
+            <div class="titles">
+                <h3>Favorite Games</h3>
+            </div>
 
             <div class="display-favs">
-            <h2>Favorite Games</h2>
+                <div class="games-display"></div>
+            </div>
+
+            <div class="titles">
+                <h3>Add Favorites</h3>
             </div>
 
             <div class="add-favs">
-                <h2>Add New Favorite Games</h2>
                 <h3>Look up game name</h3>
                 <div class="search-body-profile">
 
@@ -81,8 +104,6 @@
                     <div id="search-results"></div>
                 </div>
             </div>
-    
-            <p><a href="#" onclick="logout();" style="color: red;">Click here to Logout</a></p>
 
         </div>
 
