@@ -22,21 +22,15 @@
         <my-header></my-header>
 
         <div class="content">
-                <div class="error success">
-                    <p>Welcome <strong>USER</strong></p>
-                </div>
+            <div class="error success">
+                <p>Welcome <strong>USER</strong></p>
+            </div>
 
-        <p>Add Games
-        <form action="/action_page.php">
-            <label for="new_game_1">Game:</label>
-            <input type="text" id="new_game_1" name="new_game_1"><br><br>
-            <input type="submit" value="Submit">
-        </form>
-        </p>
+            <p>Add Games</p>
 
-        <p>My Games</p>
+            <p>My Games</p>
         
-        <p><a href="#" onclick="logout();" style="color: red;"> Click here to Logout </a></p>
+            <p><a href="#" onclick="logout();" style="color: red;"> Click here to Logout </a></p>
 
         </div>
 
@@ -50,18 +44,35 @@
   <script nomodule src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js></script>
   <script>
     function logout() {
-    fetch('http://localhost:3000/pages/logout')
-        .then((response) => {
-        if (response.status === 200) {
-            console.log('Logged out');
-            window.location.href = 'arcadia.html';
-        } else {
-            console.error('Error logging out');
-        }
-        })
-        .catch((error) => {
-        console.error('Error:', error);
+        fetch('http://localhost:3000/account/logout')
+            .then((response) => {
+            if (response.status === 200) {
+                console.log('Logged out');
+                window.location.href = 'arcadia.html';
+            } else {
+                console.error('Error logging out');
+            }
+            })
+            .catch((error) => {
+            console.error('Error:', error);
         });
     }
+
+    async function fetchUserData() {
+        try {
+            const response = await fetch('http://localhost:3000/account/get-user-data');
+            if (response.ok) {
+            const userData = await response.json();
+            const welcomeMessage = document.querySelector('.success p');
+            welcomeMessage.innerHTML = `Welcome <strong>${userData.display_name}</strong>`;
+            // You can use userData to display other information as needed
+            } else {
+            console.error('Error fetching user data');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+    document.addEventListener('DOMContentLoaded', fetchUserData);
   </script>
 </html>

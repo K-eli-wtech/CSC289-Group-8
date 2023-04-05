@@ -9,6 +9,7 @@ const port = 3000;
 const pagesRouter = require('./routes/form');
 const emailRouter = require('./routes/email');
 const apiRouter = require('./routes/api-call');
+const accountRouter = require('./routes/account');
 
 // Middlewares
 const corsMiddleware = require('./middlewares/cors');
@@ -34,6 +35,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // route to form and recommend
 app.use('/pages', [pagesRouter, emailRouter]);
+app.use('/account', accountRouter);
 app.use('/api', apiRouter);
 
 
