@@ -11,6 +11,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link rel="stylesheet" href="./css/default.css">
     <link rel="stylesheet" href="./css/profile.css">
+    <link rel="stylesheet" href="./css/search.css">
+    <link rel="stylesheet" href="./css/card.css">
     <title> Arcadia</title>
 </head>
 
@@ -22,15 +24,65 @@
         <my-header></my-header>
 
         <div class="content">
-            <div class="error success">
-                <p>Welcome <strong>USER</strong></p>
+            <div class="user-display">
+                <h2>Welcome <strong>USER</strong></h2>
             </div>
 
-            <p>Add Games</p>
-
-            <p>My Games</p>
+            <div id="user-info">
+                <p id="display_name">Display Name: </p>
+                <p id="email">Email: </p>
+                <p id="name">First Name: </p>
+                <p id="age">Age: </p>
+                <p id="phone_number">Phone Number: </p>
+            </div>
         
-            <p><a href="#" onclick="logout();" style="color: red;"> Click here to Logout </a></p>
+            <div id="edit-form" style="display:none;">
+                <form id="update-user-form">
+                    <label for="display_name">Display Name:</label>
+                    <input type="text" id="display_name" name="display_name">
+                    <br>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email">
+                    <br>
+                    <label for="first_name">First Name:</label>
+                    <input type="text" id="first_name" name="first_name">
+                    <br>
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" id="last_name" name="last_name">
+                    <br>
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age">
+                    <br>
+                    <label for="phone_number">Phone Number:</label>
+                    <input type="tel" id="phone_number" name="phone_number">
+                    <br>
+                    <input type="submit" value="Update">
+                </form>
+            </div>
+
+            <button id="edit-btn" onclick="toggleEditForm()">Edit Profile</button>
+
+            <div class="display-favs">
+            <h2>Favorite Games</h2>
+            </div>
+
+            <div class="add-favs">
+                <h2>Add New Favorite Games</h2>
+                <h3>Look up game name</h3>
+                <div class="search-body-profile">
+
+                    <!--Search Bar-->
+                    <div class="search-bar">
+                      <input type="text" placeholder="Search" id="search-input">
+                    </div>
+              
+                    <p id="result"></p>
+              
+                    <div id="search-results"></div>
+                </div>
+            </div>
+    
+            <p><a href="#" onclick="logout();" style="color: red;">Click here to Logout</a></p>
 
         </div>
 
@@ -42,37 +94,6 @@
   <!--Javascript for icons-->
   <script type=module src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js></script>
   <script nomodule src=https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js></script>
-  <script>
-    function logout() {
-        fetch('http://localhost:3000/account/logout')
-            .then((response) => {
-            if (response.status === 200) {
-                console.log('Logged out');
-                window.location.href = 'arcadia.html';
-            } else {
-                console.error('Error logging out');
-            }
-            })
-            .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
-
-    async function fetchUserData() {
-        try {
-            const response = await fetch('http://localhost:3000/account/get-user-data');
-            if (response.ok) {
-            const userData = await response.json();
-            const welcomeMessage = document.querySelector('.success p');
-            welcomeMessage.innerHTML = `Welcome <strong>${userData.display_name}</strong>`;
-            // You can use userData to display other information as needed
-            } else {
-            console.error('Error fetching user data');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
-    document.addEventListener('DOMContentLoaded', fetchUserData);
-  </script>
+  <script src="./js/profile.js"></script>
+  <script src="./js/search.js"></script>
 </html>

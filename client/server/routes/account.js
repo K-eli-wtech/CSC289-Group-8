@@ -2,6 +2,8 @@ const express = require('express');
 const accountRouter = express.Router();
 const dbConnect = require('../dbConfig');
 
+
+
 // Handles logged in session data
 accountRouter.get('/check-login', (req, res) => {
   if (req.session.loggedIn) {
@@ -10,6 +12,7 @@ accountRouter.get('/check-login', (req, res) => {
     res.status(401).json({ loggedIn: false });
   }
 });
+
 
 // Handles logging out
 accountRouter.get('/logout', (req, res) => {
@@ -25,7 +28,8 @@ accountRouter.get('/logout', (req, res) => {
   });
 });
 
-// Add the new endpoint for getting user data
+
+// Endpoint for getting user data
 accountRouter.get('/get-user-data', async (req, res) => {
   const email = req.session.email;
   if (!email) {
@@ -46,5 +50,29 @@ accountRouter.get('/get-user-data', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+
+// Endpoint for updating the user data
+accountRouter.post('/update-user-data', async (req, res) => {
+  const { first_name, last_name, age, display_name, phone_number } = req.body;
+  const email = req.session.email;
+
+  if (!email) {
+    res.status(401).send('Unauthorized');
+    return;
+  }
+
+  try {
+    await dbConnect.execute(
+      'UPDATE Users SET First_name=?, last_name=?, age=?, display_name=?, phone_number=? WHERE email=?',
+      [first_name, last_name, age, display_name, phone_number, email]
+    );
+    res.status(200).send('User data updated successfully');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 
 module.exports = accountRouter;

@@ -30,7 +30,6 @@ formRouter.post('/register', async (req, res) => {
 
 // Login php form
 formRouter.get('/login', async (req, res) => {
-  console.log(req.query);
   const { email, password } = req.query;
 
   try {
@@ -39,20 +38,19 @@ formRouter.get('/login', async (req, res) => {
       `SELECT * FROM Users WHERE email = ?`,
       [email]
     );
-    console.log(results)
     if (results.length === 0) {
       console.log("Login failed: invalid email or password");
       res.status(401).send('Invalid email or password');
     } else {
       // Compare the password with the hashed password from the database
       const isMatch = await bcrypt.compare(password, results[0].password);
-      console.log(password, results[0].password);
-      console.log(isMatch)
       if (isMatch) {
         console.log("Login successful");
         req.session.loggedIn = true;
         req.session.email = email;
-        console.log(req.session);
+        console.log('Session established')
+        console.log('Email: ', req.session.email)
+        console.log('Login-status: ', req.session.loggedIn)
         res.redirect('/profile.html');
       } else {
         console.log("Login failed: invalid email or password");
