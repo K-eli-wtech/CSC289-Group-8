@@ -46,13 +46,23 @@
   margin-right: auto;
 }
 
+.simple-container {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 50px;
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-#genre-selection-container {
+
+#genre-selection-container, #simple-recommend-body {
   padding: 30px;
 }
 
-#genre-selection-container h2 {
-  font-size: 20px;
+#genre-selection-container h2, #simple-recommend-body h2 {
+  font-size: 23px;
   text-align: center;
   padding-bottom: 30px;
 }

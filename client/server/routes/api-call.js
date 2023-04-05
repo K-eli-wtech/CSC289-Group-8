@@ -250,6 +250,26 @@ APIRouter.post('/platform', async (req, res) => {
 });
 
 
+// Random games
+APIRouter.post('/randomGames', async (req, res) => {
+  const page = req.body.page;
+
+  try {
+    const gameData = await fetchData(baseURL, {
+      key,
+      ordering: '-rating',
+      page_size: 20,
+      metacritic: '1,100',
+      page,
+    });
+
+    res.status(200).json(gameData);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+
 
 // Ratings lookup
 APIRouter.post('/rating', async (req, res) => {

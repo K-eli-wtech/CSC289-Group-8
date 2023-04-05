@@ -37,6 +37,9 @@ async function fetchData(endpoint, searchParams) {
       case 'searchGames':
         apiEndpoint = `searchGames?key=${key}`;
         break;
+      case 'randomGames':
+        apiEndpoint = `randomGames?key=${key}&page=${searchParams.page}`;
+        break;
       case 'genre':
         apiEndpoint = `genre?key=${key}`;
         break;
@@ -217,4 +220,10 @@ async function genreGames(genre, container, count, type) {
 async function platformGames(platformId, container, count, type) {
   const resultsContainer = document.getElementById(container);
   await handleSearch('platform', { platform: platformId }, resultsContainer, count, type);
+}
+
+
+// Completely random games
+async function randomGeneralGames(container, count, type, page) {
+  await handleSearch('randomGames', { page: page }, container, count, type);
 }
