@@ -33,14 +33,6 @@ formRouter.get('/login', async (req, res) => {
   const { email, password } = req.query;
 
   try {
-    // Log the database layout
-    const [tableNames] = await dbConnect.execute("SHOW TABLES");
-    console.log("Database layout:");
-    for (const table of tableNames) {
-      const tableName = Object.values(table)[0];
-      const [columnInfo] = await dbConnect.execute(`DESCRIBE ${tableName}`);
-      console.log(`Table '${tableName}':`, columnInfo);
-    }
     // Get the user data from the database
     const [results] = await dbConnect.execute(
       `SELECT * FROM Users WHERE email = ?`,
