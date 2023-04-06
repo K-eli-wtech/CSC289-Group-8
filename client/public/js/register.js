@@ -1,6 +1,9 @@
 /* eslint-disable no-unused-vars */
+
 // Checking the password
-async function checkPass() {
+async function checkPass(event) {
+  event.preventDefault(); // Prevent the default form submission behavior
+
   let password = document.getElementById("pass").value;
   let confirm = document.getElementById("verify").value;
   let display_name = document.getElementById("display_name").value;
@@ -22,7 +25,13 @@ async function checkPass() {
           button.setAttribute('type', 'button');
         } else {
           message.textContent = "";
-          button.setAttribute('type', 'submit');
+          
+          // Show an alert and redirect to login page after successful registration
+          alert("Account created successfully!");
+          window.location.href = "./login.html";
+          
+          // Submit the form
+          event.target.submit(); 
         }
       } catch (error) {
         message.textContent = "Error: " + error.message;
@@ -41,6 +50,7 @@ async function checkPass() {
   }
 }
 
+
 // Check username and email
 async function checkUser(email, displayName) {
   const data = { email, display_name: displayName };
@@ -58,7 +68,6 @@ async function checkUser(email, displayName) {
   return result;
 }
 
-
 // Show/hide the password
 function showPass(pass, icon){
   let password = document.getElementById(pass);
@@ -72,3 +81,9 @@ function showPass(pass, icon){
     eye.name = "eye-outline"
   }
 }
+
+// Get the form element
+const form = document.querySelector('form');
+
+// Add an event listener to the submit event of the form element
+form.addEventListener('submit', checkPass);

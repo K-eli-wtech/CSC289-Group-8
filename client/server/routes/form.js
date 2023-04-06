@@ -3,7 +3,7 @@ const formRouter = express.Router();
 const dbConnect = require('../dbConfig');
 const bcrypt = require('bcryptjs');
 
-// Registering account php form
+// Registering account
 formRouter.post('/register', async (req, res) => {
   console.log(req.body);
   const { display_name, email, password } = req.body;
@@ -20,7 +20,7 @@ formRouter.post('/register', async (req, res) => {
     );
     
     console.log(results);
-    res.status(200).json({ message: 'User registered successfully' });
+    res.redirect('/login.html');
   } catch (error) {
     console.error(error);
     res.status(500).send('Error querying database');
@@ -28,7 +28,8 @@ formRouter.post('/register', async (req, res) => {
 });
 
 
-// Login php form
+
+// Login
 formRouter.get('/login', async (req, res) => {
   const { email, password } = req.query;
 
@@ -90,5 +91,6 @@ formRouter.post('/check-user', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
 
 module.exports = formRouter;
