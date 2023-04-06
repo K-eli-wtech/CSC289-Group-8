@@ -83,17 +83,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const platforms = Array.isArray(platformsList) ? platformsList.map((platform) => platform.platform.name).join(', ') : 'Unknown Platform';
   
     return `
-      <div class="card">
-        <div class="card-image">
-          <img src="${photo}" alt="${name}" />
-        </div>
-        <div class="card-content">
-          <h3>${name}</h3>
-          <p class="base">Release Date: </p><p>${released}</p>
-          <p class="base">Genres: </p><p>${genreNames}</p>
-          <p class="base">Rating: </p>${rating}</p>
-          <p class="base">Platforms: </p><p>${platforms}</p>
-        </div>
+      <div class="card" id="${name.trim()}">
+      <div class="card-image">
+        <img src="${photo}" alt="${name}" />
+      </div>
+      <div class="card-content">
+        <h3>${name}</h3>
+        <p class="base">Release Date: </p><p>${released}</p>
+        <p class="base">Genres: </p><p>${genreNames}</p>
+        <p class="base">Rating: </p>${rating}</p>
+        <p class="base">Platforms: </p><p>${platforms}</p>
+      </div>
       </div>
     `;
   }

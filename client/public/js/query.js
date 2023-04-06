@@ -99,7 +99,7 @@ function createCardTemplate(game, type) {
 
   if (type === 'mini') {
     return `
-        <div class="mini-card">
+        <div class="mini-card" id="${name.trim()}">
         <div class="mini-card-image">
           <img src="${photo}" alt="${name}" />
         </div>
@@ -114,7 +114,7 @@ function createCardTemplate(game, type) {
     `;
   } else {
     return `
-      <div class="card">
+      <div class="card" id="${name.trim()}">
       <div class="card-image">
         <img src="${photo}" alt="${name}" />
       </div>

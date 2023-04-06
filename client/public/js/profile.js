@@ -101,5 +101,48 @@ document.getElementById('update-user-form').addEventListener('submit', async (ev
     }
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search-input');
+    const searchText = document.getElementById('search-text');
+    const containers = document.querySelectorAll('#search-results');
+    
+    containers.forEach((container) => {
+        container.addEventListener('click', async (event) => {
+            if (event.target.closest('.card, .mini-card')) {
+                const gameName = event.target.closest('.card, .mini-card').id.trim();
+                console.log('Clicked: ', gameName);
+                await addGameToUserFavorites(gameName);
+            }
+        });
+    });
+
+    // Listening to what is entered in the search bar
+    searchInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            searchText.textContent = "Please select a game to add it to your favorites";
+        }
+    });
+});
+
+
+async function addGameToUserFavorites(gameName) {
+    try {
+        const response = await fetch('http://localhost:3000/account/add-favorite-game', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ gameName }),
+        });
+
+        if (response.ok) {
+            console.log(`Game '${gameName}' added to user favorites`);
+        } else {
+            console.error(`Error adding game '${gameName}' to user favorites`);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
 
 document.addEventListener('DOMContentLoaded', fetchUserData);

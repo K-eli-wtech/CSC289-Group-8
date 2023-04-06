@@ -168,7 +168,11 @@ APIRouter.post('/title', async (req, res) => {
       rating: '9.0,10.0',
     });
 
-    res.status(200).json(gameData);
+    // Check for exact match
+    const exactMatch = gameData.find((game) => game.name.toLowerCase() === query.toLowerCase());
+
+    // If an exact match is found, return only that game, otherwise return the fetched data as is
+    res.status(200).json(exactMatch ? [exactMatch] : gameData);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

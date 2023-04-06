@@ -75,4 +75,40 @@ accountRouter.post('/update-user-data', async (req, res) => {
 });
 
 
+// Endpoint for adding a favorite game to a user's profile
+accountRouter.post('/add-favorite-game', async (req, res) => {
+  const { gameName } = req.body;
+  const email = req.session.email;
+
+  if (!email) {
+    res.status(401).send('Unauthorized');
+    return;
+  }
+
+  try {
+    // Check if the game is already in the user's favorites
+    const [existingGame] = await dbConnect.execute(
+      'SELECT * FROM UserFavorites WHERE email = ? AND game_name = ?',
+      [email, gameName]
+    );
+
+    if (existingGame.length > 0) {
+      res.status(409).send('Game already in user favorites');
+      return;
+    }
+
+    // Add the game to the user's favorites
+    await dbConnect.execute(
+      'INSERT INTO UserFavorites (email, game_name) VALUES (?, ?)',
+      [email, gameName]
+    );
+
+    res.status(200).send('Game added to user favorites');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
 module.exports = accountRouter;
