@@ -12,7 +12,7 @@ class myHeader extends HTMLElement {
                     }
                 </script>
 
-                <a href="arcadia.html"><h1 style="color: #a81000">Arcadia</h1></a>
+                <a href="/"><h1 style="color: #a81000">Arcadia</h1></a>
                 <h3>
                 <ul class="navigation_bar">
                     <li><a href="newest_games.html">NEWEST GAMES</a></li>
