@@ -109,9 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
     containers.forEach((container) => {
         container.addEventListener('click', async (event) => {
             if (event.target.closest('.card, .mini-card')) {
-                const gameName = event.target.closest('.card, .mini-card').id.trim();
-                console.log('Clicked: ', gameName);
-                await addGameToUserFavorites(gameName);
+                const game_name = event.target.closest('.card, .mini-card').id.trim();
+                console.log('Clicked: ', game_name);
+                await addGameToUserFavorites(game_name);
             }
         });
     });
@@ -125,20 +125,20 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-async function addGameToUserFavorites(gameName) {
+async function addGameToUserFavorites(game_name) {
     try {
         const response = await fetch('http://localhost:3000/account/add-favorite-game', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ gameName }),
+            body: JSON.stringify({ game_name }),
         });
 
         if (response.ok) {
-            console.log(`Game '${gameName}' added to user favorites`);
+            console.log(`Game '${game_name}' added to user favorites`);
         } else {
-            console.error(`Error adding game '${gameName}' to user favorites`);
+            console.error(`Error adding game '${game_name}' to user favorites`);
         }
     } catch (error) {
         console.error('Error:', error);

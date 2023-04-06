@@ -52,63 +52,72 @@ accountRouter.get('/get-user-data', async (req, res) => {
 });
 
 
-// Endpoint for updating the user data
-accountRouter.post('/update-user-data', async (req, res) => {
-  const { first_name, last_name, age, display_name, phone_number } = req.body;
-  const email = req.session.email;
-
-  if (!email) {
-    res.status(401).send('Unauthorized');
-    return;
-  }
-
-  try {
-    await dbConnect.execute(
-      'UPDATE Users SET First_name=?, last_name=?, age=?, display_name=?, phone_number=? WHERE email=?',
-      [first_name, last_name, age, display_name, phone_number, email]
-    );
-    res.status(200).send('User data updated successfully');
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
-
 // Endpoint for adding a favorite game to a user's profile
 accountRouter.post('/add-favorite-game', async (req, res) => {
-  const { gameName } = req.body;
   const email = req.session.email;
+  const { game_name } = req.body;
 
-  if (!email) {
+  console.log('Received game_name:', game_name);
+
+  if (!email || !game_name) {
     res.status(401).send('Unauthorized');
     return;
   }
 
   try {
-    // Check if the game is already in the user's favorites
-    const [existingGame] = await dbConnect.execute(
-      'SELECT * FROM UserFavorites WHERE email = ? AND game_name = ?',
-      [email, gameName]
+    // Get the existing favorite games for the user
+    const [existingEntry] = await dbConnect.execute(
+      'SELECT favorite_games FROM UserFavorites WHERE email = ?',
+      [email]
     );
 
-    if (existingGame.length > 0) {
-      res.status(409).send('Game already in user favorites');
-      return;
+    let favoriteGames;
+    if (existingEntry.length > 0) {
+      const storedFavoriteGames = existingEntry[0].favorite_games;
+      console.log('Stored favorite games:', storedFavoriteGames);
+
+      favoriteGames = storedFavoriteGames || [];
+
+      console.log('Current favorite games (before adding):', favoriteGames);
+
+      // Check if the game is already in the user's favorites
+      if (favoriteGames.includes(game_name)) {
+        res.status(409).send('The game is already in the user\'s favorites');
+        return;
+      }
+
+      // Add the new game to the user's favorites
+      favoriteGames.push(game_name);
+
+      // Update the favorite games for the user
+      await dbConnect.execute(
+        'UPDATE UserFavorites SET favorite_games = ? WHERE email = ?',
+        [JSON.stringify(favoriteGames), email]
+      );
+
+      console.log('Current favorite games (after adding):', favoriteGames);
+
+      res.status(200).send('Favorite game added successfully');
+    } else {
+      // Add the new game to the user's favorites
+      favoriteGames = [game_name];
+
+      // Insert a new entry for the user with their favorite game
+      await dbConnect.execute(
+        'INSERT INTO UserFavorites (email, favorite_games) VALUES (?, ?)',
+        [email, JSON.stringify(favoriteGames)]
+      );
+
+      console.log('Current favorite games (after adding):', favoriteGames);
+
+      res.status(200).send('Favorite game added successfully');
     }
-
-    // Add the game to the user's favorites
-    await dbConnect.execute(
-      'INSERT INTO UserFavorites (email, game_name) VALUES (?, ?)',
-      [email, gameName]
-    );
-
-    res.status(200).send('Game added to user favorites');
   } catch (error) {
-    console.error(error);
+    console.error('Error adding favorite game:', error);
     res.status(500).send('Internal Server Error');
   }
 });
+
 
 
 module.exports = accountRouter;
