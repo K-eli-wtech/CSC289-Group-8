@@ -119,5 +119,32 @@ accountRouter.post('/add-favorite-game', async (req, res) => {
 });
 
 
+accountRouter.get('/get-favorite-games', async (req, res) => {
+  const email = req.session.email;
+
+  if (!email) {
+    res.status(401).send('Unauthorized');
+    return;
+  }
+
+  try {
+    const [existingEntry] = await dbConnect.execute(
+      'SELECT favorite_games FROM UserFavorites WHERE email = ?',
+      [email]
+    );
+
+    if (existingEntry.length > 0) {
+      const favoriteGames = existingEntry[0].favorite_games;
+      res.json(favoriteGames);
+    } else {
+      res.json([]);
+    }
+  } catch (error) {
+    console.error('Error fetching favorite games:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
 
 module.exports = accountRouter;

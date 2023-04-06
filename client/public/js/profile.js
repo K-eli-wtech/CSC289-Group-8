@@ -126,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 async function addGameToUserFavorites(game_name) {
+    const searchText = document.getElementById('search-text');
     try {
         const response = await fetch('http://localhost:3000/account/add-favorite-game', {
             method: 'POST',
@@ -136,8 +137,10 @@ async function addGameToUserFavorites(game_name) {
         });
 
         if (response.ok) {
+            searchText.textContent = `${game_name} added to your favorite games`;
             console.log(`Game '${game_name}' added to user favorites`);
         } else {
+            searchText.textContent = `${game_name} already is in your list of favorite games`;
             console.error(`Error adding game '${game_name}' to user favorites`);
         }
     } catch (error) {
