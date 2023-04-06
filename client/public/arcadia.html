@@ -153,15 +153,15 @@
       document.addEventListener('DOMContentLoaded', () => {
       const containers = document.querySelectorAll('#release-container, #results-container, #review_box');
 
-      containers.forEach((container) => {
-          container.addEventListener('click', (event) => {
-              if (event.target.closest('.card, .mini-card')) {
-                  const name = event.target.closest('.card, .mini-card').id.trim();
-                  console.log('Clicked: ', name)
-                  window.location.href = `results.html?name=${name}`;
-              }
-          });
+        containers.forEach((container) => {
+            container.addEventListener('click', (event) => {
+                if (event.target.closest('.card, .mini-card')) {
+                    const id = event.target.closest('.card, .mini-card').id.trim();
+                    console.log('Clicked: ', id)
+                    window.location.href = `results.html?id=${id}`;
+                }
+            });
+        });
       });
-    });
   </script>
 </html> 

@@ -96,10 +96,9 @@ function createCardTemplate(game, type) {
   const platformsList = game.platforms || [];
   const platforms = Array.isArray(platformsList) ? platformsList.map((platform) => platform.platform ? platform.platform.name : 'Unknown Platform').join(', ') : 'Unknown Platform';
 
-
   if (type === 'mini') {
     return `
-        <div class="mini-card" id="${name.trim()}">
+        <div class="mini-card" id="${game.id}">
         <div class="mini-card-image">
           <img src="${photo}" alt="${name}" />
         </div>
@@ -114,7 +113,7 @@ function createCardTemplate(game, type) {
     `;
   } else {
     return `
-      <div class="card" id="${name.trim()}">
+      <div class="card" id="${game.id}">
       <div class="card-image">
         <img src="${photo}" alt="${name}" />
       </div>
@@ -129,6 +128,7 @@ function createCardTemplate(game, type) {
     `;
   }
 }
+
 
 
 // Genre cards for recommender

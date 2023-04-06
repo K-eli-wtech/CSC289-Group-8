@@ -8,6 +8,10 @@ const baseURL = 'https://api.rawg.io/api/games';
 const key = process.env.API_KEY;
 
 
+
+
+// Fetch functions
+
 // Fetching the data to return
 const fetchData = async (url, params) => {
   try {
@@ -86,6 +90,28 @@ const fetchData = async (url, params) => {
 };
 
 
+// Function to get game details
+const fetchGameDetails = async (gameId) => {
+  try {
+    const response = await axios.get(`${baseURL}/${gameId}`, {
+      params: {
+        key,
+      },
+    });
+
+
+    if (response.data) {
+      return response.data;
+    } else {
+      throw new Error('No matching game found');
+    }
+  } catch (err) {
+    console.error('Error fetching game details:', err);
+    throw err;
+  }
+};
+
+
 // Function to fetch platform based on its ID
 const fetchPlatform = async (platformId) => {
   try {
@@ -105,6 +131,13 @@ const fetchPlatform = async (platformId) => {
     throw err;
   }
 };
+
+
+
+
+
+
+// Search endpoints
 
 
 // General game search
@@ -312,5 +345,37 @@ APIRouter.post('/year', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+
+// Results page lookup
+APIRouter.post('/game', async (req, res) => {
+  const gameId = req.body.gameId;
+  console.log('Incoming game request:', req.body);
+
+  try {
+    const gameDetails = await fetchGameDetails(gameId);
+
+    const gameData = {
+      id: gameDetails.id,
+      name: gameDetails.name,
+      website: gameDetails.website,
+      released: gameDetails.released,
+      description: gameDetails.description,
+      background_image: gameDetails.background_image,
+      images: gameDetails.short_screenshots?.map((screenshot) => screenshot.image),
+      genres: gameDetails.genres,
+      rating: gameDetails.rating,
+      meta: gameDetails.metacritic,
+      platforms: gameDetails.platforms?.map((platform) => platform.platform.name),
+    };
+    
+
+    res.status(200).json(gameData);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: err.message });
+  }
+});
+
 
 module.exports = APIRouter;

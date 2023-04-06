@@ -5,27 +5,25 @@ const bcrypt = require('bcryptjs');
 
 // Registering account
 formRouter.post('/register', async (req, res) => {
-  console.log(req.body);
   const { display_name, email, password } = req.body;
-  console.log(display_name, email, password);
 
   try {
     // Hash the password
     const hash = await bcrypt.hash(password, 10);
 
     // Insert the user data into the database
-    const results = await dbConnect.execute(
+    await dbConnect.execute(
       'INSERT INTO Users (display_name, email, password) VALUES (?, ?, ?)',
       [display_name, email, hash]
     );
     
-    console.log(results);
     res.redirect('/login.html');
   } catch (error) {
     console.error(error);
     res.status(500).send('Error querying database');
   }
 });
+
 
 
 

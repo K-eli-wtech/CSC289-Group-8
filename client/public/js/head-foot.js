@@ -47,7 +47,6 @@ class myFooter extends HTMLElement {
                 <ul>
                     <li>KATHERINE ALEXANDER</li>
                     <li>TYLER BROWNING</li>
-                    <li>DAVIN MCFADDIN</li>
                     <li>KALEB WHITE</li>
                 </ul>
                 </aside>

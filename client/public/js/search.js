@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const platforms = Array.isArray(platformsList) ? platformsList.map((platform) => platform.platform.name).join(', ') : 'Unknown Platform';
   
     return `
-      <div class="card" id="${name.trim()}">
+      <div class="card" id="${game.id}">
       <div class="card-image">
         <img src="${photo}" alt="${name}" />
       </div>
