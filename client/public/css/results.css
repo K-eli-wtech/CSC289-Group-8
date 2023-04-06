@@ -2,7 +2,7 @@
 /* Game name title */
 
 .game-title {
-    font-size: 3em;
+    font-size: 2.5em;
     font-weight: bold;
     text-align: center;
     margin-top: 3%;
@@ -14,7 +14,7 @@
 /* Game display box */
 
 .game-display {
-    max-width: 90%;
+    width: 80%;
     min-height: 90%;
     align-items: center;
     justify-content: center;
@@ -30,12 +30,14 @@
 
 .game-display h3 {
   font-size: 21px;
-  margin-left: 3%;
+  margin-left: 5%;
+  text-align: left;
+  width: 150px;
+  word-wrap: break-word;
 }
 
 .game-display p {
   font-size: 20px;
-  margin-left: .8%;
   margin-bottom: 1%;
   margin-top: .1%;
   width: 80%;
@@ -45,11 +47,17 @@
   display: flex;
 }
 
+#rating-title {
+    margin-bottom: 1%;
+    margin-top: 1%;
+    margin-left: 8%;
+}
+
 /* Image slider */
   
 .game-images {
     width: 100%;
-    height: 400px;
+    height: 500px;
     margin-bottom: 3%;
     position: relative;
     overflow: hidden;
