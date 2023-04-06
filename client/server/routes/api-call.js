@@ -15,6 +15,7 @@ const fetchData = async (url, params) => {
     const response = await axios.get(url, config);
     const games = response.data.results;
 
+
     const gameData = games.map((game) => {
       const filteredPlatforms = game.platforms
         ? game.platforms.map((platform) => platform.platform.name)
@@ -72,11 +73,11 @@ const fetchData = async (url, params) => {
         genres: game.genres,
         rating: game.rating,
         platforms: aggregatedPlatforms.map((platform) => ({
-          platform: { name: platform },
+        platform: { name: platform },
         })),
       };      
     });
-    
+
     return gameData;
   } catch (err) {
     console.log('Error' + err.message);
@@ -109,6 +110,7 @@ const fetchPlatform = async (platformId) => {
 // General game search
 APIRouter.post('/searchGames', async (req, res) => {
   const query = req.body.query;
+  console.log('searchGames: ', query)
 
   try {
     const gameData = await fetchData(baseURL, {
@@ -164,8 +166,7 @@ APIRouter.post('/title', async (req, res) => {
       search: query,
       ordering: '-rating',
       page_size: 20,
-      dates: `2015-01-01,${new Date().getFullYear()}-12-31`,
-      rating: '9.0,10.0',
+      rating: '9,10',
     });
 
     // Check for exact match
