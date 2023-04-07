@@ -1,7 +1,34 @@
 const urlParams = new URLSearchParams(window.location.search);
+const sliderWrapper = document.querySelector(".slider-wrapper");
+const sliderButtons = document.querySelectorAll(".slider-button");
 const gameId = urlParams.get("id");
 
 const apiBaseUrl = "http://localhost:3000/api/game";
+
+// Initialize the index of the current image
+let currentImageIndex = 0;
+
+// Add event listeners to the slider buttons
+sliderButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    // Update the current image index based on the button that was clicked
+    if (button.classList.contains("slider-button-left")) {
+      currentImageIndex--;
+      if (currentImageIndex < 0) {
+        currentImageIndex = sliderWrapper.children.length - 1;
+      }
+    } else if (button.classList.contains("slider-button-right")) {
+      currentImageIndex++;
+      if (currentImageIndex >= sliderWrapper.children.length) {
+        currentImageIndex = 0;
+      }
+    }
+    
+    // Update the slider wrapper's transform property to slide to the current image
+    sliderWrapper.style.transform = `translateX(-${currentImageIndex * (100 + 11.1)}%)`;
+  });
+});
+
 
 
 // Function to fetch the game data
@@ -64,14 +91,15 @@ function updateGameInfo(game) {
     sliderWrapper.appendChild(img);
 
 
-    if (game.short_screenshots && Array.isArray(game.short_screenshots)) {
-      game.short_screenshots.forEach(screenshot => {
+    if (game.images && Array.isArray(game.images)) {
+      game.images.forEach(image => {
         const img = document.createElement("img");
-        img.src = screenshot.image;
+        img.src = image;
         img.alt = game.name;
         sliderWrapper.appendChild(img);
       });
     }
+    
 
     // Update game description
     const gameDesc = document.querySelector(".game-desc p");

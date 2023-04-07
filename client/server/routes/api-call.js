@@ -355,20 +355,21 @@ APIRouter.post('/game', async (req, res) => {
 
   try {
     const gameDetails = await fetchGameDetails(gameId);
+    const screenshots = await fetchScreenshots(gameId);
 
     const gameData = {
       id: gameDetails.id,
       name: gameDetails.name,
-      website: gameDetails.website,
+      website: gameDetails.website?gameDetails.website : gameDetails.metacritic_url,
       released: gameDetails.released,
       description: gameDetails.description_raw,
-      //background_image: gameDetails.background_image_additional?gameDetails.background_image_additional || gameDetails.background_image,
+      background_image: gameDetails.background_image,
+      images: screenshots?.map((screenshot) => screenshot.image),
       genres: gameDetails.genres,
       rating: gameDetails.rating,
       meta: gameDetails.metacritic,
       platforms: gameDetails.platforms?.map((platform) => platform.platform.name),
     };
-    
 
     res.status(200).json(gameData);
   } catch (err) {
@@ -376,6 +377,13 @@ APIRouter.post('/game', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+async function fetchScreenshots(gameId) {
+  const response = await axios.get(`${baseURL}/${gameId}/screenshots?key=${key}`);
+  const screenshots = response.data.results;
+  return screenshots;
+}
+
 
 
 module.exports = APIRouter;

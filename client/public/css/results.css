@@ -92,6 +92,7 @@
   
 .slider-button {
     width: 75px;
+    max-height: 75px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -102,13 +103,32 @@
     color: #000000;
     z-index: 1;
 }
+
+.ion {
+    width: 75px;
+    max-height: 75px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 10rem;
+    color: #000000;
+    margin-left: -50%;
+    z-index: 1;
+}
   
 .slider-button-left {
     left: 0;
+    padding-right: 5%;
 }
   
 .slider-button-right {
     right: 0;
+    padding-left: 5%;
 }
+
+
 
 /*  */
