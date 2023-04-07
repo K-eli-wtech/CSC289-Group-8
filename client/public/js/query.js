@@ -103,7 +103,7 @@ function createCardTemplate(game, type) {
           <img src="${photo}" alt="${name}" />
         </div>
         <div class="mini-card-content">
-          <h3>${name}</h3>
+          <h3 class="mini-name">${name}</h3>
           <p class="mini-base">Release Date: </p><p>${released}</p>
           <p class="mini-base">Genres: </p><p>${genreNames}</p>
           <p class="mini-base">Rating: </p>${rating}</p>
@@ -118,7 +118,7 @@ function createCardTemplate(game, type) {
         <img src="${photo}" alt="${name}" />
       </div>
       <div class="card-content">
-        <h3>${name}</h3>
+        <h3 class="name">${name}</h3>
         <p class="base">Release Date: </p><p>${released}</p>
         <p class="base">Genres: </p><p>${genreNames}</p>
         <p class="base">Rating: </p>${rating}</p>
@@ -128,7 +128,6 @@ function createCardTemplate(game, type) {
     `;
   }
 }
-
 
 
 // Genre cards for recommender

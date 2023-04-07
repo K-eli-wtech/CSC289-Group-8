@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <img src="${photo}" alt="${name}" />
       </div>
       <div class="card-content">
-        <h3>${name}</h3>
+        <h3 class="name">${name}</h3>
         <p class="base">Release Date: </p><p>${released}</p>
         <p class="base">Genres: </p><p>${genreNames}</p>
         <p class="base">Rating: </p>${rating}</p>

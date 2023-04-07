@@ -48,7 +48,6 @@ async function fetchGameData(gameId) {
     }
 
     const data = await response.json();
-    console.log('Fetched game data:', data);
     return data;
   } catch (error) {
     console.error('Error fetching game data:', error);
@@ -106,7 +105,6 @@ function updateGameInfo(game) {
     gameDesc.innerHTML = game.description.replace(/<br>/g, '');
   }
 }
-
 
 
 async function initResultsPage() {

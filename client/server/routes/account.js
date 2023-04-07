@@ -3,7 +3,6 @@ const accountRouter = express.Router();
 const dbConnect = require('../dbConfig');
 
 
-
 // Handles logged in session data
 accountRouter.get('/check-login', (req, res) => {
   if (req.session.loggedIn) {
@@ -52,14 +51,42 @@ accountRouter.get('/get-user-data', async (req, res) => {
 });
 
 
+// Endpoint for updating user data
+accountRouter.post('/update-user-data', async (req, res) => {
+  const email = req.session.email;
+  const { first_name, last_name, age, phone_number, display_name } = req.body;
+
+  if ( !email || !display_name ) {
+    res.status(400).send('Bad Request');
+    return;
+  }
+
+  try {
+    const [rows] = await dbConnect.execute(
+      'UPDATE Users SET first_name = ?, last_name = ?, age = ?, phone_number = ?, display_name = ? WHERE email = ?',
+      [first_name, last_name, age, phone_number, display_name, email]
+    );
+
+    if (rows.affectedRows === 0) {
+      res.status(404).send('User not found');
+    } else {
+      res.status(200).send('User data updated successfully');
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
 // Endpoint for adding a favorite game to a user's profile
 accountRouter.post('/add-favorite-game', async (req, res) => {
   const email = req.session.email;
-  const { game_name } = req.body;
+  const { game_id } = req.body;
 
-  console.log('Received game_name:', game_name);
+  console.log('Received game_id:', game_id);
 
-  if (!email || !game_name) {
+  if (!email || !game_id) {
     res.status(401).send('Unauthorized');
     return;
   }
@@ -81,13 +108,13 @@ accountRouter.post('/add-favorite-game', async (req, res) => {
       console.log('Current favorite games (before adding):', favoriteGames);
 
       // Check if the game is already in the user's favorites
-      if (favoriteGames.includes(game_name)) {
+      if (favoriteGames.includes(game_id)) {
         res.status(409).send('The game is already in the user\'s favorites');
         return;
       }
 
       // Add the new game to the user's favorites
-      favoriteGames.push(game_name);
+      favoriteGames.push(game_id);
 
       // Update the favorite games for the user
       await dbConnect.execute(
@@ -100,7 +127,7 @@ accountRouter.post('/add-favorite-game', async (req, res) => {
       res.status(200).send('Favorite game added successfully');
     } else {
       // Add the new game to the user's favorites
-      favoriteGames = [game_name];
+      favoriteGames = [game_id];
 
       // Insert a new entry for the user with their favorite game
       await dbConnect.execute(

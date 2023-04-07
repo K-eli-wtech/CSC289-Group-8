@@ -1,10 +1,11 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 function logout() {
     fetch('http://localhost:3000/account/logout')
         .then((response) => {
         if (response.status === 200) {
             console.log('Logged out');
-            window.location.href = 'arcadia.html';
+            window.location.href = 'index.html';
         } else {
             console.error('Error logging out');
         }
@@ -43,6 +44,22 @@ async function fetchUserData() {
         console.error('Error:', error);
     }
 }
+
+
+async function fetchUserFavoriteGames() {
+    try {
+        const response = await fetch('http://localhost:3000/account/get-favorite-games');
+        if (response.ok) {
+            const favoriteGames = await response.json();
+            displayFavoriteGames(favoriteGames);
+        } else {
+            console.error('Error fetching user favorite games');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
 
 
 function toggleEditForm() {
@@ -101,6 +118,7 @@ document.getElementById('update-user-form').addEventListener('submit', async (ev
     }
 });
 
+
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input');
     const searchText = document.getElementById('search-text');
@@ -109,9 +127,10 @@ document.addEventListener('DOMContentLoaded', () => {
     containers.forEach((container) => {
         container.addEventListener('click', async (event) => {
             if (event.target.closest('.card, .mini-card')) {
-                const game_name = event.target.closest('.card, .mini-card').id.trim();
+                const game_id = event.target.closest('.card, .mini-card').id.trim();
+                const game_name = event.target.closest('.card, .mini-card').querySelector('.name').textContent.trim();
                 console.log('Clicked: ', game_name);
-                await addGameToUserFavorites(game_name);
+                await addGameToUserFavorites(game_id, game_name);
             }
         });
     });
@@ -125,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-async function addGameToUserFavorites(game_name) {
+async function addGameToUserFavorites(game_id, game_name) {
     const searchText = document.getElementById('search-text');
     try {
         const response = await fetch('http://localhost:3000/account/add-favorite-game', {
@@ -133,12 +152,13 @@ async function addGameToUserFavorites(game_name) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ game_name }),
+            body: JSON.stringify({ game_id }),
         });
 
         if (response.ok) {
             searchText.textContent = `${game_name} added to your favorite games`;
             console.log(`Game '${game_name}' added to user favorites`);
+            fetchUserFavoriteGames();
         } else {
             searchText.textContent = `${game_name} already is in your list of favorite games`;
             console.error(`Error adding game '${game_name}' to user favorites`);
@@ -148,4 +168,37 @@ async function addGameToUserFavorites(game_name) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', fetchUserData);
+
+function createDOMNode(htmlString) {
+    const template = document.createElement('template');
+    template.innerHTML = htmlString.trim();
+    return template.content.firstChild;
+  }
+  
+
+async function displayFavoriteGames(favoriteGames) {
+    const releaseContainer = document.getElementById('release-container');
+    releaseContainer.innerHTML = '';
+  
+    if (favoriteGames) {
+      for (const game of favoriteGames) {
+        const gameData = await fetchGameData(game);
+        if (gameData) {
+          // You can use the existing function to create a card for each favorite game
+          const cardHTML = createCardTemplate(gameData, 'normal');
+          const cardElement = createDOMNode(cardHTML);
+          releaseContainer.appendChild(cardElement);
+        } else {
+          console.error("Game data is not valid.");
+        }
+      }
+    } else {
+      console.error("No Favorite games found.");
+    }
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchUserData();
+    fetchUserFavoriteGames();
+});
