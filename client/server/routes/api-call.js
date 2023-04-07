@@ -16,6 +16,10 @@ const key = process.env.API_KEY;
 const fetchData = async (url, params) => {
   try {
     const config = { params };
+
+    // Log the assembled API call
+    console.log('Assembled API call:', url + '?' + new URLSearchParams(params).toString());
+
     const response = await axios.get(url, config);
     const games = response.data.results;
 
@@ -69,7 +73,6 @@ const fetchData = async (url, params) => {
       }
     
       aggregatedPlatforms.push(...otherPlatforms);
-    
       return {
         id: game.id,
         name: game.name,
@@ -144,7 +147,6 @@ const fetchPlatform = async (platformId) => {
 // General game search
 APIRouter.post('/searchGames', async (req, res) => {
   const query = req.body.query;
-  console.log('searchGames: ', query)
 
   try {
     const gameData = await fetchData(baseURL, {
@@ -170,17 +172,32 @@ APIRouter.post('/advancedSearch', async (req, res) => {
     if (platformId) {
       platform = await fetchPlatform(platformId);
     }
-    
-    const gameData = await fetchData(baseURL, {
+
+    const params = {
       key,
-      platforms: platform ? platform.id : undefined,
-      dates: year ? `${year}-01-01,${year}-12-31` : undefined,
-      rating: maxRating ? `${minRating},${maxRating}` : undefined,
-      genres: genreId,
       ordering: '-rating',
       page_size: 20,
-      metacritic: '1,100',
-    });
+    };
+
+    if (platform) {
+      params.platforms = platform.id;
+    }
+
+    if (year) {
+      params.dates = `${year}-01-01,${year}-12-31`;
+    }
+
+    if (maxRating) {
+      params.metacritic = `${minRating},${maxRating}`;
+    } else {
+      params.metacritic = '1,100';
+    }
+
+    if (genreId) {
+      params.genres = genreId;
+    }
+
+    const gameData = await fetchData(baseURL, params);
 
     res.status(200).json(gameData);
   } catch (err) {
@@ -188,6 +205,7 @@ APIRouter.post('/advancedSearch', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
 
 
 // Title lookup

@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-  }  
+  }
   
   
   // Date formatting
@@ -155,11 +155,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchParams = {
       platformId,
       year,
-      minRating: rating ? parseFloat(rating) - 0.99 : undefined,
-      maxRating: rating,
+      minRating: rating ? ((rating * 20) - 19) : undefined,
+      maxRating: rating * 20,
       genreId: genre
     };
-  
+
     // Perform the search based on the query parameter values.
     const data = await fetchData(null, 'advanced', searchParams);
   
