@@ -34,9 +34,9 @@
     "webpack": "^5.75.0"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
+    "start": "react-app-rewired start --port 3001",
+    "build": "react-app-rewired build --port 3001",
+    "test": "react-app-rewired test --port 3001",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
