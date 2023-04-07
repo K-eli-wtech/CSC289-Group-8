@@ -14,7 +14,7 @@
 /* Game display box */
 
 .game-display {
-    width: 80%;
+    width: 70%;
     min-height: 90%;
     align-items: center;
     justify-content: center;
@@ -31,7 +31,8 @@
 .game-display h3 {
   font-size: 21px;
   margin-left: 5%;
-  text-align: left;
+  margin-right: .8%;
+  text-align: right;
   width: 150px;
   word-wrap: break-word;
 }
@@ -40,7 +41,7 @@
   font-size: 20px;
   margin-bottom: 1%;
   margin-top: .1%;
-  width: 80%;
+  width: 75%;
 }
 
 .game-date, .game-desc, .game-genres, .game-platforms, .rawg-rating, .meta-rating {
@@ -48,9 +49,9 @@
 }
 
 #rating-title {
+    text-align: center;
     margin-bottom: 1%;
     margin-top: 1%;
-    margin-left: 8%;
 }
 
 /* Image slider */

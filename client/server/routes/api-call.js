@@ -71,6 +71,7 @@ const fetchData = async (url, params) => {
       aggregatedPlatforms.push(...otherPlatforms);
     
       return {
+        id: game.id,
         name: game.name,
         released: game.released,
         background_image: game.background_image,
@@ -360,9 +361,9 @@ APIRouter.post('/game', async (req, res) => {
       name: gameDetails.name,
       website: gameDetails.website,
       released: gameDetails.released,
-      description: gameDetails.description,
+      description: gameDetails.description_raw,
       background_image: gameDetails.background_image,
-      images: gameDetails.short_screenshots?.map((screenshot) => screenshot.image),
+      //images: gameDetails.background_image_additional?.map((background_image_additional) => background_image_additional.background_image_additional.images),
       genres: gameDetails.genres,
       rating: gameDetails.rating,
       meta: gameDetails.metacritic,

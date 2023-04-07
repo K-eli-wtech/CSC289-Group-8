@@ -52,7 +52,7 @@ class myFooter extends HTMLElement {
                 </aside>
                 <aside>
                 <div id="contact" class="content"></div>
-                <h3>Contact Us</h3>
+                <h3>Powered by RAWG Api</h3>
                 </aside>
             </footer>
         `

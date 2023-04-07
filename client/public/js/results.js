@@ -1,35 +1,8 @@
-const slider = document.querySelector('.slider');
-const sliderWrapper = slider.querySelector('.slider-wrapper');
-const sliderImages = sliderWrapper.querySelectorAll('img');
-const leftArrow = slider.querySelector('.slider-button-left');
-const rightArrow = slider.querySelector('.slider-button-right');
 const urlParams = new URLSearchParams(window.location.search);
 const gameId = urlParams.get("id");
 
 const apiBaseUrl = "http://localhost:3000/api/game";
 
-// Image slider scrolling
-let currentSlide = 0;
-const slideWidth = slider.clientWidth;
-
-// Set initial position of slider wrapper
-sliderWrapper.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-
-// Event listener for left arrow
-leftArrow.addEventListener('click', () => {
-  if (currentSlide > 0) {
-    currentSlide--;
-    sliderWrapper.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-  }
-});
-
-// Event listener for right arrow
-rightArrow.addEventListener('click', () => {
-  if (currentSlide < sliderImages.length - 1) {
-    currentSlide++;
-    sliderWrapper.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-  }
-});
 
 // Function to fetch the game data
 async function fetchGameData(gameId) {
@@ -84,11 +57,13 @@ function updateGameInfo(game) {
 
     // Update game images
     const sliderWrapper = document.querySelector(".slider-wrapper");
-    sliderWrapper.innerHTML = "";
+
     const img = document.createElement("img");
     img.src = game.background_image;
     img.alt = game.name;
     sliderWrapper.appendChild(img);
+
+
     if (game.short_screenshots && Array.isArray(game.short_screenshots)) {
       game.short_screenshots.forEach(screenshot => {
         const img = document.createElement("img");
