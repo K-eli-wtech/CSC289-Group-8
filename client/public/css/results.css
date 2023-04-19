@@ -121,12 +121,12 @@
   
 .slider-button-left {
     left: 0;
-    padding-right: 5%;
+    padding-right: 1%;
 }
   
 .slider-button-right {
     right: 0;
-    padding-left: 5%;
+    padding-left: 1%;
 }
 
 
